@@ -79,7 +79,7 @@ public class ProductDAOImpl implements ProductDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
-		String sql = "SELECT PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE FROM PRODUCT WHERE PRODUCT_CATEGORY='ï¿½ï¿½ï¿½ï¿½'";
+		String sql = "SELECT PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE FROM PRODUCT WHERE PRODUCT_CATEGORY='ÀÚÄÏ'";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -105,7 +105,7 @@ public class ProductDAOImpl implements ProductDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
-		String sql = "SELECT PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE FROM PRODUCT WHERE PRODUCT_CATEGORY='ï¿½ï¿½Æ®'";
+		String sql = "SELECT PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE FROM PRODUCT WHERE PRODUCT_CATEGORY='ÄÚÆ®'";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -131,7 +131,7 @@ public class ProductDAOImpl implements ProductDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
-		String sql = "SELECT PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE FROM PRODUCT WHERE PRODUCT_CATEGORY='ï¿½Ðµï¿½'";
+		String sql = "SELECT PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE FROM PRODUCT WHERE PRODUCT_CATEGORY='ÆÐµù'";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);

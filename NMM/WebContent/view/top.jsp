@@ -21,9 +21,9 @@
             <div class="header__nav__mid layout--center">
                 <a href="<%=application.getContextPath()%>/view/index.html" class="header__logo">NEVER MINE MALL</a>
                 <ul class="header__nav__mid_bottom clearfix">
-                    <li><a href="<%=application.getContextPath()%>/servlet?command=selectJacket" class="header__nav__mid-title">JACKET</a></li>
-                    <li><a href="<%=application.getContextPath()%>/servlet?command=selectCoat" class="header__nav__mid-title">COAT</a></li>              
-                    <li><a href="<%=application.getContextPath()%>/servlet?command=selectPadding" class="header__nav__mid-title">PADDING</a></li>              
+                    <li><a href="<%=application.getContextPath()%>/servlet?command=searchJacket" class="header__nav__mid-title">JACKET</a></li>
+                    <li><a href="<%=application.getContextPath()%>/servlet?command=searchCoat" class="header__nav__mid-title">COAT</a></li>              
+                    <li><a href="<%=application.getContextPath()%>/servlet?command=searchPadding" class="header__nav__mid-title">PADDING</a></li>              
                 </ul>
             </div>
             
