@@ -1,0 +1,15 @@
+.ui-jqlineargauge { position: relative; }
+.ui-jqlineargauge-stretch { width: 100%; height: 100% }
+.ui-jqlineargauge .ui-jqlineargauge-tooltip {position: absolute; white-space: nowrap; padding: .2em .4em; z-index: 9999; border: 1px solid #dddddd; color: #333333; background: white; border-radius: 4px; box-shadow: 0 0 5px #aaa; border-width: 2px; background-image: none; }
+
+.ui-jqradialgauge { position: relative; }
+.ui-jqradialgauge-stretch { width: 100%; height: 100% }
+.ui-jqradialgauge .ui-jqradialgauge-tooltip {position: absolute; white-space: nowrap; padding: .2em .4em; z-index: 9999; border: 1px solid #dddddd; color: #333333; background: white; border-radius: 4px; box-shadow: 0 0 5px #aaa; border-width: 2px; background-image: none; }
+
+.ui-jqbulletgraph { position: relative; }
+.ui-jqbulletgraph-stretch { width: 100%; height: 100% }
+.ui-jqbulletgraph .ui-jqbulletgraph-tooltip {position: absolute; white-space: nowrap; padding: .2em .4em; z-index: 9999; border: 1px solid #dddddd; color: #333333; background: white; border-radius: 4px; box-shadow: 0 0 5px #aaa; border-width: 2px; background-image: none; }
+
+.ui-jqsegmenteddisplay { position: relative; }
+.ui-jqsegmenteddisplay-stretch { width: 100%; height: 100% }
+
