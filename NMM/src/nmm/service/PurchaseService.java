@@ -9,8 +9,12 @@ import java.util.List;
 public class PurchaseService {
     private static PurchasesDAO dao = new PurchasesDAOImpl();
 
-    public static List<PurchaseDTO> selectAll(int userNo) throws Exception{
-        return dao.selectAll(userNo);
+    public static List<PurchaseDTO> selectAllHistory(int userNo) throws Exception{
+        return dao.selectAllHistory(userNo);
+    }
+
+    public static List<PurchaseDTO> selectAllPurchase(int userNo) throws Exception{
+        return dao.selectAllPurchase(userNo);
     }
 
 }

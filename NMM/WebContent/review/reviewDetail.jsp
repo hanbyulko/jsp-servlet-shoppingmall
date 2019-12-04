@@ -6,10 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- <script> 
+      setTimeout(function(){
+         location.reload();
+      }, 10000);
+
+</script> -->
 </head>
 <body>
 <h1 align = center>상품 리뷰 </h1>
-<table>
+<table style="text-align:center">
       <tr>
          <th>리뷰 번호</th>
          <th>제목</th>

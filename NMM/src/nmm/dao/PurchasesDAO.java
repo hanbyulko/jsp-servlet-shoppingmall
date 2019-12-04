@@ -5,5 +5,8 @@ import nmm.dto.PurchaseDTO;
 import java.util.List;
 
 public interface PurchasesDAO {
-    List<PurchaseDTO> selectAll(int userNo) throws Exception;
+    List<PurchaseDTO> selectAllHistory(int userNo) throws Exception;
+
+    List<PurchaseDTO> selectAllPurchase(int userNo) throws Exception;
+
 }

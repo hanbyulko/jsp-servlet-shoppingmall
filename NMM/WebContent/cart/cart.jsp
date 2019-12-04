@@ -62,8 +62,6 @@
 		
 	</table>
 	</form>
-	
-    
 <jsp:include page="../view/footer.jsp"/>
 </body>
 </html>
