@@ -32,6 +32,7 @@ public class UserService {
    public static UserDTO loginCheck(String userId, String userPwd) throws Exception {
       UserDAOImpl userdaoimpa = new UserDAOImpl();
       UserDTO user = userdaoimpa.loginCheck(userId, userPwd);
+      System.out.println(userId);
       if(user==null) {
          System.out.println("아이디 비번 오류!!!!!!!");
          return null;

@@ -27,6 +27,7 @@ public class UserController implements Controller {
 
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
+		System.out.println(userId+"/"+userPwd);
 		UserDTO user = UserService.loginCheck(userId, userPwd);
 		if (user != null) {
 			session.setAttribute("userId", user.getUserId());
@@ -57,7 +58,7 @@ public class UserController implements Controller {
 		String userPhone = request.getParameter("userPhone");
 		String userEmail = request.getParameter("userEmail");
 		String userBirth = request.getParameter("userBirth");
-		UserDTO dto = new UserDTO(userId, userPwd, userName, userPhone, userAddr, userEmail);
+		UserDTO dto = new UserDTO(userPwd, userId, userName, userBirth, userPhone, userAddr, userEmail);
 		UserService.update(dto);
 		return new ModelAndView("servlet?controller=product+review&command=productList", false);
 	}

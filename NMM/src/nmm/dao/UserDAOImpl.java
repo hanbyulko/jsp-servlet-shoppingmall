@@ -92,7 +92,7 @@ public class UserDAOImpl implements UserDAO {
          UserDTO user1 = null;
          rs = ps.executeQuery();  //  ����Ŭ�� app������ ����
          while(rs.next()) {
-           // user1 = new UserDTO(rs.getInt(1),rs.getString(2),rs.getString(3));
+            user1 = new UserDTO(rs.getInt(1),rs.getString(2),rs.getString(3));
          }
          return user1;
       }finally {
