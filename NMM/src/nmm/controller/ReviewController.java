@@ -23,7 +23,6 @@ public class ReviewController implements Controller {
    }
 
    public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception {
-      
 	  int productNo = Integer.parseInt(request.getParameter("productNo"));
       List<ReviewDTO> list = ReviewService.selectAll(productNo);
       request.setAttribute("list", list);

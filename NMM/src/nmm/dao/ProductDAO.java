@@ -5,11 +5,9 @@ import java.util.List;
 import nmm.dto.ProductDTO;
 
 public interface ProductDAO {
-	List<List<ProductDTO>> selectAll() throws Exception;
+	List<ProductDTO> selectAll() throws Exception;
 	
 	List<ProductDTO> selectLatest() throws Exception;
-	
-	List<ProductDTO> selectPopular() throws Exception;
 	
 	List<ProductDTO> selectJacket() throws Exception;
 	
@@ -24,4 +22,6 @@ public interface ProductDAO {
 	int update(ProductDTO productDTO) throws Exception;
 
 	int delete(int productNo) throws Exception;
+
+	List<ProductDTO> searchByKeyword(String keyword) throws Exception;
 }

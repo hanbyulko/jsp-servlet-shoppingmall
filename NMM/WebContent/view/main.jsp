@@ -24,7 +24,7 @@ function pageMove(){
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-
+`
 <jsp:include page="top.jsp"/>
 
 <h1 align="center"> 최신상품 LIST TOP4 </h1>
