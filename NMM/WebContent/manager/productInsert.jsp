@@ -33,21 +33,31 @@
 			</tr>
 			<tr>
 				<td>색상</td>
-				<td><input type="text" name="price"></td>
+				<td><input type="text" name="color"></td>
 			</tr>
 			<tr>
 				<td>사이즈</td>
-				<td><input type="text" name="price"></td>
+				<td><input type="text" name="size"></td>
 			</tr>
 			<tr>
 				<td>재고량</td>
 				<td><input type="text" name="stock"></td>
 			</tr>
 			<tr>
-				<td>이미지</td>
+				<td>대표 이미지</td>
 				<td>
 					<img name="preview" src="../images/product/noimage.jpg" style="width:100%"><br/>
-					<input type="file" name="image" size="30" onchange="filePreview()">
+					<input type="file" name="L_1" size="30" onchange="filePreview()">
+				</td>
+				<td>상품 상세 이미지</td>
+				<td>
+					<img name="preview" src="../images/product/noimage.jpg" style="width:100%"><br/>
+					<input type="file" name="D_1" size="30" onchange="filePreview()">
+				</td>
+				<td>상품 확대 이미지</td>
+				<td>
+					<img name="preview" src="../images/product/noimage.jpg" style="width:100%"><br/>
+					<input type="file" name="D_2" size="30" onchange="filePreview()">
 				</td>
 			</tr>
 			<tr>

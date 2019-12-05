@@ -47,7 +47,6 @@ public class CartDAOImpl implements CartDAO {
 			   String userAddr = rs.getString("USER_ADDR");
 			   String userEmail = rs.getString("USER_EMAIL");
 			   String productResiDate = rs.getString("PRODUCT_RESIDATE");
-			   
 			   UserDTO userDTO = new UserDTO(
 			   		userCode, userId, userPwd, userName, userBirth, userPhone, userAddr, userEmail);
 			   ProductDTO productDTO = new ProductDTO(
