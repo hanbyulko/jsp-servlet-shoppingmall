@@ -38,7 +38,7 @@ public class DispatcherServlet extends HttpServlet {
 				Controller con = map.get(controller);
 				Class<?> cls = classMap.get(controller);
 				Method method = cls.getMethod(command, HttpServletRequest.class, HttpServletResponse.class);
-				
+
 				mv = (ModelAndView) method.invoke(con, request, response);
 			} else {
 				String[] controllerArr = controller.split(" ");

@@ -10,13 +10,18 @@
 	img{width:200px; height:350px}
 	table td{text-align:center;}
 </style>
+<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-function pageMove(){
-	location.href='<%=application.getContextPath()%>/servlet?controller=review&command=select';
-}
-</script>
-<script src="../js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
+
+$(function(){
+	$("img").click(function(){
+		var no = $(this).parent().prev().text();
+		var addr = "${pageContext.request.contextPath}/servlet?controller=review&command=select&productNo="+eval(no);
+		
+		location.href = addr;
+		
+	});
+});
 </script>
       	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -24,18 +29,37 @@ function pageMove(){
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-`
-<jsp:include page="top.jsp"/>
 
-<h1 align="center"> 최신상품 LIST TOP4 </h1>
-<table>
+<jsp:include page="top.jsp"/>
+<!--우먼-->     
+        <div class="women">
+                <a href="./list.html" class="main_menu__title-left">NEW LIST TOP4</a>
+ 
+            <div class="main__list__container">
+            <c:forEach items="${listLastest}" var="lastest">
+                <div class="main__list">
+                	<div> ${lastest.productNo} </div>
+                    <div><img alt="이미지입니다." src="${imgPath}${lastest.productName}_L_1.jpg"/>
+                    </div>
+                    <div>${lastest.productName}</div>
+                    <div href="./detail.html" class="info__icon__new" style="display: noen; border: none;"></div>
+                    <div href="./detail.html" class="info__price">${lastest.productPrice} WON</div>
+                </div>
+            </c:forEach>
+            </div>
+            <a href="./list.html" class="readmore_kr">제품보러가기</a>
+        </div>
+
+
+
+<%-- <table>
 <tr>
 <c:forEach items="${listLastest}" var="lastest">
         <td>${lastest.productNo} </td>
         </c:forEach>
         </tr><tr>
         <c:forEach items="${listLastest}" var="lastest">
-        <td><img alt="이미지입니다." src="${imgPath}${lastest.productName}_L_1.jpg" onclick="pageMove()"/></td>
+        <td><img alt="이미지입니다." src="${imgPath}${lastest.productName}_L_1.jpg"/></td>
         </c:forEach>
         </tr><tr>
         <c:forEach items="${listLastest}" var="lastest">
@@ -46,9 +70,28 @@ function pageMove(){
         <td>${lastest.productPrice} </td>
      </c:forEach>
      </tr>
-</table>
-<h1 align="center"> 인기상품 LIST TOP4 </h1>
-<table>    
+</table> --%>
+
+        <div class="women">
+                <a href="./list.html" class="main_menu__title-left">POPULAR LIST TOP4</a>
+ 
+            <div class="main__list__container">
+            <c:forEach items="${listPopular}" var="popular">
+                <div class="main__list">
+                	<div> ${popular.productNo} </div>
+                    <div><img alt="이미지입니다." src="${imgPath}${popular.productName}_L_1.jpg"/>
+                    </div>
+                    <div>${popular.productName}</div>
+                    <div href="./detail.html" class="info__icon__new" style="display: noen; border: none;"></div>
+                    <div href="./detail.html" class="info__price">${popular.productPrice} WON</div>
+                </div>
+                
+            </c:forEach>
+            </div>
+            <a href="./list.html" class="readmore_kr">제품보러가기</a>
+        </div>
+        
+<%-- <table>    
 <tr>
 <c:forEach items="${listPopular}" var="popular">
         <td>${popular.productNo} </td>
@@ -66,7 +109,7 @@ function pageMove(){
         <td>${popular.productPrice} </td>
 </c:forEach> 
 </tr>
-</table>
+</table> --%>
 
 
 <%@ include file="footer.jsp" %>

@@ -46,7 +46,7 @@ public class QnaController implements Controller{
 	}
 
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("insert í˜¸ì¶œ");
+		System.out.println("insert È£Ãâ");
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
 		String qnaTitle = request.getParameter("qnaTitle");
 		String qnaContent = request.getParameter("qnaContent");

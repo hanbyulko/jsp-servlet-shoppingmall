@@ -45,6 +45,7 @@ public class ProductDAOImpl implements ProductDAO {
 				product.setProductSize(rs.getString(6));
 				product.setProductPrice(rs.getInt(7));
 				product.setProductResiDate(rs.getString(8));
+				product.setPageCnt(pageCnt % 8 == 0 ? pageCnt / 8 : pageCnt / 8 + 1);
 				list.add(product);
 			}
 		} finally {

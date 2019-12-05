@@ -53,7 +53,7 @@ body,html{
     box-sizing: border-box;
 
 }
-.login--title{
+.review--title{
     width: 100%;
     text-align: center;
     font-size: 50px;
@@ -98,7 +98,35 @@ body,html{
     box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
     
 }
+div.stars {
+  width: 270px;
+  display: table-row;
+}
 
+input.star { display: none; }
+
+label.star {
+  float: right;
+  padding: 10px;
+  font-size: 36px;
+  color: #444;
+  transition: all .2s;
+}
+
+input.star:checked ~ label.star:before {
+  content: '\2605';
+  color: #FD4;
+  transition: all .25s;
+}
+
+
+
+
+label.star:hover { transform: rotate(-15deg) scale(1.3); }
+
+label.star:before {
+  content: '\2605';
+}
 </style>
 
 
@@ -106,24 +134,35 @@ body,html{
 
 
 <body>
-<form method='post' action="${servlet}review&command=insert" onsubmit='return info_chk()'>
+
 <div class="full-bg">
    <div class="table">
       <div class="table-cell">
-              <form method="post" action="../servlet?controller=user&command=signUp">
+      <form method='post' action="${servlet}review&command=insert">     
                     <div class="login-container">
-                        <h3 class="login--title">만족도 평가</h3>
-                        <h6 class="login--title">상품에 만족하셨나요 ?</h6>
+                        <h3 class="review--title">Survey</h3><br><br>
                         
-                        <label class=form-input--title>별점을 선택해주세요.</label>
-                        <input type="radio" id ="userId" name="reviewStar" class="form-input" value = 1><strong>*</strong>
-                         <input type="radio" id ="userId" name="reviewStar" class="form-input" value = 2><strong>**</strong>
-                          <input type="radio" id ="userId" name="reviewStar" class="form-input" value = 3><strong>***</strong>
-                           <input type="radio" id ="userId" name="reviewStar" class="form-input" value = 4><strong>****</strong>
-                            <input type="radio" id ="userId" name="reviewStar" class="form-input" value = 5><strong>*****</strong>
-                        
-                        
-                        <h3 class="login--title">상품리뷰작성</h3>
+                         <label class=form-input--title>상품에 만족하셨나요?</label>
+   <div class="stars">
+   <input class="star star-1" id="star-1" name="reviewStar" value = 5 type="radio"/>
+    <label class="star star-1" for="star-1"></label>
+  <input class="star star-2" id="star-2" name="reviewStar" value = 4 type="radio"/>
+    <label class="star star-2" for="star-2"></label>
+    <input class="star star-3" id="star-3" name="reviewStar" value =3 type="radio"/>
+    <label class="star star-3" for="star-3"></label>
+    <input class="star star-4" id="star-4" name="reviewStar" value = 2 type="radio"/>
+    <label class="star star-4" for="star-4"></label>
+    <input class="star star-5" id="star-5" name="reviewStar" value = 1 type="radio"/>
+    <label class="star star-5" for="star-5"></label>
+
+    
+    <br><br><br>
+
+ 
+  
+</div>
+                   
+                        <h3 class="review--title">Product Review</h3><br><br>
                         
                         <label class=form-input--title>리뷰제목 : </label><p>
                          <input type = "text" id="reviewTitle" name='reviewTitle' class="form-input" style="text-align:left; width:200px; height:20px;"><p>
@@ -133,7 +172,6 @@ body,html{
                         
                         
                         <input type="submit" name = "insert" value="등록"  class="form-btn" >
-                  <input type="button" name = "update" value="수정" class="form-btn" onclick='return info_chk2(this.form)'>
 
                         
                     </div>

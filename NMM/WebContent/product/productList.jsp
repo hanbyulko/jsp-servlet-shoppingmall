@@ -88,38 +88,49 @@ img {
 table td {
 	text-align: center;
 }
+img{width:200px; height:350px}
 </style>
-<script  src="../js/jquery-3.4.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	$("img").click(function(){
+		var no = $(this).parent().prev().text();
+		var addr = "${pageContext.request.contextPath}/servlet?controller=review&command=select&productNo="+eval(no);
+		
+		location.href = addr;
+		
+	});
+});
+/* function pageMove(){
+	alert("${pageContext.request.contextPath}/servlet?controller=review&command=select");
+	location.href='${pageContext.request.contextPath}/servlet?controller=review&command=select&productNo=';
+} */
+</script>
 </head>
 <body>
-	<jsp:include page="../view/top.jsp" />
-	<h1 align="center">${pageTitle}</h1>
-	<table>
-		<tr>
-			<c:forEach items="${list}" var="product">
-				<td>${product.productNo}</td>
-			</c:forEach>
-		</tr>
-		<tr>
-			<c:forEach items="${list}" var="product">
-				<td><img alt="이미지입니다."
-					src="${imgPath}${product.productName}_L_1.jpg" onclick="pageMove()" /></td>
-			</c:forEach>
-		</tr>
-		<tr>
-			<c:forEach items="${list}" var="product">
-				<td>${product.productName}</td>
-			</c:forEach>
-		</tr>
-		<tr>
-			<c:forEach items="${list}" var="product">
-				<td>${product.productPrice}</td>
-			</c:forEach>
-		</tr>
-	</table>
+<jsp:include page="../view/top.jsp"/>
+
+<!--우먼-->     
+        <div class="women">
+                <a href="./list.html" class="main_menu__title-left">PRODUCT LIST</a>
+ 
+            <div class="main__list__container">
+            <c:forEach items="${list}" var="product">
+                <div class="main__list">
+                	<div> ${product.productNo} </div>
+                    <div><img alt="이미지입니다." src="${imgPath}${product.productName}_L_1.jpg"/>
+                    </div>
+                    <div>${product.productName}</div>
+                    <div href="./detail.html" class="info__icon__new" style="display: noen; border: none;"></div>
+                    <div href="./detail.html" class="info__price">${product.productPrice} WON</div>
+                </div>
+            </c:forEach>
+            </div>
+            <a href="./list.html" class="readmore_kr">제품보러가기</a>
+        </div>
 
 
-<%-- <a class="pagination-active" href="servlet?command=searchByCategory&category=${category}&pageNo=${pageNo-1}">1</a>  --%>
 	<!-- 페이징처리 -->
 	<nav class="pagination-container">
 		<div class="pagination">

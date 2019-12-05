@@ -45,8 +45,6 @@ public class ReviewController implements Controller {
 		String reviewContent = request.getParameter("reviewContent");
 		String reviewStar = request.getParameter("reviewStar");
 		System.out.println(reviewTitle);
-
-		ReviewService.insert(userNo, productNo, new ReviewDTO(reviewNo, reviewTitle, reviewContent, reviewStar));
 		return new ModelAndView("myPage/review.jsp", false);
 	}
 

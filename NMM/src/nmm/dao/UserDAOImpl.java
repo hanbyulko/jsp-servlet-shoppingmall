@@ -14,6 +14,7 @@ public class UserDAOImpl implements UserDAO {
    public int insert(UserDTO dto) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
+        System.out.println(dto);
         int result=0;
         try {
          con = DbUtil.getConnection();
@@ -39,8 +40,7 @@ public class UserDAOImpl implements UserDAO {
    public int update(UserDTO dto) throws Exception {
       Connection con= null;
       PreparedStatement ps = null;
-      String sql="UPDATE USERDB SET USER_PWD=? , USER_NAME=? , USER_ADDR=? , USER_PHONE=? , USER_EMAIL=? WHERE USER_ID=?";
-      System.out.println(dto);
+      String sql="UPDATE USERDB SET USER_PWD=? , USER_NAME=? , USER_ADDR=? , USER_PHONE=? , USER_EMAIL=? WHERE upper(USER_ID)=upper(?)";
       try {
          con = DbUtil.getConnection();
          ps = con.prepareStatement(sql);
@@ -100,24 +100,26 @@ public class UserDAOImpl implements UserDAO {
       }
    }
 
-   public String idCheck(String id) throws SQLException {
+   public boolean idCheck(String id) throws SQLException {
       Connection con = null;
       PreparedStatement ps = null;
       String sql = "select USER_ID from USERDB where upper(user_id) = upper(?) ";
       ResultSet rs =null;
-      String user = null;
+      boolean user = false;
+      System.out.println(user);
       try {
          con = DbUtil.getConnection();
          ps = con.prepareStatement(sql);
          ps.setString(1, id);
          rs = ps.executeQuery();  //  ����Ŭ�� app������ ����
          while(rs.next()) {
-          user = new String(rs.getString(1));
+        	 user=true;
          }
          return user;
       }finally {
          DbUtil.dbClose(rs, ps, con);
       }
+
    }
 
 }

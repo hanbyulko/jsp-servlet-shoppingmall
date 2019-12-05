@@ -12,9 +12,6 @@ import nmm.util.DbUtil;
 
 public class ReviewDAOImpl implements ReviewDAO {
 
-	
-	
-	
 	@Override
 	public List<ReviewDTO> selectAll(int pageNo) throws Exception {
 		Connection con = null;

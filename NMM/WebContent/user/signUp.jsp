@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900|Noto+Sans+KR:100,300,400,500,700,900" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <title>NMM SignUp</title>
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 <style>
 /* CSS RESET */
 * {
@@ -94,36 +95,83 @@ body,html{
 </style>
 
 
-<script>
-document.getElementById('userBirth').value = new Date().toISOString().substring(0, 10);;
-var
-$.ajax({
-	  type:"post",
-	  url:"../idServlet",
-    dataType: "text",//서버에게 받은 응답결과 type(text, xml, html, json)
-    data : {id: $(this).val() } ,//서버에게 전송할 parameter
-    success: function(result){
-  	  $("span").html(result);
-    } ,
-    error : function(err){
-  	  console.log(err+"=> 오류발생");
-    }
-});//ajax끝
+<script type="text/javascript">
+document.getElementById('userBirth').value = new Date().toISOString().substring(0, 10);
 </script>
-</head>
+
+<script type="text/javascript">
+
+function cheakFunction() {
+	if($("#userId").val() == ""){
+	    alert("아이디 입력바람");
+	    $("#userId").focus();
+	    return false;
+	  }
+	if($("#userPwd").val() == ""){
+	    alert("비밀번호 입력바람");
+	    $("#userPwd").focus();
+	    return false;
+	  }
+	if($("#userName").val() == ""){
+	    alert("이름 입력바람");
+	    $("#userName").focus();
+	    return false;
+	  }
+	if($("#userAddr").val() == ""){
+	    alert("주소 입력바람");
+	    $("#userAddr").focus();
+	    return false;
+	  }
+	if($("#userPhone").val() == ""){
+	    alert("핸드폰 입력바람");
+	    $("#userPhone").focus();
+	    return false;
+	  }
+	if($("#userEmail").val() == ""){
+	    alert("이메일 입력바람");
+	    $("#userEmail").focus();
+	    return false;
+	  }
+	
+}
+
+  $(document).ready(function(){
+	  
+	  $("#userId").keyup(function(){
+		  if($(this).val()==""){
+			  $("span").text("ID 입력해주세요. ");
+			  return;
+		  }
+		  
+		  $.ajax({
+			  type:"post",
+			  url:"../idSelect",
+		      dataType: "text",//서버에게 받은 응답결과 type(text, xml, html, json)
+		      data : {id: $(this).val() } ,//서버에게 전송할 parameter
+		      success: function(result){
+		    	  $("span").html(result);
+		      } ,
+		      error : function(err){
+		    	  console.log(err+"=> 오류발생");
+		      }
+		  });//ajax끝
+	  });//keyup끝
+  });
+		  
+</script>
 <body>
 <div class="full-bg">
 	<div class="table">
 		<div class="table-cell">
-  				<form method="post" action="../servlet?controller=user&command=signUp">
+  				<form method="post" onsubmit="return cheakFunction();" action="../servlet?controller=user&command=signUp">
                     <div class="login-container">
                         <h3 class="login--title">SIGN UP</h3>
                         
-                        <label class=form-input--title>ID  =    <span>    중복결과여부</span></label>
+                        <label class=form-input--title><span>    ID 입력해주세요.      </span></label>
                         <input type="text" id ="userId" name="userId" class="form-input" value="">
                         
                         <label class=form-input--title>PASSWORD</label>
-                        <input type="password" id="userPwd" name="userPwd" class="form-input">
+                        <input type="password" id="userPwd" name="userPwd" class="form-input" value="">
                         
                         <label class=form-input--title>NAME</label>
                         <input type="text" id ="userName" name="userName" class="form-input" value="">
@@ -132,7 +180,7 @@ $.ajax({
                         <input type="text" id ="userAddr" name="userAddr" class="form-input" value="">
                         
                         <label class=form-input--title>TEL</label>
-                        <input type="text" id ="userPhone" name="userPhone" class="form-input" value="">
+                        <input type="text" id ="userPhone" name="userPhone" class="form-input" value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')">
                         
                         <label class=form-input--title>EMAIL</label>
                         <input type="text" id ="userEmail" name="userEmail" class="form-input" value="">
@@ -140,8 +188,8 @@ $.ajax({
                         <label class=form-input--title>BIRHT DAY</label>
                         <input type="date" id ="userBirth" name="userBirth" class="form-input" value="">
                         
-                        <input type="submit" class="form-btn" value="SIGN UP">
-                        
+                        <input type="submit" class="form-btn" value="SIGN UP" id="SIGNUP">
+                        <input type="button" class="form-btn" value="MAIN" id="main" onclick="location.href='../servlet?controller=product+review&command=productList'">
                     </div>
  				</form>
 		</div>

@@ -12,46 +12,46 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-   $("#minus").click(function(){
-      value = parseInt($("#quantity").val())-1;
-      if(value<=1){
-         $("#quantity").val(1);
-         value=1;
-      }else{
-         $("#quantity").val(value);
-      }
-      var total = eval(value*$("#price").text());
-      $("#total").text(total+" WON"); 
-   });
-   
-   $("#plus").click(function(){
-      var value = parseInt($("#quantity").val())+1;
-      $("#quantity").val(value);
-      var total = eval(value*$("#price").text());
-      $("#total").text(total+" WON"); 
-   });
-   
-   $("#cart").click(function(){
-      
-      location.href="${pageContext.request.contextPath}/servlet?controller=cart&command=insert&productNo="+eval(${product.productNo})+"&cartQty="+eval($("#quantity").val());
-      
-   });
-   
-   $("#buy").click(function(){
-      
-      location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insert&productNo="+eval(${product.productNo})+"&cartQty="+eval($("#quantity").val());
-   });   
+	$("#minus").click(function(){
+		value = parseInt($("#quantity").val())-1;
+		if(value<=1){
+			$("#quantity").val(1);
+			value=1;
+		}else{
+			$("#quantity").val(value);
+		}
+		/* var total = eval(value*$("#price").text());
+		$("#total").text(total+" WON"); */
+	});
+	
+	$("#plus").click(function(){
+		var value = parseInt($("#quantity").val())+1;
+		$("#quantity").val(value);
+		/* var total = eval(value*$("#price").text());
+		$("#total").text(total+" WON"); */
+	});
+	
+	$("#cart").click(function(){
+		
+		location.href="${pageContext.request.contextPath}/servlet?controller=cart&command=insert&productNo="+eval(${product.productNo})+"&productStock="+eval($("#quantity").val());
+		
+	});
+	
+	$("#buy").click(function(){
+		
+		location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insert&productNo="+eval(${product.productNo})+"&productStock="+eval($("#quantity").val());
+	});	
 });
 /* function plus(){
-   var value = document.getElementById("quantity").value+1;
-   
-   
+	var value = document.getElementById("quantity").value+1;
+	
+	
 }
 function minus(){
-   var value = document.getElementById("quantity").value = eval(document.getElementById("quantity").value-1);
-   if(document.getElementById("quantity").value==0){
-      document.getElementById("quantity").value=0;
-   }
+	var value = document.getElementById("quantity").value = eval(document.getElementById("quantity").value-1);
+	if(document.getElementById("quantity").value==0){
+		document.getElementById("quantity").value=0;
+	}
 } */
 </script>
 </head>
@@ -88,7 +88,7 @@ function minus(){
                 <div class="top-info-title-wrap clearfix">
                     <div class="info__icon__new">NEW</div>
                     <div class="top-info-title">${product.productName}</div>
-                    <div class="top-info-price" id="price">${product.productPrice}</div>
+                    <div class="top-info-price">${product.productPrice}</div>
                 </div>
                 
                 <div class="top-info-select clearfix">
@@ -136,9 +136,8 @@ function minus(){
                 </div>
             </div>
         </div> 
-
 <%-- <% if(request.getAttribute("list")!=null){
-   out.println("<jsp:include page='../review/reviewDetail.jsp' />");
+	out.println("<jsp:include page='../review/reviewDetail.jsp' />");
 }
 %> --%>
 <jsp:include page='../review/reviewDetail.jsp' />
