@@ -9,8 +9,8 @@ import nmm.dto.ProductDTO;
 public class ProductService {
 	private static ProductDAO productDAO  = new ProductDAOImpl();
 	
-	public static List<List<ProductDTO>> selectAll() throws Exception{
-		List<List<ProductDTO>> list = productDAO.selectAll();
+	public static List<ProductDTO> selectAll() throws Exception{
+		List<ProductDTO> list = productDAO.selectAll();
 		return list;
 	}
 	
@@ -42,6 +42,14 @@ public class ProductService {
 
 	public static void delete(int productNo) throws Exception {
 		productDAO.delete(productNo);
+	}
+
+	public static void update(ProductDTO dto) throws Exception {
+		productDAO.update(dto);
+	}
+
+	public static List<ProductDTO> searchByKeyword(String keyword) throws Exception {
+		return productDAO.searchByKeyword(keyword);
 	}
 	
 	

@@ -9,10 +9,9 @@
 <body>
 
 <a href='${servlet}siteManage&command=accounting'>사이트 통계</a> <p>
-<a href='${servlet}siteManage&command=productManage'>상품 관리</a> <p>
+<a href='${servlet}product&command=selectAll'>상품 관리</a> <p>
 <a href='${servlet}siteManage&command=reviewManage'>문의 관리</a> <p>
 <a href='${servlet}siteManage&command=mgtUserManage'>관리자 계정</a> <p>
-
 <hr>
 </body>
 </html>
