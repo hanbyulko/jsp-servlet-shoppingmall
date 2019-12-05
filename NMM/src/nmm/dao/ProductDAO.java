@@ -5,15 +5,11 @@ import java.util.List;
 import nmm.dto.ProductDTO;
 
 public interface ProductDAO {
-	List<ProductDTO> selectAll() throws Exception;
+	List<ProductDTO> selectAll(int pageNo) throws Exception;
 	
 	List<ProductDTO> selectLatest() throws Exception;
 	
-	List<ProductDTO> selectJacket() throws Exception;
-	
-	List<ProductDTO> selectCoat() throws Exception;
-	
-	List<ProductDTO> selectPadding() throws Exception;
+	List<ProductDTO> selectByCategory(int pageNo, String category) throws Exception;
 	
 	ProductDTO selectProduct(int productNo) throws Exception;
 

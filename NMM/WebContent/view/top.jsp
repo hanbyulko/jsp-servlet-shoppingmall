@@ -33,13 +33,13 @@
 				class="header__logo">NEVER MINE MALL</a>
 			<ul class="header__nav__mid_bottom clearfix">
 				<li><a
-					href="<%=application.getContextPath()%>/servlet?command=searchJacket"
+					href="<%=application.getContextPath()%>/servlet?command=searchByCategory&category=자켓&pageNo=1"
 					class="header__nav__mid-title">JACKET</a></li>
 				<li><a
-					href="<%=application.getContextPath()%>/servlet?command=searchCoat"
+					href="<%=application.getContextPath()%>/servlet?command=searchByCategory&category=코트&pageNo=1"
 					class="header__nav__mid-title">COAT</a></li>
 				<li><a
-					href="<%=application.getContextPath()%>/servlet?command=searchPadding"
+					href="<%=application.getContextPath()%>/servlet?command=searchByCategory&category=패딩&pageNo=1"
 					class="header__nav__mid-title">PADDING</a></li>
 			</ul>
 		</div>

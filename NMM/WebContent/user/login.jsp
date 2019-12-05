@@ -124,6 +124,7 @@ function cheakFunction() {
                         
                         <input type="submit" class="form-btn" value="LOG IN" id="login">
                         <input type="button" class="form-btn" value="SIGN UP" id="signup" onclick="location.href='<%=application.getContextPath()%>/user/signUp.jsp'">
+                        <input type="button" class="form-btn" value="MAIN" id="main" onclick="location.href='../servlet?controller=product+review&command=productList'">
                     </div>
  				</form>
 		</div>

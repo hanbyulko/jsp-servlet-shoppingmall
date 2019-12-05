@@ -9,8 +9,8 @@ import nmm.dto.ProductDTO;
 public class ProductService {
 	private static ProductDAO productDAO  = new ProductDAOImpl();
 	
-	public static List<ProductDTO> selectAll() throws Exception{
-		List<ProductDTO> list = productDAO.selectAll();
+	public static List<ProductDTO> selectAll(int pageNo) throws Exception{
+		List<ProductDTO> list = productDAO.selectAll(pageNo);
 		return list;
 	}
 	
@@ -19,16 +19,8 @@ public class ProductService {
 		return list;
 	}
 	
-	public static List<ProductDTO> selectJacket() throws Exception{
-		List<ProductDTO> list = productDAO.selectJacket();
-		return list;
-	}
-	public static List<ProductDTO> selectCoat() throws Exception{
-		List<ProductDTO> list = productDAO.selectCoat();
-		return list;
-	}
-	public static List<ProductDTO> selectPadding() throws Exception{
-		List<ProductDTO> list = productDAO.selectPadding();
+	public static List<ProductDTO> selectByCategory(int pageNo, String category) throws Exception{
+		List<ProductDTO> list = productDAO.selectByCategory(pageNo, category);
 		return list;
 	}
 	public static ProductDTO selectProduct(int productNo) throws Exception{
@@ -51,7 +43,7 @@ public class ProductService {
 	public static List<ProductDTO> searchByKeyword(String keyword) throws Exception {
 		return productDAO.searchByKeyword(keyword);
 	}
-	
+
 	
 	
 }

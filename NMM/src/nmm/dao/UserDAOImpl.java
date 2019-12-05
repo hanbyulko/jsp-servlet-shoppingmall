@@ -14,6 +14,7 @@ public class UserDAOImpl implements UserDAO {
    public int insert(UserDTO dto) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
+        System.out.println(dto);
         int result=0;
         try {
          con = DbUtil.getConnection();
