@@ -36,7 +36,7 @@ $(function(){
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-`
+
 <jsp:include page="top.jsp"/>
 <!--우먼-->     
         <div class="women">
@@ -92,6 +92,7 @@ $(function(){
                     <div href="./detail.html" class="info__icon__new" style="display: noen; border: none;"></div>
                     <div href="./detail.html" class="info__price">${popular.productPrice}</div>
                 </div>
+                
             </c:forEach>
             </div>
             <a href="./list.html" class="readmore_kr">제품보러가기</a>
