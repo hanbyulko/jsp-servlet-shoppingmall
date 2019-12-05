@@ -168,6 +168,9 @@
 									</form>
 								</section>
 								<section>
+								<a href="${servlet}qna&command=main&pageNo=1">QNA PAGE MOVE</a>
+								</section>
+								<section>
 									<ul class="contact">
 										<li><img alt="1" src="images/1.jpg"></li>
 										<li><img alt="2" src="images/2.jpg"></li>
