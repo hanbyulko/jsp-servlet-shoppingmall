@@ -26,16 +26,23 @@ function minus(){
 <jsp:include page="../view/top.jsp"/>
 <h1> 제품상세페이지입니다. </h1>
 <table>
-<tr><td rowspan="50"><img alt="이미지입니다." src="/NeverMineMall/images/DENIM LAYERED LEATHER JACKET_awa225w(BLACK)_D_1.jpg"></td><td>상품이름 : </td><tr>
-<tr><td>PRICE :  WON</td><tr>
-<tr><td>COLOR : </td><tr>
-<tr><td>SIZE : </td><tr>
+<tr><td rowspan="50"><img alt="이미지입니다." src="${imgPath}${product.productName}_L_1.jpg"></td><td>상품이름 :${product.productName} </td><tr>
+<tr><td>PRICE : ${product.productPrice} WON</td><tr>
+<tr><td>COLOR : ${product.productColor}</td><tr>
+<tr><td>SIZE : ${product.productSize}</td><tr>
 <tr><td>QUANTITY : <BUTTON TYPE="BUTTON" onclick="minus()">-</BUTTON><input type="text" value=1 size="2" id="quantity"></input><BUTTON TYPE="BUTTON" onclick="plus()">+</BUTTON></td><tr>
 <tr><td>TOTAL :  WON</td><tr>
 <tr><td><button type="button" value="">구매하기</button></td><tr>
 <tr><td><button type="button" value="">장바구니</button></td><tr>
 </table>
-<jsp:include page="../review/reviewDetail.jsp" />
+<img alt="이미지입니다." src="${imgPath}${product.productName}_D_1.jpg">
+<img alt="이미지입니다." src="${imgPath}${product.productName}_D_2.jpg">
+
+<%-- <% if(request.getAttribute("list")!=null){
+	out.println("<jsp:include page='../review/reviewDetail.jsp' />");
+}
+%> --%>
+<jsp:include page='../review/reviewDetail.jsp' />
 <jsp:include page="../view/footer.jsp"/>
 </body>
 </html>

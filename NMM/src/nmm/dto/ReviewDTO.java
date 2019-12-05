@@ -44,7 +44,10 @@ public class ReviewDTO {
       this.reviewStar = reviewStar;
       this.reviewDate = reviewDate;
    }
-
+   public ReviewDTO(ProductDTO productDTO) {
+	   super();
+	   this.productDTO = productDTO;
+   }
 
    public ReviewDTO(String userId, int reviewNo,  String reviewTitle, String reviewContent,
          String reviewStar, String reviewDate) {
@@ -116,6 +119,6 @@ public class ReviewDTO {
    @Override
    public String toString() {
       return "ReviewDTO [reviewNo=" + reviewNo + ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent
-            + ", reviewStar=" + reviewStar + ", reviewDate=" + reviewDate + "]";
+            + ", reviewStar=" + reviewStar + ", reviewDate=" + reviewDate + productDTO.toString()+"]";
    }
 }

@@ -18,33 +18,36 @@ public class ReviewDAOImpl implements ReviewDAO {
       PreparedStatement ps = null;
       ResultSet rs = null;
       List<ReviewDTO> list = new ArrayList<>();
-      //String sql = "SELECT USER_ID, PRODUCT_NO, REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_STAR, REVIEW_DATE FROM REVIEWJOIN WHERE PRODUCT_NO=?";
-      String sql = "SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_STAR, REVIEW_DATE FROM REVIEW WHERE PRODUCT_NO=?";
+      ProductDTO productDTO = null;
+      String sql = "SELECT PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_COLOR, PRODUCT_SIZE, REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_STAR, REVIEW_DATE FROM VIEW_PRODUCTANDREVIEW WHERE PRODUCT_NO=?";
+      
       try {
          con = DbUtil.getConnection();
          ps = con.prepareStatement(sql);
          ps.setInt(1, productNo);
          rs = ps.executeQuery();
-         while (rs.next()) {
-            /*
-             * ReviewDTO reviewDTO = new ReviewDTO(rs.getString(1), rs.getInt(2),
-             * rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
-             */
-            //ProductDTO productDTO = new ProductDTO();
-            ReviewDTO reviewDTO = new ReviewDTO();
-            reviewDTO.setReviewNo(rs.getInt(1));
-            //reviewDTO.setProductDTO(productDTO);
-            reviewDTO.setReviewTitle(rs.getString(2));
-            reviewDTO.setReviewContent(rs.getString(3));
-            reviewDTO.setReviewStar(rs.getString(4));
-            reviewDTO.setReviewDate(rs.getString(5));
-            list.add(reviewDTO);
+         
+         while(rs.next()) {
+     		String productName = rs.getString(1);
+         	int productPrice = rs.getInt(2);
+         	String productColor = rs.getString(3);
+         	String productSize = rs.getString(4);
+         	productDTO = new ProductDTO(productName, productPrice, productColor, productSize);
+	        int reviewNo = rs.getInt(5);
+	            //reviewDTO.setProductDTO(productDTO);
+	        String reviewTitle= rs.getString(6);
+	        String reviewContent = rs.getString(7);
+	        String reviewStar = rs.getString(8);
+	        String reviewDate = rs.getString(9);
+	            
+	        list.add(new ReviewDTO(productDTO, reviewNo, reviewTitle, reviewContent, reviewStar, reviewDate));
          }
-         //System.out.println(list);
-      } finally {
-         DbUtil.dbClose(rs, ps, con);
-
-      }
+ 	 	
+     }catch (Exception e) {
+			e.printStackTrace();
+	 }finally {
+	         DbUtil.dbClose(rs, ps, con);
+     }
       return list;
 
    }

@@ -27,9 +27,6 @@ $(function(){
 	location.href='${pageContext.request.contextPath}/servlet?controller=review&command=select&productNo=';
 } */
 </script>
-<script src="../js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
-</script>
       	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900|Noto+Sans+KR:100,300,400,500,700,900" rel="stylesheet">

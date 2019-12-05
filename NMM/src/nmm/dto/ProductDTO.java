@@ -1,6 +1,6 @@
 package nmm.dto;
 
-public class ProductDTO {
+public class ProductDTO{
 	private int productNo;
 	private String productCategory;
 	private int productStock;
@@ -24,6 +24,13 @@ public class ProductDTO {
 		this.productResiDate = productResiDate;
 	}
 	
+	public ProductDTO(String productName, int productPrice, String productColor, String productSize) {
+		super();
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.productColor = productColor;
+		this.productSize = productSize;
+	}
 	
 	
 	public ProductDTO(int productNo, String productName, int productPrice) {
@@ -79,6 +86,12 @@ public class ProductDTO {
 	}
 	public void setProductResiDate(String productResiDate) {
 		this.productResiDate = productResiDate;
+	}
+	@Override
+	public String toString() {
+		return "ProductDTO [productNo=" + productNo + ", productCategory=" + productCategory + ", productStock="
+				+ productStock + ", productName=" + productName + ", productColor=" + productColor + ", productSize="
+				+ productSize + ", productPrice=" + productPrice + ", productResiDate=" + productResiDate + "]";
 	}
 	
 	

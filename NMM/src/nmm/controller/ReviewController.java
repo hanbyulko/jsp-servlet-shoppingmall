@@ -25,7 +25,13 @@ public class ReviewController implements Controller {
    public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	  int productNo = Integer.parseInt(request.getParameter("productNo"));
       List<ReviewDTO> list = ReviewService.selectAll(productNo);
-      request.setAttribute("list", list);
+      ProductDTO dto = list.get(0).getProductDTO();
+      if(list.get(0).getReviewContent() != null) {
+    	  request.setAttribute("product", dto);
+    	  request.setAttribute("list", list);
+      }else {
+    	  request.setAttribute("product", dto);
+      }
       return new ModelAndView("product/productDetail.jsp", false);
    }
 
