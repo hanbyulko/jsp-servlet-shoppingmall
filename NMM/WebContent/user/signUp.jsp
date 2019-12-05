@@ -102,9 +102,9 @@ document.getElementById('userBirth').value = new Date().toISOString().substring(
 <script type="text/javascript">
 
 function cheakFunction() {
-	if($("#id").val() == ""){
+	if($("#userId").val() == ""){
 	    alert("아이디 입력바람");
-	    $("#id").focus();
+	    $("#userId").focus();
 	    return false;
 	  }
 	if($("#userPwd").val() == ""){
@@ -137,9 +137,9 @@ function cheakFunction() {
 
   $(document).ready(function(){
 	  
-	  $("#id").keyup(function(){
+	  $("#userId").keyup(function(){
 		  if($(this).val()==""){
-			  $("span").text("값을 입력해주세요.");
+			  $("span").text("ID 입력해주세요. ");
 			  return;
 		  }
 		  
@@ -167,8 +167,8 @@ function cheakFunction() {
                     <div class="login-container">
                         <h3 class="login--title">SIGN UP</h3>
                         
-                        <label class=form-input--title>ID  =    <span>    중복결과여부      </span></label>
-                        <input type="text" id ="id" name="id" class="form-input" value="">
+                        <label class=form-input--title><span>    ID 입력해주세요.      </span></label>
+                        <input type="text" id ="userId" name="userId" class="form-input" value="">
                         
                         <label class=form-input--title>PASSWORD</label>
                         <input type="password" id="userPwd" name="userPwd" class="form-input" value="">
