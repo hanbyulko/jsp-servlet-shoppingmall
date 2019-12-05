@@ -32,17 +32,19 @@ public class UserService {
    public static UserDTO loginCheck(String userId, String userPwd) throws Exception {
       UserDAOImpl userdaoimpa = new UserDAOImpl();
       UserDTO user = userdaoimpa.loginCheck(userId, userPwd);
-      System.out.println(userId);
       if(user==null) {
          System.out.println("아이디 비번 오류!!!!!!!");
          return null;
+      }else if(userId.equals(user.getUserId())&userPwd.equals(user.getUserPwd())) {
+    	 return user;
+      }else {
+    	  return null;
       }
-      return user;
    }
 
    public static boolean idCheck(String id) throws Exception {
       UserDAOImpl userdaoimpa = new UserDAOImpl();
-      userdaoimpa.idCheck(id);
-      return false;
+      return userdaoimpa.idCheck(id);
+
    }
 }
