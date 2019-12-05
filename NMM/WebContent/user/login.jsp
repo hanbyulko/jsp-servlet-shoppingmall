@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>NMM Login</title>
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 <style>
 /* CSS RESET */
 * {
@@ -85,15 +86,31 @@ body,html{
     box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
     
 }
-
 </style>
 </head>
+
+<script type="text/javascript">
+function cheakFunction() {
+	
+	if($("#userId").val()==""){
+	    alert("아이디 입력바람");
+	    $("#userId").focus();
+	    return false;
+	  }
+	if($("#userPwd").val()==""){
+	    alert("비밀번호 입력바람");
+	    $("#userPwd").focus();
+	    return false;
+	  }
+}
+</script>
+
 <body>
 
 <div class="full-bg">
 	<div class="table">
 		<div class="table-cell">
-  				<form method="post" action="<%=application.getContextPath()%>/servlet?controller=user&command=login">
+  				<form method="post" onsubmit="return cheakFunction();" action="<%=application.getContextPath()%>/servlet?controller=user&command=login">
                     <div class="login-container">
                         <h3 class="login--title">LOGIN</h3>
                         
@@ -103,10 +120,10 @@ body,html{
                         
                         <label class=form-input--title>PASSWORD</label>
                         
-                        <input type="password" id="userPwd" name="userPwd" class="form-input">
+                        <input type="password" id="userPwd" name="userPwd" class="form-input" value="">
                         
-                        <input type="submit" class="form-btn" value="LOG IN">
-                        <input type="button" class="form-btn" value="SIGN UP" onclick="location.href='<%=application.getContextPath()%>/user/signUp.jsp'">
+                        <input type="submit" class="form-btn" value="LOG IN" id="login">
+                        <input type="button" class="form-btn" value="SIGN UP" id="signup" onclick="location.href='<%=application.getContextPath()%>/user/signUp.jsp'">
                     </div>
  				</form>
 		</div>

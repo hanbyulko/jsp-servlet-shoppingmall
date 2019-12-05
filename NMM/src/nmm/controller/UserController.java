@@ -9,7 +9,10 @@ import nmm.dto.UserDTO;
 import nmm.service.UserService;
 
 public class UserController implements Controller {
-
+	@Override
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return new ModelAndView("servlet?controller=product+review&command=productList", false);
+	}
 	public ModelAndView logOut(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", null);
@@ -17,10 +20,7 @@ public class UserController implements Controller {
 		return new ModelAndView("servlet?controller=product+review&command=productList", false);
 	}
 
-	@Override
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return new ModelAndView("servlet?controller=product+review&command=productList", false);
-	}
+
 
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();

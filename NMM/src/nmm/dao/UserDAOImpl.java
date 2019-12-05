@@ -100,24 +100,26 @@ public class UserDAOImpl implements UserDAO {
       }
    }
 
-   public String idCheck(String id) throws SQLException {
+   public boolean idCheck(String id) throws SQLException {
       Connection con = null;
       PreparedStatement ps = null;
       String sql = "select USER_ID from USERDB where upper(user_id) = upper(?) ";
       ResultSet rs =null;
-      String user = null;
+      boolean user = false;
+      System.out.println(user);
       try {
          con = DbUtil.getConnection();
          ps = con.prepareStatement(sql);
          ps.setString(1, id);
          rs = ps.executeQuery();  //  ����Ŭ�� app������ ����
          while(rs.next()) {
-          user = new String(rs.getString(1));
+        	 user=true;
          }
          return user;
       }finally {
          DbUtil.dbClose(rs, ps, con);
       }
+
    }
 
 }
