@@ -189,7 +189,7 @@ function cheakFunction() {
                         <input type="date" id ="userBirth" name="userBirth" class="form-input" value="">
                         
                         <input type="submit" class="form-btn" value="SIGN UP" id="SIGNUP">
-                        
+                        <input type="button" class="form-btn" value="MAIN" id="main" onclick="location.href='../servlet?controller=product+review&command=productList'">
                     </div>
  				</form>
 		</div>

@@ -87,13 +87,24 @@
 							<div class="features">
 								<section>
 									<span class="icon solid major fa-code"></span>
-									<h3>회원 정보 수정페이지 이동</h3>
-									<p> 아이디는 이미 세팅되어 있습니다. 나머지 값들을 변경</p>
+									<form method="post" action="../servlet?controller=user&command=upDate">
+									userId : <%
+											if(session.getAttribute("userId")!=null){
+												String i = (String)session.getAttribute("userId");
+												out.print("<input type='text' id='userId' name='userId' value='"+i+"' readonly><br>");
+											}
+										%>
+									  PWD : <input type="password" id="userPwd" name="userPwd" />
+									  userName : <input type="text" id="userName" name="userName" />
+									  userPhone : <input type="text" id="userPhone" name="userPhone" />
+									  userAddr : <input type="text" id="userAddr" name="userAddr" />
+									  userEmail : <input type="text" id="userEmail" name="userEmail" />
+									    
+									  <input type="submit" value="회원정보 수정" />
+									  
+									</form>
 								</section>
 							</div>
-							<ul class="actions">
-								<li><a href="userUpdate.jsp" class="button">회원정보 수정</a></li>
-							</ul>
 						</div>
 					</section>
 
@@ -106,7 +117,7 @@
 								<section>
 									<form method="post" action="#">
 										<ul class="contact">
-										<li><a href="${servlet}qna&command=main" class="button">메인페이지 이동</a></li>
+										<li><a href="../servlet?controller=product+review&command=productList" class="button">메인페이지 이동</a></li>
 									</ul>
 									</form>
 								</section>

@@ -5,10 +5,28 @@ public class UserDTO {
    private String userId;
    private String userPwd;
    private String userName;
-   public UserDTO(String userId, String userPwd) {
+   private String userBirth;
+   private String userPhone;
+   private String userAddr;
+   private String userEmail;
+   
+   
+   public UserDTO() {
+	super();
+}
+public UserDTO(String userId, String userPwd) {
    super();
    this.userId = userId;
    this.userPwd = userPwd;
+}
+public UserDTO(String userId, String userPwd, String userName, String userPhone, String userAddr, String userEmail) {
+	super();
+	this.userId = userId;
+	this.userPwd = userPwd;
+	this.userName = userName;
+	this.userPhone = userPhone;
+	this.userAddr = userAddr;
+	this.userEmail = userEmail;
 }
 public UserDTO(int userNo, String userId, String userPwd) {
    super();
@@ -16,10 +34,7 @@ public UserDTO(int userNo, String userId, String userPwd) {
    this.userId = userId;
    this.userPwd = userPwd;
 }
-private String userBirth;
-   private String userPhone;
-   private String userAddr;
-   private String userEmail;
+
 public UserDTO(int userNo, String userId, String userPwd, String userName, String userBirth, String userPhone,
       String userAddr, String userEmail) {
    super();
