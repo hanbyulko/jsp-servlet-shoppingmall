@@ -56,7 +56,7 @@
 							<div class="content">
 								<div class="inner">
 									<h2>여러분이 구매하신 구매 내역을 확인할수 있습니다</h2>
-									<p>여러분에 구매내역을 확인해 보세요</p>
+									<p>여러분에 구매내역을 확인해 보세요!</p>
 									<ul class="actions">
 										<li><a href="../user/purchase/purchaseHistory.jsp" class="button">구매 내역이동</a></li>
 									</ul>
