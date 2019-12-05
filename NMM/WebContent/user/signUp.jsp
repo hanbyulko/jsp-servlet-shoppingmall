@@ -180,7 +180,7 @@ function cheakFunction() {
                         <input type="text" id ="userAddr" name="userAddr" class="form-input" value="">
                         
                         <label class=form-input--title>TEL</label>
-                        <input type="text" id ="userPhone" name="userPhone" class="form-input" value="">
+                        <input type="text" id ="userPhone" name="userPhone" class="form-input" value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')">
                         
                         <label class=form-input--title>EMAIL</label>
                         <input type="text" id ="userEmail" name="userEmail" class="form-input" value="">

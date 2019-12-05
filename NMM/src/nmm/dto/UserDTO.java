@@ -47,8 +47,8 @@ public UserDTO(int userNo, String userId, String userPwd, String userName, Strin
    this.userAddr = userAddr;
    this.userEmail = userEmail;
 }
-public UserDTO(String userId, String userPwd, String userName, String userAddr, String userPhone,
-      String userEmail, String userBirth) {
+public UserDTO(String userId, String userPwd, String userName, String userBirth, String userAddr,
+      String userPhone, String userEmail) {
    this.userId=userId;
    this.userPwd = userPwd;
    this.userName = userName;

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
 <!--
 	Hyperspace by HTML5 UP
@@ -16,8 +17,53 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style type="text/css">
 		img {width: 200px; height: 150px; margin: 0; padding: 0;}
+		p{color: "#0d001a";}
 		</style>
+		<script type="text/javascript">
+		function cheakFunction() {
+			if($("#userId").val() == ""){
+			    alert("아이디 입력바람");
+			    $("#userId").focus();
+			    return false;
+			  }
+			if($("#userPwd").val() == ""){
+			    alert("비밀번호 입력바람");
+			    $("#userPwd").focus();
+			    return false;
+			  }
+			if($("#userName").val() == ""){
+			    alert("이름 입력바람");
+			    $("#userName").focus();
+			    return false;
+			  }
+			if($("#userAddr").val() == ""){
+			    alert("주소 입력바람");
+			    $("#userAddr").focus();
+			    return false;
+			  }
+			if($("#userPhone").val() == ""){
+			    alert("핸드폰 입력바람");
+			    $("#userPhone").focus();
+			    return false;
+			  }
+			if($("#userEmail").val() == ""){
+			    alert("이메일 입력바람");
+			    $("#userEmail").focus();
+			    return false;
+			  }
+			
+		}
+		
+		$(function () {
+			$("#userPhone").on("keyup", function() {
+			    $(this).val($(this).val().replace(/[^0-9]/g,""));
+			});
+		})
+
+		</script>
+		
 	</head>
+	
 	<body class="is-preload">
 
 		<!-- Sidebar -->
@@ -43,7 +89,7 @@
 							<h1>마이페이지 환영한다 동무</h1>
 							<p>이 페이지에서 회원정보를 수정하고, 구매내역을 조회할수 있습니다<br />
 							<ul class="actions">
-								<li><a href="#one" class="button scrolly">1첫</a></li>
+								<li><a href="#one" class="button scrolly">구매내역</a></li>
 							</ul>
 						</div>
 					</section>
@@ -96,7 +142,7 @@
 										%>
 									  PWD : <input type="password" id="userPwd" name="userPwd" />
 									  userName : <input type="text" id="userName" name="userName" />
-									  userPhone : <input type="text" id="userPhone" name="userPhone" />
+									  userPhone : <input type="text" id="userPhone" name="userPhone" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
 									  userAddr : <input type="text" id="userAddr" name="userAddr" />
 									  userEmail : <input type="text" id="userEmail" name="userEmail" />
 									    
