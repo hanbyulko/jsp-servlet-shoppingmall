@@ -7,52 +7,139 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#mask {
-	position: absolute;
-	z-index: 9000;
-	background-color: #000;
-	display: none;
-	left: 0;
-	top: 0;
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300");
+body {
+	color: #2c3e50;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
 }
-.window {
-	display: none;
+
+h1 {
+	text-align: center;
+	font-size: 2.5rem;
+	font-weight: 300;
+}
+
+.pagination-container {
+	margin: 100px auto;
+	text-align: center;
+}
+
+.pagination {
+	position: relative;
+}
+
+.pagination a {
+	position: relative;
+	display: inline-block;
+	color: #2c3e50;
+	text-decoration: none;
+	font-size: 1.2rem;
+	padding: 8px 16px 10px;
+}
+
+.pagination a:before {
+	z-index: -1;
 	position: absolute;
-	left: 50%;
-	top: 50px;
-	margin-left: -500px;
-	width: 1000px;
-	height: 500px;
-	background-color: #FFF;
-	z-index: 10000;
+	height: 100%;
+	width: 100%;
+	content: "";
+	top: 0;
+	left: 0;
+	background-color: #2c3e50;
+	border-radius: 24px;
+	-webkit-transform: scale(0);
+	transform: scale(0);
+	transition: all 0.2s;
+}
+
+.pagination a:hover, .pagination a .pagination-active {
+	color: #fff;
+}
+
+.pagination a:hover:before, .pagination a .pagination-active:before {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+.pagination .pagination-active {
+	color: #fff;
+}
+
+.pagination .pagination-active:before {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+.pagination-newer {
+	margin-right: 50px;
+}
+
+.pagination-older {
+	margin-left: 50px;
+}
+
+
+body, html {
+	height: 100%;
+	background-color: #f4f4f4;
+	font-family: 'Maven Pro', 'Noto Sans KR';
+}
+
+th {
+	text-align: center;
+}
+
+.table {
+	height: auto;
+	display: table;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.table--title {
+	width: 100%;
+	text-align: center;
+	font-size: 50px;
 }
 </style>
 </head>
 <body>
-	<jsp:include page="../view/top.jsp"></jsp:include>
-	<p>
-		1대1문의 게시판입니다 <br> <br>
-	<p>
-	<table>
+	<jsp:include page="../view/top.jsp" />
+	<h1 class="table--title">1대1 문의</h1>
+	<table class="table">
 		<tr>
 			<th>게시글번호</th>
-			<th>상품번호</th>
+			<th>상품이름</th>
 			<th>제목</th>
 			<th>작성날짜</th>
 			<th>답변상태</th>
-			<th>삭제하기</th>
 		</tr>
 		<c:forEach var="qnaDTO" items="${list}">
 			<tr>
 				<td>${qnaDTO.qnaNo}</td>
-				<td><a href="#" class=openMask>${qnaDTO.productDTO.productName}</a></td>
+				<td><a href="${servlet}qna&command=main">${qnaDTO.productDTO.productName}</a></td>
 				<td>${qnaDTO.qnaTitle}</td>
 				<td>${qnaDTO.qnaDate}</td>
 				<td>${qnaDTO.qnaResponseState}</td>
-				<td><a
-					href='${servlet}qna&command=delete&qnaNo=${qnaDTO.qnaNo}'>삭제하기</a></td>
 		</c:forEach>
 	</table>
+	
+	<!-- 페이징처리 -->
+	<nav class="pagination-container">
+		<div class="pagination">
+			<a class="pagination-newer"
+				href="${servlet}qna&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo>1?pageNo-1:1}">PREV</a>
+			<span class="pagination-inner"> <c:forEach var='i' begin='1'
+					end='${pageCnt}'>
+					<a class="${i==pageNo?'pagination-active':page}"
+						href="${servlet}qna&command=${command}&category=${category}&keyword=${keyword}&pageNo=${i}">${i}</a>
+				</c:forEach>
+			</span> <a class="pagination-older"
+				href="${servlet}qna&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo<pageCnt?pageNo+1:pageCnt}">NEXT</a>
+		</div>
+	</nav>
+	
 	<p>
 		<br> <br>
 	<form method='post' action='${servlet}qna&command=insert'>
@@ -65,71 +152,6 @@
 			<input type="submit" />
 	</form>
 
-	<div id="wrap">
-		<div id="container">
-			<div id="mask"></div>
-			<div class="window">
-				<p id=title
-					style="width: 1000px; height: 500px; text-align: center; vertical-align: middle;">
-					질문 제목 <br> 질문 내용 <br> 답변 내용
-				</p>
-				<div></div>
-
-				<p style="text-align: center; background: #ffffff; padding: 20px;">
-					<a href="#" class="close">창 닫기</a>
-				</p>
-			</div>
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td align="center"><a href="#" class="openMask"></a></td>
-				</tr>
-			</table>
-		</div>
-	</div>
-
-
-	<input type="hidden" id="qt" value="${qnaTitle}">
-	<input type="hidden" id="qc" value="${qnaContent}">
-	<input type="hidden" id="qrc" value="${qnaResponseContent}">
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script type="text/javascript">
-		function wrapWindowByMask() {
-
-			var maskHeight = $(document).height();
-			var maskWidth = $(window).width();
-
-			$("#mask").css({
-				"width" : maskWidth,
-				"height" : maskHeight
-			});
-
-			$("#mask").fadeIn(0);
-			$("#mask").fadeTo("slow", 0.6);
-
-			$(".window").show();
-			$window.opener.document.getElementById("#content").value = $("#qc")
-					.val()
-		}
-
-		$(document).ready(function() {
-			$(".openMask").click(function(e) {
-				e.preventDefault();
-				wrapWindowByMask();
-			});
-			$(".window .close").click(function(e) {
-				e.preventDefault();
-				$("#mask, .window").hide();
-			});
-
-			$("#mask").click(function() {
-				$(this).hide();
-				$(".window").hide();
-
-			});
-
-		});
-	</script>
-
-	<jsp:include page="../view/footer.jsp"></jsp:include>
+	<jsp:include page="../view/footer.jsp" />
 </body>
 </html>

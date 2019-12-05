@@ -9,10 +9,9 @@ public class ProductDTO {
 	private String productSize;
 	private int productPrice;
 	private String productResiDate;
-	
-	public ProductDTO() {}
+	private int pageCnt;
 	public ProductDTO(int productNo, String productCategory, int productStock, String productName, String productColor,
-			String productSize, int productPrice, String productResiDate) {
+			String productSize, int productPrice, String productResiDate, int pageCnt) {
 		super();
 		this.productNo = productNo;
 		this.productCategory = productCategory;
@@ -22,15 +21,9 @@ public class ProductDTO {
 		this.productSize = productSize;
 		this.productPrice = productPrice;
 		this.productResiDate = productResiDate;
+		this.pageCnt = pageCnt;
 	}
-	
-	
-	
-	public ProductDTO(int productNo, String productName, int productPrice) {
-		super();
-		this.productNo = productNo;
-		this.productName = productName;
-		this.productPrice = productPrice;
+	public ProductDTO() {
 	}
 	public int getProductNo() {
 		return productNo;
@@ -80,6 +73,17 @@ public class ProductDTO {
 	public void setProductResiDate(String productResiDate) {
 		this.productResiDate = productResiDate;
 	}
-	
-	
+	public int getPageCnt() {
+		return pageCnt;
+	}
+	public void setPageCnt(int pageCnt) {
+		this.pageCnt = pageCnt;
+	}
+	@Override
+	public String toString() {
+		return "ProductDTO [productNo=" + productNo + ", productCategory=" + productCategory + ", productStock="
+				+ productStock + ", productName=" + productName + ", productColor=" + productColor + ", productSize="
+				+ productSize + ", productPrice=" + productPrice + ", productResiDate=" + productResiDate + ", pageCnt="
+				+ pageCnt + "]";
+	}
 } 

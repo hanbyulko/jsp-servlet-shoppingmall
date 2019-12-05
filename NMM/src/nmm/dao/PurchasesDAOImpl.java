@@ -50,8 +50,15 @@ public class PurchasesDAOImpl implements PurchasesDAO {
 
 
                 UserDTO userDTO = new UserDTO(userNo, userName, userId, userPwd, userAddr, userPhone, userEmail, userBirth);
-                ProductDTO productDTO = new ProductDTO(
-                        productNo, category, stock, productName, productColor, productSize, price, productResiDate);
+                ProductDTO productDTO = new ProductDTO();
+                productDTO.setProductNo(productNo);
+                productDTO.setProductCategory(category);
+                productDTO.setProductStock(stock);
+                productDTO.setProductName(productName);
+                productDTO.setProductColor(productColor);
+                productDTO.setProductSize(productSize);
+                productDTO.setProductPrice(price);
+                productDTO.setProductResiDate(productResiDate);
                 list.add(new PurchaseDTO(purNo,userDTO,productDTO,purQty,purDate,purStat));
 //
             }
@@ -102,10 +109,16 @@ public class PurchasesDAOImpl implements PurchasesDAO {
 
 
                 UserDTO userDTO = new UserDTO(userNo, userName, userId, userPwd, userAddr, userPhone, userEmail, userBirth);
-                ProductDTO productDTO = new ProductDTO(
-                        productNo, category, stock, productName, productColor, productSize, price, productResiDate);
+                ProductDTO productDTO = new ProductDTO();
+                productDTO.setProductNo(productNo);
+                productDTO.setProductCategory(category);
+                productDTO.setProductStock(stock);
+                productDTO.setProductName(productName);
+                productDTO.setProductColor(productColor);
+                productDTO.setProductSize(productSize);
+                productDTO.setProductPrice(price);
+                productDTO.setProductResiDate(productResiDate);
                 list.add(new PurchaseDTO(purNo,userDTO,productDTO,purQty,purDate,purStat));
-//
             }
 
         } catch (SQLException e) {

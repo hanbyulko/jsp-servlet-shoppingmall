@@ -49,9 +49,15 @@ public class CartDAOImpl implements CartDAO {
 			   String productResiDate = rs.getString("PRODUCT_RESIDATE");
 			   UserDTO userDTO = new UserDTO(
 			   		userCode, userId, userPwd, userName, userBirth, userPhone, userAddr, userEmail);
-			   ProductDTO productDTO = new ProductDTO(
-			   		productNo, category, stock, productName, productColor, productSize, price, productResiDate);
-			   
+			   ProductDTO productDTO = new ProductDTO();
+               productDTO.setProductNo(productNo);
+               productDTO.setProductCategory(category);
+               productDTO.setProductStock(stock);
+               productDTO.setProductName(productName);
+               productDTO.setProductColor(productColor);
+               productDTO.setProductSize(productSize);
+               productDTO.setProductPrice(price);
+               productDTO.setProductResiDate(productResiDate);
 			   list.add(new CartDTO(cartNo, userDTO, productDTO, cartQty));
 		   }
 

@@ -19,5 +19,6 @@ public interface ProductDAO {
 
 	int delete(int productNo) throws Exception;
 
-	List<ProductDTO> searchByKeyword(String keyword) throws Exception;
+	List<ProductDTO> searchByKeyword(int pageNo, String keyword) throws Exception;
+	
 }

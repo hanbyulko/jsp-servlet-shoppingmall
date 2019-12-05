@@ -6,10 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import nmm.dto.ModelAndView;
-import nmm.dto.ProductDTO;
 import nmm.dto.QnaDTO;
 import nmm.service.QnaService;
-import nmm.service.UserService;
 
 public class QnaController implements Controller{
 	private String userId;
@@ -21,19 +19,23 @@ public class QnaController implements Controller{
 			userId = (String)request.getSession().getAttribute("userId");
 			userNo = (int)request.getSession().getAttribute("userNo");
 		}
-		selectByUserNo(request, response);
+		List<QnaDTO> list = QnaService.selectByUserId(Integer.parseInt(request.getParameter("pageNo")), userId);
+		request.setAttribute("pageCnt", list.get(list.size()-1>0?list.size()-1:list.size()).getPageCnt());
+		SendPageInfo.sendInfo(request, response);
+		request.setAttribute("list", list);
 		return new ModelAndView("myPage/qna.jsp", false);
 	}
 	
-	public ModelAndView selectByUserNo(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		List<QnaDTO> list = QnaService.selectByUserId(userId);
-		request.setAttribute("list", list);
+	public ModelAndView selectByQnaNo(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		QnaDTO qnaDTO = QnaService.selectByQnaNo(Integer.parseInt(request.getParameter("qnaNo")));
+		request.setAttribute("qnaDTO", qnaDTO);
 		return new ModelAndView("myPage/qna.jsp", false);
 	}
 
 	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		List<QnaDTO> list = QnaService.selectAll(); 
+		List<QnaDTO> list = QnaService.selectAll(Integer.parseInt(request.getParameter("pageNo"))); 
 		request.setAttribute("list" , list);
+		SendPageInfo.sendInfo(request, response);
 		return new ModelAndView("myPage/qna.jsp", false);
 	}
 

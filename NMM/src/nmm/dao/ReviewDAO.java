@@ -7,7 +7,8 @@ import nmm.dto.ReviewDTO;
 
 public interface ReviewDAO {
 	
-	List<ReviewDTO> selectAll(int productNo) throws Exception;
+	List<ReviewDTO> selectUser(int pageNo, int productNo) throws Exception;
+	List<ReviewDTO> selectAll(int pageNo) throws Exception;
 	
 	int insert(int userNo, int productNo, ReviewDTO dto) throws Exception;
 	   

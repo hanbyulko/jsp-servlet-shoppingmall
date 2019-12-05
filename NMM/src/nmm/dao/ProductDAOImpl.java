@@ -17,12 +17,23 @@ public class ProductDAOImpl implements ProductDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		Connection con2 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs2 = null;
+		int pageCnt = 0;
+		String cnt = "SELECT COUNT(*) FROM PRODUCT ORDER BY PRODUCT_NO ASC";
 		String sql = "SELECT * FROM (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM product ORDER BY PRODUCT_NO ASC) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";
 		try {
+			con2 = DbUtil.getConnection();
+			ps2 = con2.prepareStatement(cnt);
+			rs2 = ps2.executeQuery();
+			while (rs2.next()) {
+				pageCnt = rs2.getInt(1);
+			}
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, pageNo*8+1);
-			ps.setInt(2, (pageNo-1)*8+1);
+			ps.setInt(1, pageNo * 8 + 1);
+			ps.setInt(2, (pageNo - 1) * 8 + 1);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ProductDTO product = new ProductDTO();
@@ -38,6 +49,7 @@ public class ProductDAOImpl implements ProductDAO {
 			}
 		} finally {
 			DbUtil.dbClose(rs, ps, con);
+			DbUtil.dbClose(rs2, ps2, con2);
 		}
 		return list;
 	}
@@ -56,8 +68,11 @@ public class ProductDAOImpl implements ProductDAO {
 				int productNo = rs.getInt(1);
 				String productName = rs.getString(2);
 				int productPrice = rs.getInt(3);
-
-				listLatest.add(new ProductDTO(productNo, productName, productPrice));
+				ProductDTO dto = new ProductDTO();
+				dto.setProductNo(productNo);
+				dto.setProductName(productName);
+				dto.setProductPrice(productPrice);
+				listLatest.add(dto);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -72,14 +87,26 @@ public class ProductDAOImpl implements ProductDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		Connection con2 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs2 = null;
+		int pageCnt = 0;
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		String cnt = "SELECT COUNT(*) FROM PRODUCT WHERE PRODUCT_CATEGORY=?";
 		String sql = "SELECT * FROM (SELECT a.*, ROWNUM rnum FROM (SELECT PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_CATEGORY FROM PRODUCT WHERE PRODUCT_CATEGORY=?) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";
 		try {
+			con2 = DbUtil.getConnection();
+			ps2 = con2.prepareStatement(cnt);
+			ps2.setString(1, category);
+			rs2 = ps2.executeQuery();
+			while (rs2.next()) {
+				pageCnt = rs2.getInt(1);
+			}
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, category);
-			ps.setInt(2, pageNo*8);
-			ps.setInt(3, (pageNo-1)*8+1);
+			ps.setInt(2, pageNo * 8);
+			ps.setInt(3, (pageNo - 1) * 8 + 1);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				int productNo = rs.getInt(1);
@@ -91,10 +118,12 @@ public class ProductDAOImpl implements ProductDAO {
 				dto.setProductName(productName);
 				dto.setProductPrice(productPrice);
 				dto.setProductCategory(productCategory);
+				dto.setPageCnt(pageCnt % 8 == 0 ? pageCnt / 8 : pageCnt / 8 + 1);
 				list.add(dto);
 			}
 		} finally {
 			DbUtil.dbClose(rs, ps, con);
+			DbUtil.dbClose(rs2, ps2, con2);
 		}
 		return list;
 	}
@@ -186,17 +215,33 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductDTO> searchByKeyword(String keyword) throws Exception {
+	public List<ProductDTO> searchByKeyword(int pageNo, String keyword) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM PRODUCT WHERE UPPER(PRODUCT_NAME) LIKE UPPER(?) OR PRODUCT_CATEGORY LIKE ?";
+		Connection con2 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs2 = null;
+		int pageCnt = 0;
+		String cnt = "SELECT COUNT(*) FROM PRODUCT WHERE UPPER(PRODUCT_NAME) LIKE UPPER(?) OR PRODUCT_CATEGORY LIKE ?";
+		String sql = "SELECT * FROM (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM PRODUCT WHERE UPPER(PRODUCT_NAME) LIKE UPPER(?) OR PRODUCT_CATEGORY LIKE ?) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
 		try {
+			con2 = DbUtil.getConnection();
+			ps2 = con2.prepareStatement(cnt);
+			ps2.setString(1, "%" + keyword + "%");
+			ps2.setString(2, "%" + keyword + "%");
+			rs2 = ps2.executeQuery();
+			while (rs2.next()) {
+				pageCnt = rs2.getInt(1);
+			}
+
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setString(1, "%" + keyword+ "%");
-			ps.setString(2, "%" + keyword+ "%");
+			ps.setString(1, "%" + keyword + "%");
+			ps.setString(2, "%" + keyword + "%");
+			ps.setInt(3, pageNo * 8);
+			ps.setInt(4, (pageNo - 1) * 8 + 1);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ProductDTO product = new ProductDTO();
@@ -208,15 +253,15 @@ public class ProductDAOImpl implements ProductDAO {
 				product.setProductSize(rs.getString(6));
 				product.setProductPrice(rs.getInt(7));
 				product.setProductResiDate(rs.getString(8));
+				product.setPageCnt(pageCnt % 8 == 0 ? pageCnt / 8 : pageCnt / 8 + 1);
 				list.add(product);
 			}
 		} finally {
-			DbUtil.dbClose(rs , ps, con);
+			DbUtil.dbClose(rs, ps, con);
+			DbUtil.dbClose(rs2, ps2, con2);
 		}
 		return list;
-		
-		
+
 	}
-	
-	
+
 }

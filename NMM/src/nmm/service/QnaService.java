@@ -9,8 +9,8 @@ import nmm.dto.QnaDTO;
 public class QnaService {
 	private static QnaDAO dao = new QnaDAOImpl();
 	
-	public static List<QnaDTO> selectAll() throws Exception {
-		return dao.selectAll();
+	public static List<QnaDTO> selectAll(int pageNo) throws Exception {
+		return dao.selectAll(pageNo);
 	}
 	
 	public static int insert(int userNo, int productNo, QnaDTO dto) throws Exception {
@@ -25,8 +25,12 @@ public class QnaService {
 		return dao.delete(qnaNo);
 	}
 
-	public static List<QnaDTO> selectByUserId(String userId) throws Exception{
-		return dao.selectByUserId(userId);
+	public static List<QnaDTO> selectByUserId(int pageNo, String userId) throws Exception{
+		return dao.selectByUserId(pageNo, userId);
+	}
+
+	public static QnaDTO selectByQnaNo(int qnaNo) throws Exception {
+		return dao.selectByQnaNo(qnaNo);
 	}
 	
 }

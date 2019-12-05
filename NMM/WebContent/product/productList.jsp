@@ -89,12 +89,11 @@ table td {
 	text-align: center;
 }
 </style>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script  src="../js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../view/top.jsp" />
-	<h1 align="center">제품 리스트 페이지 입니다.</h1>
-
+	<h1 align="center">${pageTitle}</h1>
 	<table>
 		<tr>
 			<c:forEach items="${list}" var="product">
@@ -119,30 +118,20 @@ table td {
 		</tr>
 	</table>
 
-	<%-- <c:forEach items="${list}" var="product">
-		
-        <a href="servlet?command=product&productNo=${product.productNo}">${product.productImg}</a> <br/>
-        ${product.productName} <br/>
-        ${product.productPrice} <br/>
-</c:forEach> --%>
-
 
 <%-- <a class="pagination-active" href="servlet?command=searchByCategory&category=${category}&pageNo=${pageNo-1}">1</a>  --%>
 	<!-- 페이징처리 -->
 	<nav class="pagination-container">
 		<div class="pagination">
-			<a class="pagination-newer" href="servlet?command=searchByCategory&category=${category}&pageNo=${pageNo-1}">PREV</a> 
+			<a class="pagination-newer" href="${servlet}product&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo>1?pageNo-1:1}">PREV</a> 
 				<span class="pagination-inner"> 
-				<c:forEach var='i' begin='0' end='${pageCnt}'>
-				<a href="servlet?command=searchByCategory&category=${category}&pageNo${i}">${i}</a> 
+				<c:forEach var='i' begin='1' end='${pageCnt}'>
+				<a class="${i==pageNo?'pagination-active':page}" href="${servlet}product&command=${command}&category=${category}&keyword=${keyword}&pageNo=${i}">${i}</a> 
 				</c:forEach>
 				</span> 
-			<a class="pagination-older" href="servlet?command=searchByCategory&category=${category}&pageNo=${pageno+1}">NEXT</a>
+			<a class="pagination-older" href="${servlet}product&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo<pageCnt?pageNo+1:pageCnt}">NEXT</a>
 		</div>
 	</nav>
-
-
 	<jsp:include page="../view/footer.jsp" />
-
 </body>
 </html>
