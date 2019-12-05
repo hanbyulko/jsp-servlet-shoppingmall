@@ -115,7 +115,7 @@ input, select, textarea {
 /* Type */
 
 	body, input, select, textarea {
-		color: rgba(255, 255, 255, 0.55);
+		color: rgb(0, 0, 26);
 		font-family: Arial, Helvetica, sans-serif;
 		font-size: 16.5pt;
 		font-weight: normal;
@@ -175,7 +175,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #ffffff;
+		color: #0d001a;
 		font-weight: bold;
 		line-height: 1.5;
 		margin: 0 0 0.5em 0;
@@ -1827,15 +1827,15 @@ input, select, textarea {
 		-webkit-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
-		-moz-transition: border-color 0.2s ease;
-		-webkit-transition: border-color 0.2s ease;
-		-ms-transition: border-color 0.2s ease;
-		transition: border-color 0.2s ease;
+		-moz-transition: border-color 0.8s ease;
+		-webkit-transition: border-color 0.8s ease;
+		-ms-transition: border-color 0.8s ease;
+		transition: border-color 0.8s ease;
 		background-color: transparent;
 		border: solid 1px !important;
-		border-color: rgba(255, 255, 255, 0.15) !important;
+		border-color: rgb(0, 0, 26) !important;
 		border-radius: 3em;
-		color: #ffffff !important;
+		color:  #00001a !important;
 		cursor: pointer;
 		display: inline-block;
 		font-size: 0.6em;
@@ -1945,7 +1945,7 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			border-color: rgba(255, 255, 255, 0.55) !important;
+			border-color: rgb(255, 26, 26) !important;
 		}
 
 			input[type="submit"]:hover:after,
@@ -2316,7 +2316,7 @@ input, select, textarea {
 		background: rgba(255, 255, 255, 0.05);
 		border-radius: 0.25em;
 		border: none;
-		border: solid 1px rgba(255, 255, 255, 0.15);
+		border: solid 2px rgba(0, 0, 0, 0.5);
 		color: inherit;
 		display: block;
 		outline: 0;
@@ -3240,15 +3240,15 @@ input, select, textarea {
 		}
 
 		.wrapper.style1 {
-			background-color: #5e42a6;
+			background-color: #ffffff;
 		}
 
 		.wrapper.style1-alt {
-			background-color: #493382;
+			background-color: #e6ffff;
 		}
 
 		.wrapper.style2 {
-			background-color: #5052b5;
+			background-color: #e6e6ff;
 		}
 
 		.wrapper.style2-alt {
@@ -3256,7 +3256,7 @@ input, select, textarea {
 		}
 
 		.wrapper.style3 {
-			background-color: #b74e91;
+			background-color: #e6e6ff;
 		}
 
 		.wrapper.style3-alt {
@@ -3524,7 +3524,7 @@ input, select, textarea {
 
 	#sidebar {
 		padding: 2.5em 2.5em 0.5em 2.5em ;
-		background: #312450;
+		background: #0d001a;
 		cursor: default;
 		height: 100vh;
 		left: 0;

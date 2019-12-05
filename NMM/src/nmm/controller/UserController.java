@@ -44,7 +44,7 @@ public class UserController implements Controller {
 		String userPhone = request.getParameter("userPhone");
 		String userEmail = request.getParameter("userEmail");
 		String userBirth = request.getParameter("userBirth");
-		UserDTO dto = new UserDTO(userId, userPwd,userName,  userAddr, userPhone, userEmail, userBirth);
+		UserDTO dto = new UserDTO(userId, userPwd,userName,  userBirth, userAddr, userPhone, userEmail);
 		UserService.insert(dto);
 
 		return new ModelAndView("servlet?controller=product+review&command=productList", false);
@@ -57,8 +57,7 @@ public class UserController implements Controller {
 		String userAddr = request.getParameter("userAddr");
 		String userPhone = request.getParameter("userPhone");
 		String userEmail = request.getParameter("userEmail");
-		String userBirth = request.getParameter("userBirth");
-		UserDTO dto = new UserDTO(userPwd, userId, userName, userBirth, userPhone, userAddr, userEmail);
+		UserDTO dto = new UserDTO(userId, userPwd, userName, userPhone, userAddr, userEmail);
 		UserService.update(dto);
 		return new ModelAndView("servlet?controller=product+review&command=productList", false);
 	}

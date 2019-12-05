@@ -40,8 +40,7 @@ public class UserDAOImpl implements UserDAO {
    public int update(UserDTO dto) throws Exception {
       Connection con= null;
       PreparedStatement ps = null;
-      String sql="UPDATE USERDB SET USER_PWD=? , USER_NAME=? , USER_ADDR=? , USER_PHONE=? , USER_EMAIL=? WHERE USER_ID=?";
-      System.out.println(dto);
+      String sql="UPDATE USERDB SET USER_PWD=? , USER_NAME=? , USER_ADDR=? , USER_PHONE=? , USER_EMAIL=? WHERE upper(USER_ID)=upper(?)";
       try {
          con = DbUtil.getConnection();
          ps = con.prepareStatement(sql);
