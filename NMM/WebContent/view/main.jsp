@@ -22,10 +22,6 @@ $(function(){
 		
 	});
 });
-/* function pageMove(){
-	alert("${pageContext.request.contextPath}/servlet?controller=review&command=select");
-	location.href='${pageContext.request.contextPath}/servlet?controller=review&command=select&productNo=';
-} */
 </script>
       	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 		<meta name="viewport" content="width=device-width,initial-scale=1">

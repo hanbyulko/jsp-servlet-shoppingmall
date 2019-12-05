@@ -27,6 +27,7 @@ public class ReviewDAOImpl implements ReviewDAO {
          ps.setInt(1, productNo);
          rs = ps.executeQuery();
          
+         
          while(rs.next()) {
      		String productName = rs.getString(1);
          	int productPrice = rs.getInt(2);
