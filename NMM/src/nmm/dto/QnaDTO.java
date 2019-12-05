@@ -7,11 +7,11 @@ public class QnaDTO {
 	private String qnaTitle;
 	private String qnaContent; 
 	private String qnaDate;
-	private String qnaResponseState; //ÎãµÎ≥ÄÏÉÅÌÉú
-	private String qnaResponseContent; //ÎãµÎ≥ÄÎÇ¥Ïö©
-	
+	private String qnaResponseState; //¥‰∫ØªÛ≈¬
+	private String qnaResponseContent; //¥‰∫Ø≥ªøÎ
+	private int pageCnt;
 	public QnaDTO(int qnaNo, UserDTO userDTO, ProductDTO productDTO, String qnaTitle, String qnaContent, String qnaDate,
-			String qnaResponseState, String qnaResponseContent) {
+			String qnaResponseState, String qnaResponseContent, int pageCnt) {
 		super();
 		this.qnaNo = qnaNo;
 		this.userDTO = userDTO;
@@ -21,6 +21,19 @@ public class QnaDTO {
 		this.qnaDate = qnaDate;
 		this.qnaResponseState = qnaResponseState;
 		this.qnaResponseContent = qnaResponseContent;
+		this.pageCnt = pageCnt;
+	}
+	public QnaDTO() {
+		super();
+	}
+	public QnaDTO(String qnaTitle, String qnaContent) {
+		this.qnaTitle = qnaTitle;
+		this.qnaContent = qnaContent;
+	}
+	public QnaDTO(int qnaNo, String qnaTitle, String qnaContent) {
+		this.qnaNo = qnaNo;
+		this.qnaTitle = qnaTitle;
+		this.qnaContent = qnaContent;
 	}
 	public int getQnaNo() {
 		return qnaNo;
@@ -70,30 +83,12 @@ public class QnaDTO {
 	public void setQnaResponseContent(String qnaResponseContent) {
 		this.qnaResponseContent = qnaResponseContent;
 	}
-	public QnaDTO() {
-		super();
+	public int getPageCnt() {
+		return pageCnt;
 	}
-	public QnaDTO(ProductDTO productDTO, String qnaTitle, String qnaContent) {
-		this.productDTO = productDTO;
-		this.qnaTitle = qnaTitle;
-		this.qnaContent = qnaContent;
+	public void setPageCnt(int pageCnt) {
+		this.pageCnt = pageCnt;
 	}
-	public QnaDTO(ProductDTO productDTO, int qnaNo, String qnaTitle, String qnaContent) {
-		this.productDTO = productDTO;
-		this.qnaNo = qnaNo;
-		this.qnaTitle = qnaTitle;
-		this.qnaContent = qnaContent;
-	}
-	public QnaDTO(int qnaNo, String qnaTitle, String qnaContent) {
-		this.qnaNo = qnaNo;
-		this.qnaTitle = qnaTitle;
-		this.qnaContent = qnaContent;
-	}
-	public QnaDTO(String qnaTitle, String qnaContent) {
-		this.qnaTitle = qnaTitle;
-		this.qnaContent = qnaContent;
-	}
-	
 	
 	
 }

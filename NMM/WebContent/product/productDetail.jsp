@@ -20,15 +20,15 @@ $(function(){
 		}else{
 			$("#quantity").val(value);
 		}
-		var total = eval(value*$("#price").text());
-		$("#total").text(total+" WON");
+		/* var total = eval(value*$("#price").text());
+		$("#total").text(total+" WON"); */
 	});
 	
 	$("#plus").click(function(){
 		var value = parseInt($("#quantity").val())+1;
 		$("#quantity").val(value);
-		var total = eval(value*$("#price").text());
-		$("#total").text(total+" WON");
+		/* var total = eval(value*$("#price").text());
+		$("#total").text(total+" WON"); */
 	});
 	
 	$("#cart").click(function(){
