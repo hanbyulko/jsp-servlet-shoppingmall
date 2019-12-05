@@ -50,24 +50,6 @@ $(function(){
             <a href="./list.html" class="readmore_kr">제품보러가기</a>
         </div>
 
-<%-- <table><tr>
-<c:forEach items="${list}" var="product">
-        <td>${product.productNo} </td>
-        </c:forEach>
-        </tr><tr>
-        <c:forEach items="${list}" var="product">
-        <td><img alt="이미지입니다." src="${imgPath}${product.productName}_L_1.jpg" /></td>
-        </c:forEach>
-        </tr><tr>
-        <c:forEach items="${list}" var="product">
-        <td>${product.productName} </td>
-        </c:forEach>
-        </tr><tr>
-        <c:forEach items="${list}" var="product">
-        <td>${product.productPrice} </td>
-     </c:forEach>
-     </tr>
-</table> --%>
 
 <%-- <c:forEach items="${list}" var="product">
 		
