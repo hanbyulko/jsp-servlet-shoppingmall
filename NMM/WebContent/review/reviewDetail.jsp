@@ -13,9 +13,30 @@
 
 </script> -->
 </head>
+<style>
+body,html{
+    height: 100%;
+    background-color: #f4f4f4;
+    font-family: 'Maven Pro','Noto Sans KR';
+}
+th{
+    text-align: center;
+}
+.table{
+    height: auto;
+    display:table;
+    margin: 0 auto;
+    text-align: center;
+}
+.table--title{
+    width: 100%;
+    text-align: center;
+    font-size: 50px;
+}
+</style>
 <body>
-<h1 align = center>상품 리뷰 </h1>
-<table style="text-align:center">
+<h1 class="table--title">상품 리뷰 </h1>
+<table class="table">
       <tr>
          <th>리뷰 번호</th>
          <th>제목</th>

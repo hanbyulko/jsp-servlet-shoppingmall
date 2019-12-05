@@ -19,7 +19,7 @@ public class ReviewDAOImpl implements ReviewDAO {
       ResultSet rs = null;
       List<ReviewDTO> list = new ArrayList<>();
       ProductDTO productDTO = null;
-      String sql = "SELECT PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_COLOR, PRODUCT_SIZE, REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_STAR, REVIEW_DATE FROM VIEW_PRODUCTANDREVIEW WHERE PRODUCT_NO=?";
+      String sql = "SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_COLOR, PRODUCT_SIZE, REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_STAR, REVIEW_DATE FROM VIEW_PRODUCTANDREVIEW WHERE PRODUCT_NO=?";
       
       try {
          con = DbUtil.getConnection();
@@ -29,17 +29,23 @@ public class ReviewDAOImpl implements ReviewDAO {
          
          
          while(rs.next()) {
-     		String productName = rs.getString(1);
-         	int productPrice = rs.getInt(2);
-         	String productColor = rs.getString(3);
-         	String productSize = rs.getString(4);
-         	productDTO = new ProductDTO(productName, productPrice, productColor, productSize);
-	        int reviewNo = rs.getInt(5);
+        	productNo = rs.getInt(1);
+     		String productName = rs.getString(2);
+         	int productPrice = rs.getInt(3);
+         	String productColor = rs.getString(4);
+         	String productSize = rs.getString(5);
+         	productDTO = new ProductDTO();
+         	productDTO.setProductNo(productNo);
+         	productDTO.setProductName(productName);
+         	productDTO.setProductPrice(productPrice);
+         	productDTO.setProductColor(productColor);
+         	productDTO.setProductSize(productSize);
+	        int reviewNo = rs.getInt(6);
 	            //reviewDTO.setProductDTO(productDTO);
-	        String reviewTitle= rs.getString(6);
-	        String reviewContent = rs.getString(7);
-	        String reviewStar = rs.getString(8);
-	        String reviewDate = rs.getString(9);
+	        String reviewTitle= rs.getString(7);
+	        String reviewContent = rs.getString(8);
+	        String reviewStar = rs.getString(9);
+	        String reviewDate = rs.getString(10);
 	            
 	        list.add(new ReviewDTO(productDTO, reviewNo, reviewTitle, reviewContent, reviewStar, reviewDate));
          }
@@ -140,7 +146,11 @@ public class ReviewDAOImpl implements ReviewDAO {
          rs = ps.executeQuery();
          for (int i=0; i<4; i++) {
             rs.next();
-            list.add(new ProductDTO(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+            ProductDTO dto = new ProductDTO();
+            dto.setProductNo(rs.getInt(1));
+            dto.setProductName(rs.getString(2));
+            dto.setProductPrice(rs.getInt(3));
+            list.add(dto);
          }
       } finally {
          DbUtil.dbClose(rs, ps, con);

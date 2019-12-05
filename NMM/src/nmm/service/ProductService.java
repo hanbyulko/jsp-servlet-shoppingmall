@@ -40,10 +40,13 @@ public class ProductService {
 		productDAO.update(dto);
 	}
 
-	public static List<ProductDTO> searchByKeyword(String keyword) throws Exception {
-		return productDAO.searchByKeyword(keyword);
+	public static List<ProductDTO> searchByKeyword(int pageNo, String keyword) throws Exception {
+		List<ProductDTO> list = productDAO.searchByKeyword(pageNo, keyword);
+		if (list.isEmpty()) {
+			throw new Exception("검색 결과가 없습니다");
+		}
+		return list;
 	}
-
 	
 	
 }

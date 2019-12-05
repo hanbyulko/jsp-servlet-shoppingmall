@@ -43,7 +43,7 @@ $(function(){
                     </div>
                     <div>${lastest.productName}</div>
                     <div href="./detail.html" class="info__icon__new" style="display: noen; border: none;"></div>
-                    <div href="./detail.html" class="info__price">${lastest.productPrice}</div>
+                    <div href="./detail.html" class="info__price">${lastest.productPrice} WON</div>
                 </div>
             </c:forEach>
             </div>
@@ -83,7 +83,7 @@ $(function(){
                     </div>
                     <div>${popular.productName}</div>
                     <div href="./detail.html" class="info__icon__new" style="display: noen; border: none;"></div>
-                    <div href="./detail.html" class="info__price">${popular.productPrice}</div>
+                    <div href="./detail.html" class="info__price">${popular.productPrice} WON</div>
                 </div>
                 
             </c:forEach>

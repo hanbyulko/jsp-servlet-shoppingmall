@@ -38,7 +38,7 @@ public class DispatcherServlet extends HttpServlet {
 				Controller con = map.get(controller);
 				Class<?> cls = classMap.get(controller);
 				Method method = cls.getMethod(command, HttpServletRequest.class, HttpServletResponse.class);
-				
+
 				mv = (ModelAndView) method.invoke(con, request, response);
 			} else {
 				String[] controllerArr = controller.split(" ");
@@ -58,7 +58,7 @@ public class DispatcherServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());
-			request.getRequestDispatcher("errorView/error.jsp").forward(request, response);
+			request.getRequestDispatcher("view/error.jsp").forward(request, response);
 		}
 
 	}

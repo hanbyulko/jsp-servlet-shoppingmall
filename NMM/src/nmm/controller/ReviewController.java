@@ -44,13 +44,13 @@ public class ReviewController implements Controller {
       System.out.println(reviewTitle);
 
       ReviewService.insert(userNo, productNo, new ReviewDTO(reviewNo, reviewTitle, reviewContent, reviewStar));
-      return new ModelAndView("myPage/review.jsp", false);
+      return new ModelAndView("user/purchase/purchaseHistory.jsp", false);
    }
 
    public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
       int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
       ReviewService.delete(reviewNo);
-      return new ModelAndView("myPage/review.jsp", false);
+      return new ModelAndView("user/purchase/purchaseHistory.jsp", false);
    }
 
    public ModelAndView update(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -60,7 +60,7 @@ public class ReviewController implements Controller {
       String reviewStar = request.getParameter("reviewStar");
 
       ReviewService.update(new ReviewDTO(reviewNo, reviewTitle, reviewContent, reviewStar));
-      return new ModelAndView("myPage/review.jsp", false);
+      return new ModelAndView("user/purchase/purchaseHistory.jsp", false);
    }
 
    public ModelAndView productList(HttpServletRequest request, HttpServletResponse response) throws Exception {

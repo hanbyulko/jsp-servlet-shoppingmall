@@ -21,13 +21,20 @@ public class ProductController implements Controller {
 		return null;
 	}
 	
-	public ModelAndView productSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView searchByKeyword(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		String keyword = request.getParameter("keyword");
-		System.out.println(keyword);
-		List<ProductDTO> list = ProductService.searchByKeyword(request.getParameter("keyword"));
+		String command = request.getParameter("command");
+		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		List<ProductDTO> list = ProductService.searchByKeyword(pageNo, keyword);
+		request.setAttribute("pageNo", pageNo);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("command", command);
+		if (list!=null) {
+		request.setAttribute("pageCnt", list.get(list.size()-1).getPageCnt());
 		request.setAttribute("list", list);
-		return new ModelAndView("view/search.jsp", false);
+		}
+		return new ModelAndView("product/productList.jsp", false);
 	}
 	public ModelAndView productList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<ProductDTO> list = ProductService.selectLatest();
@@ -98,10 +105,11 @@ public class ProductController implements Controller {
 	public ModelAndView searchByCategory(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
 		String category = request.getParameter("category");
-		System.out.println(pageNo + category);
 		List<ProductDTO> list = ProductService.selectByCategory(pageNo, category);
 		request.setAttribute("pageNo", pageNo);
-		request.setAttribute("category", list.get(0).getProductCategory());
+		request.setAttribute("category", category);
+		request.setAttribute("command", request.getParameter("command"));
+		request.setAttribute("pageCnt", list.get(list.size()-1>0?list.size()-1:list.size()).getPageCnt());
 		request.setAttribute("list", list);
 		return new ModelAndView("product/productList.jsp", false);
 	}

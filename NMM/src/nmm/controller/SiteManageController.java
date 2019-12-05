@@ -22,7 +22,7 @@ public class SiteManageController implements Controller {
 	public ModelAndView accounting(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<SiteManageDTO> list = SiteManageService.selectSiteManage();
 		request.setAttribute("list", list);
-		return new ModelAndView("manager/accounting.jsp", true);
+		return new ModelAndView("manager/accounting.jsp", false);
 	}
 
 }

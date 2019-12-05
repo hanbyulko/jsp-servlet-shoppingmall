@@ -93,7 +93,7 @@ body,html{
 <div class="full-bg">
 	<div class="table">
 		<div class="table-cell">
-  				<form method="post" action="<%=application.getContextPath()%>/servlet?controller=siteManage">
+  				<form method="post" action="<%=application.getContextPath()%>/servlet?controller=siteManage&command=accounting">
                     <div class="login-container">
                         <h3 class="login--title">ADMIN LOGIN</h3>
                         

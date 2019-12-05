@@ -26,7 +26,7 @@
             입점문의 : korea@anderssonbell.com<br>
             문의메일 : cs@anderssonbell.com<br>
             copyright@anderssonbell.com all right reseved
-    <a href="<%=application.getContextPath() %>/manager/managerLogin.jsp">관리자 로그인</a>
+    <a href="<%=application.getContextPath()%>/manager/managerLogin.jsp">관리자 로그인</a>
         </div>
     </div>
 </body>

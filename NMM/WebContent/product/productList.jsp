@@ -7,52 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	img{width:200px; height:350px}
-	table td{text-align:center;}
-</style>
-<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
-
-$(function(){
-	$("img").click(function(){
-		var no = $(this).parent().prev().text();
-		var addr = "${pageContext.request.contextPath}/servlet?controller=review&command=select&productNo="+eval(no);
-		
-		location.href = addr;
-		
-	});
-});
-/* function pageMove(){
-	alert("${pageContext.request.contextPath}/servlet?controller=review&command=select");
-	location.href='${pageContext.request.contextPath}/servlet?controller=review&command=select&productNo=';
-} */
-</script>
-</head>
-<body>
-<jsp:include page="../view/top.jsp"/>
-
-<!--우먼-->     
-        <div class="women">
-                <a href="./list.html" class="main_menu__title-left">PRODUCT LIST</a>
- 
-            <div class="main__list__container">
-            <c:forEach items="${list}" var="product">
-                <div class="main__list">
-                	<div> ${product.productNo} </div>
-                    <div><img alt="이미지입니다." src="${imgPath}${product.productName}_L_1.jpg"/>
-                    </div>
-                    <div>${product.productName}</div>
-                    <div href="./detail.html" class="info__icon__new" style="display: noen; border: none;"></div>
-                    <div href="./detail.html" class="info__price">${product.productPrice}</div>
-                </div>
-            </c:forEach>
-            </div>
-            <a href="./list.html" class="readmore_kr">제품보러가기</a>
-        </div>
-
-
-<%-- <c:forEach items="${list}" var="product">
-
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300");
 
 body {
@@ -134,28 +88,59 @@ img {
 table td {
 	text-align: center;
 }
+img{width:200px; height:350px}
 </style>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-</head>
+<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
 
+$(function(){
+	$("img").click(function(){
+		var no = $(this).parent().prev().text();
+		var addr = "${pageContext.request.contextPath}/servlet?controller=review&command=select&productNo="+eval(no);
 		
-        <a href="servlet?command=product&productNo=${product.productNo}">${product.productImg}</a> <br/>
-        ${product.productName} <br/>
-        ${product.productPrice} <br/>
-</c:forEach> --%>
+		location.href = addr;
+		
+	});
+});
+/* function pageMove(){
+	alert("${pageContext.request.contextPath}/servlet?controller=review&command=select");
+	location.href='${pageContext.request.contextPath}/servlet?controller=review&command=select&productNo=';
+} */
+</script>
+</head>
+<body>
+<jsp:include page="../view/top.jsp"/>
+
+<!--우먼-->     
+        <div class="women">
+                <a href="./list.html" class="main_menu__title-left">PRODUCT LIST</a>
+ 
+            <div class="main__list__container">
+            <c:forEach items="${list}" var="product">
+                <div class="main__list">
+                	<div> ${product.productNo} </div>
+                    <div><img alt="이미지입니다." src="${imgPath}${product.productName}_L_1.jpg"/>
+                    </div>
+                    <div>${product.productName}</div>
+                    <div href="./detail.html" class="info__icon__new" style="display: noen; border: none;"></div>
+                    <div href="./detail.html" class="info__price">${product.productPrice} WON</div>
+                </div>
+            </c:forEach>
+            </div>
+            <a href="./list.html" class="readmore_kr">제품보러가기</a>
+        </div>
 
 
-<%-- <a class="pagination-active" href="servlet?command=searchByCategory&category=${category}&pageNo=${pageNo-1}">1</a>  --%>
 	<!-- 페이징처리 -->
 	<nav class="pagination-container">
 		<div class="pagination">
-			<a class="pagination-newer" href="servlet?command=searchByCategory&category=${category}&pageNo=${pageNo-1}">PREV</a> 
+			<a class="pagination-newer" href="${servlet}product&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo>1?pageNo-1:1}">PREV</a> 
 				<span class="pagination-inner"> 
-				<c:forEach var='i' begin='0' end='${pageCnt}'>
-				<a href="servlet?command=searchByCategory&category=${category}&pageNo${i}">${i}</a> 
+				<c:forEach var='i' begin='1' end='${pageCnt}'>
+				<a class="${i==pageNo?'pagination-active':page}" href="${servlet}product&command=${command}&category=${category}&keyword=${keyword}&pageNo=${i}">${i}</a> 
 				</c:forEach>
 				</span> 
-			<a class="pagination-older" href="servlet?command=searchByCategory&category=${category}&pageNo=${pageno+1}">NEXT</a>
+			<a class="pagination-older" href="${servlet}product&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo<pageCnt?pageNo+1:pageCnt}">NEXT</a>
 		</div>
 	</nav>
 
