@@ -95,27 +95,21 @@ public class ProductController implements Controller {
 		return new ModelAndView("product/productDetail.jsp", false);
 	}
 
-	public ModelAndView searchJacket(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		List<ProductDTO> list = ProductService.selectJacket();
+	public ModelAndView searchByCategory(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		String category = request.getParameter("category");
+		System.out.println(pageNo + category);
+		List<ProductDTO> list = ProductService.selectByCategory(pageNo, category);
+		request.setAttribute("pageNo", pageNo);
+		request.setAttribute("category", list.get(0).getProductCategory());
 		request.setAttribute("list", list);
 		return new ModelAndView("product/productList.jsp", false);
 	}
 
-	public ModelAndView searchCoat(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		List<ProductDTO> list = ProductService.selectCoat();
-		request.setAttribute("list", list);
-		return new ModelAndView("product/productList.jsp", false);
-	}
-
-	public ModelAndView searchPadding(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		List<ProductDTO> list = ProductService.selectPadding();
-		request.setAttribute("list", list);
-		return new ModelAndView("product/productList.jsp", false);
-	}
-	
 	
 	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		List<ProductDTO> list = ProductService.selectAll();
+		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		List<ProductDTO> list = ProductService.selectAll(pageNo);
 		request.setAttribute("list", list);
 		return new ModelAndView("manager/productSelect.jsp", false);
 	}
