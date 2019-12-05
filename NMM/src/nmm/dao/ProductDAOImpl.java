@@ -12,15 +12,17 @@ import nmm.util.DbUtil;
 
 public class ProductDAOImpl implements ProductDAO {
 	@Override
-	public List<ProductDTO> selectAll() throws Exception {
+	public List<ProductDTO> selectAll(int pageNo) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
-		String sql = "SELECT * FROM PRODUCT";
+		String sql = "SELECT * FROM (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM product ORDER BY PRODUCT_NO ASC) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, pageNo*8+1);
+			ps.setInt(2, (pageNo-1)*8+1);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ProductDTO product = new ProductDTO();
@@ -34,8 +36,6 @@ public class ProductDAOImpl implements ProductDAO {
 				product.setProductResiDate(rs.getString(8));
 				list.add(product);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		} finally {
 			DbUtil.dbClose(rs, ps, con);
 		}
@@ -68,74 +68,30 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductDTO> selectJacket() throws Exception {
+	public List<ProductDTO> selectByCategory(int pageNo, String category) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
-		String sql = "SELECT PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE FROM PRODUCT WHERE PRODUCT_CATEGORY='자켓'";
+		String sql = "SELECT * FROM (SELECT a.*, ROWNUM rnum FROM (SELECT PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_CATEGORY FROM PRODUCT WHERE PRODUCT_CATEGORY=?) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
+			ps.setString(1, category);
+			ps.setInt(2, pageNo*8);
+			ps.setInt(3, (pageNo-1)*8+1);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				int productNo = rs.getInt(1);
 				String productName = rs.getString(2);
 				int productPrice = rs.getInt(3);
-
-				list.add(new ProductDTO(productNo, productName, productPrice));
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			DbUtil.dbClose(rs, ps, con);
-		}
-		return list;
-	}
-
-	@Override
-	public List<ProductDTO> selectCoat() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		List<ProductDTO> list = new ArrayList<ProductDTO>();
-		String sql = "SELECT PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE FROM PRODUCT WHERE PRODUCT_CATEGORY='코트'";
-		try {
-			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				int productNo = rs.getInt(1);
-				String productName = rs.getString(2);
-				int productPrice = rs.getInt(3);
-
-				list.add(new ProductDTO(productNo, productName, productPrice));
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			DbUtil.dbClose(rs, ps, con);
-		}
-		return list;
-	}
-
-	@Override
-	public List<ProductDTO> selectPadding() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		List<ProductDTO> list = new ArrayList<ProductDTO>();
-		String sql = "SELECT PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE FROM PRODUCT WHERE PRODUCT_CATEGORY='패딩'";
-		try {
-			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				int productNo = rs.getInt(1);
-				String productName = rs.getString(2);
-				int productPrice = rs.getInt(3);
-
-				list.add(new ProductDTO(productNo, productName, productPrice));
+				String productCategory = rs.getString(4);
+				ProductDTO dto = new ProductDTO();
+				dto.setProductNo(productNo);
+				dto.setProductName(productName);
+				dto.setProductPrice(productPrice);
+				dto.setProductCategory(productCategory);
+				list.add(dto);
 			}
 		} finally {
 			DbUtil.dbClose(rs, ps, con);
