@@ -27,6 +27,7 @@ public class ReviewController implements Controller {
 		SendPageInfo.sendInfo(request, response);
 		request.setAttribute("list", list);
 		return new ModelAndView("manager/manager#three.jsp", false);
+		
 	}
 
 	public ModelAndView selectUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -39,29 +40,29 @@ public class ReviewController implements Controller {
 	}
 
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		int productNo = 1;
-		// int productNo = Integer.parseInt(request.getParameter("productNo"));
+		int productNo = Integer.parseInt(request.getParameter("productNo"));
 		String reviewTitle = request.getParameter("reviewTitle");
 		String reviewContent = request.getParameter("reviewContent");
 		String reviewStar = request.getParameter("reviewStar");
-		System.out.println(reviewTitle);
-		return new ModelAndView("myPage/review.jsp", false);
+		ReviewService.insert(userNo, productNo, new ReviewDTO(reviewNo, reviewTitle, reviewContent, reviewStar));
+		//System.out.println(result);
+		return new ModelAndView("user/purchase/purchaseHistoryTest.jsp", false);
 	}
 
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		ReviewService.delete(reviewNo);
-		return new ModelAndView("myPage/review.jsp", false);
+		return new ModelAndView("user/purchase/purchaseHistoryTest.jsp", false);
 	}
 
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		//int reviewNo=350;
 		String reviewTitle = request.getParameter("reviewTitle");
 		String reviewContent = request.getParameter("reviewContent");
 		String reviewStar = request.getParameter("reviewStar");
-
-		ReviewService.update(new ReviewDTO(reviewNo, reviewTitle, reviewContent, reviewStar));
-		return new ModelAndView("myPage/review.jsp", false);
+		int result = ReviewService.update(new ReviewDTO(reviewNo, reviewTitle, reviewContent, reviewStar));
+		return new ModelAndView("user/purchase/purchaseHistoryTest.jsp", false);
 	}
 
 	public ModelAndView productList(HttpServletRequest request, HttpServletResponse response) throws Exception {

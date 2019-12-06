@@ -1,22 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="../js/jquery-3.4.1.min.js"></script>
-<script> 
-function info_chk() { 
-   return true; 
-} function info_chk2(frm) { 
-   frm.action="${servlet}review&command=update"; 
-   frm.submit();
-   return true; 
-   } </script>
-
-<style>
-/* CSS RESET */
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>REVIEW</title>
+<style> 
+#mask {  
+    position:absolute;  
+    z-index:9000;  
+    background-color:#000;  
+    display:none;  
+    left:0;
+    top:0;
+} 
+.window{
+    display: none;
+    position:absolute;  
+    left:50%;
+    top:50px;
+    margin-left: -500px;
+    width:1000px;
+    height:500px;
+    background-color:#FFF;
+    z-index:10000;   
+ }
+ /* CSS RESET */
 * {
     padding: 0;
     border: 0;
@@ -27,7 +34,6 @@ li {list-style: none;}
 
 body,html{
     height: 100%;
-    background-color: #f4f4f4;
     font-family: 'Maven Pro','Noto Sans KR';
 }
 
@@ -46,14 +52,8 @@ body,html{
     vertical-align: middle;
 
 }
-.login-container{
-    width: 500px;
-    background-color: #fff;
-    padding: 70px 20px;
-    box-sizing: border-box;
 
-}
-.review--title{
+.qna--title{
     width: 100%;
     text-align: center;
     font-size: 50px;
@@ -83,7 +83,7 @@ body,html{
 }
 .form-btn{
     display: block;
-    width: 100%;
+    width: 100px;
     font-size: 16px;
     height: 40px;
     background-color: #000;
@@ -128,21 +128,60 @@ label.star:before {
   content: '\2605';
 }
 </style>
-
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript"> 
+//<![CDATA[
+    function wrapWindowByMask(){
+ 
+        var maskHeight = $(document).height();  
+        var maskWidth = $(window).width();  
+ 
+        $("#mask").css({"width":maskWidth,"height":maskHeight});  
+ 
+ 
+        $("#mask").fadeIn(0);      
+        $("#mask").fadeTo("slow",0.6);    
+ 
+        $(".window").show();
+ 
+    }
+ 
+    $(document).ready(function(){
+        $(".openMask").click(function(e){
+            e.preventDefault();
+            wrapWindowByMask();
+        });
+ 
+        $(".window .close").click(function (e) {  
+            e.preventDefault();  
+            $("#mask, .window").hide();  
+        });       
+ 
+        $("#mask").click(function () {  
+            $(this).hide();  
+            $(".window").hide();  
+ 
+        });      
+ 
+    });
+ 
+//]]>
+</script>
 </head>
-
-
 <body>
-
-<div class="full-bg">
+    <div class="review">
+ <form method='post' action="${servlet}review&command=insert"> 
+    <div id ="wrap"> 
+            <div id="mask"></div>
+            <div class="window">
+                <div class="full-bg">
    <div class="table">
       <div class="table-cell">
-      <form method='post' action="${servlet}review&command=insert">     
+         
                     <div class="login-container">
-                        <h3 class="review--title">Survey</h3><br><br>
+                    <h3 class="review--title">REVIEW</h3><br/>
                         
-                         <label class=form-input--title>상품에 만족하셨나요?</label>
+                         <label class=form-input--title>RATING STARS: </label>
    <div class="stars">
    <input class="star star-1" id="star-1" name="reviewStar" value = 5 type="radio"/>
     <label class="star star-1" for="star-1"></label>
@@ -155,34 +194,30 @@ label.star:before {
     <input class="star star-5" id="star-5" name="reviewStar" value = 1 type="radio"/>
     <label class="star star-5" for="star-5"></label>
 
-    
-    <br><br><br>
+    <br/><br/><br/>
 
- 
-  
 </div>
-                   
-                        <h3 class="review--title">Product Review</h3><br><br>
+							</div>
+                        <label class=form-input--title>REVIEW TITLE: </label>
+                         <input type = "text" id="reviewTitle" name='reviewTitle' class="form-input" style="text-align:left; width:200px; height:20px;"></input>
+                        <label class=form-input--title>REVIEW Content : </label><p/>
+                        <input type="text" id="reviewContent" name="reviewContent" class="form-input" style="text-align:left; width:400px; height:200px;"></input>
                         
-                        <label class=form-input--title>리뷰제목 : </label><p>
-                         <input type = "text" id="reviewTitle" name='reviewTitle' class="form-input" style="text-align:left; width:200px; height:20px;"><p>
+                        <input type="submit" name = "insert" value="Submit"  class="form-btn" ></input>
 
-                        <label class=form-input--title>리뷰 내용 : </label><p>
-                        <input type="text" id="reviewContent" name="reviewContent" class="form-input" style="text-align:left; width:400px; height:400px;">
-                        
-                        
-                        <input type="submit" name = "insert" value="등록"  class="form-btn" >
-
-                        
                     </div>
              </form>
-      </div>
    </div>
 </div>
+            </div>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">       
+                <tr>
+                    <td align="left">
+                    <a href="<%=application.getContextPath()%>/review/review.jsp" class="openMask" style="vertical-align: middle">REVIEW</a>
+                    </td>
+                </tr>       
+            </table>
+        </div>
+    </div>
 </body>
-
-
-
-
-
 </html>

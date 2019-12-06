@@ -23,6 +23,7 @@
 <body>
 <jsp:include page="../../view/top.jsp"/>
 <h1>product history</h1>
+<jsp:include page="<%=application.getContextPath()%>/review/reviewTest.jsp">
 <form name="historyForm" method="post" id="historyForm">
     <table>
         <tr>
