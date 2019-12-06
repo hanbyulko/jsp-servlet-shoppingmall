@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+ <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Insert title here</title>
 <!-- <script> 
       setTimeout(function(){

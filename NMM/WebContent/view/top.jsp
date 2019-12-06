@@ -21,7 +21,99 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style type="text/css">
+.menubar{
+border:none;
+border:0px;
+margin:0px;
+padding:0px;
+font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+font-size:14px;
+font-weight:bold;
+}
 
+.menubar ul{
+height:50px;
+list-style:none;
+margin:0;
+padding:0;
+}
+
+.menubar li{
+float:left;
+padding:0px;
+}
+
+.menubar li a{
+background: rgba(255, 255, 255, 1);
+color: #000000;
+display:block;
+font-weight:normal;
+line-height:50px;
+margin:0px;
+padding:0px 25px;
+text-align:center;
+text-decoration:none;
+}
+
+.menubar li a:hover, .menubar ul li:hover a{
+background: rgba(255, 255, 255, 1);
+color: #000000;
+text-decoration:none;
+}
+
+.menubar li ul{
+background: rgba(255, 255, 255, 1);
+display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
+height:auto;
+padding:0px;
+margin:0px;
+border:0px;
+position:absolute;
+width:200px;
+z-index:200;
+/*top:1em;
+/*left:0;*/
+}
+
+.menubar li:hover ul{
+display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
+}
+
+.menubar li li {
+background: rgb(109,109,109);
+display:block;
+float:none;
+margin:0px;
+padding:0px;
+width:200px;
+}
+
+.menubar li:hover li a{
+background:none;
+}
+
+.menubar li ul a{
+display:block;
+height:50px;
+font-size:12px;
+font-style:normal;
+margin:0px;
+padding:0px 10px 0px 15px;
+text-align:left;
+}
+
+.menubar li ul a:hover, .menubar li ul li:hover a{
+background: rgb(71,71,71);
+border:0px;
+color:#ffffff;
+text-decoration:none;
+}
+
+.menubar p{
+clear:left;
+}
+</style>
 </head>
 <body>
 <%request.setCharacterEncoding("UTF-8");%>
@@ -44,7 +136,7 @@
 					class="header__nav__mid-title">PADDING</a></li>
 			</ul>
 		</div>
-
+<%-- 
 		<ul class="header__nav__right clearfix">
 			<%
 				String userId = (String) session.getAttribute("userId");
@@ -74,9 +166,40 @@
 				}
 			%>
 			<li><a href="<%=application.getContextPath()%>/user/signUp.jsp"
-				class="header__nav__title">SIGNUP</a></li>
+				class="header__nav__title">SIGNUP</a></li>!
 		</ul>
-		
+		*/ --%>
+		<div class="menubar">
+			<ul class="header__nav__right clearfix">
+				<%
+				String userId = (String) session.getAttribute("userId");
+				if (userId == null) {
+				%>
+			 	<li><a href="<%=application.getContextPath()%>/user/login.jsp" id="login" class="header__nav__title">LOGIN</a></li>
+			 	<li><a href="<%=application.getContextPath()%>/user/login.jsp" id="loginMy" class="header__nav__title">MYPAGE</a></li>
+				<li><a href="<%=application.getContextPath()%>/user/login.jsp"class="header__nav__title">CART</a></li>
+				<%
+				} else {
+				%>
+				<li><a href="<%=application.getContextPath()%>/servlet?controller=user&command=logOut&userId=<%=userId%>" id="logOut" class="header__nav__title"> <%=userId%> : LOGOUT</a></li>
+			 	
+			 	<li><a href="<%=application.getContextPath()%>/myPage/myPage.jsp" id="logOutmy" class="header__nav__title">MYPAGE</a>
+					<ul>
+			     		<li><a href="#">Sliders</a></li>
+			     		<li><a href="#">Galleries</a></li>
+			     		<li><a href="#">Apps</a></li>
+			     		<li><a href="#">Extensions</a></li>
+			    	</ul>
+			 	</li>
+			 	<li><a href="<%=application.getContextPath()%>/servlet?controller=cart&command=selectAll" class="header__nav__title">CART</a></li>
+			 	<%
+				}
+				%>
+			 	<li><a href="<%=application.getContextPath()%>/user/signUp.jsp" class="header__nav__title">SIGNUP</a></li>
+			</ul>
+		</div>
+
+	</header>
 
 	<!-- 검색창 -->
 	<div class="container">
