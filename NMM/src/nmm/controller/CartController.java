@@ -22,7 +22,7 @@ public class CartController implements Controller {
 		HttpSession session = request.getSession();
 		int userNo = (int) session.getAttribute("userNo");
 		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
-		List<CartDTO> list = CartService.selectAll(userNo, pageNo);
+		List<CartDTO> list = CartService.selectAll(userNo);
 		request.setAttribute("pageCnt", list.get(list.size()-1>0?list.size()-1:list.size()).getPageCnt());
 		request.setAttribute("list", list);
 		return new ModelAndView("cart/cart.jsp", false);
