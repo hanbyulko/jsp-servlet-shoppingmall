@@ -1,6 +1,6 @@
 package nmm.dto;
 
-public class PurchaseDTO {
+public class PurchaseDTO extends PageCnt{
 	private int orderNo;
 	private UserDTO userDTO;
 	private ProductDTO productDTO;
@@ -57,5 +57,11 @@ public class PurchaseDTO {
 		super();
 	}
 	
-	
+	public void setPageCnt(int pageCnt) { 
+		super.setPageCnt(pageCnt);
+	}
+	public int getPageCnt() { 
+		return super.getPageCnt();
+	}
+
 }

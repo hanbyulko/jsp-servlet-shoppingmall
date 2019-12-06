@@ -32,5 +32,9 @@ public class QnaService {
 	public static QnaDTO selectByQnaNo(int qnaNo) throws Exception {
 		return dao.selectByQnaNo(qnaNo);
 	}
+
+	public static List<QnaDTO> selectByState(int pageNo, String responseState) throws Exception {
+		return dao.selectByState(pageNo, responseState);
+	}
 	
 }

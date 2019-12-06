@@ -1,6 +1,6 @@
 package nmm.dto;
 
-public class ProductDTO {
+public class ProductDTO extends PageCnt {
 	private int productNo;
 	private String productCategory;
 	private int productStock;
@@ -9,10 +9,9 @@ public class ProductDTO {
 	private String productSize;
 	private int productPrice;
 	private String productResiDate;
-	private int pageCnt;
-	public ProductDTO(int productNo, String productCategory, int productStock, String productName, String productColor,
-			String productSize, int productPrice, String productResiDate, int pageCnt) {
-		super();
+	public ProductDTO(int pageCnt, int productNo, String productCategory, int productStock, String productName,
+			String productColor, String productSize, int productPrice, String productResiDate) {
+		super(pageCnt);
 		this.productNo = productNo;
 		this.productCategory = productCategory;
 		this.productStock = productStock;
@@ -21,9 +20,13 @@ public class ProductDTO {
 		this.productSize = productSize;
 		this.productPrice = productPrice;
 		this.productResiDate = productResiDate;
-		this.pageCnt = pageCnt;
 	}
+	
 	public ProductDTO() {
+		
+	}
+	public void setPageCnt(int pageCnt) { 
+		super.setPageCnt(pageCnt);
 	}
 	public int getProductNo() {
 		return productNo;
@@ -73,17 +76,10 @@ public class ProductDTO {
 	public void setProductResiDate(String productResiDate) {
 		this.productResiDate = productResiDate;
 	}
-	public int getPageCnt() {
-		return pageCnt;
+	
+	public int getPageCnt() { 
+		return super.getPageCnt();
 	}
-	public void setPageCnt(int pageCnt) {
-		this.pageCnt = pageCnt;
-	}
-	@Override
-	public String toString() {
-		return "ProductDTO [productNo=" + productNo + ", productCategory=" + productCategory + ", productStock="
-				+ productStock + ", productName=" + productName + ", productColor=" + productColor + ", productSize="
-				+ productSize + ", productPrice=" + productPrice + ", productResiDate=" + productResiDate + ", pageCnt="
-				+ pageCnt + "]";
-	}
+
+	
 } 

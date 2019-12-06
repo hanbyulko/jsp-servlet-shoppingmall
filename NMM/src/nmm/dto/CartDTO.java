@@ -1,6 +1,6 @@
 package nmm.dto;
 
-public class CartDTO {
+public class CartDTO extends PageCnt{
 	private int cartNo;
 	private UserDTO userDTO;
 	private ProductDTO productDTO;
@@ -38,6 +38,15 @@ public class CartDTO {
 	}
 	public void setCartQty(int cartQty) {
 		this.cartQty = cartQty;
+	}
+	
+	public void setPageCnt(int pageCnt) { 
+		super.setPageCnt(pageCnt);
+	}
+	
+
+	public int getPageCnt() { 
+		return super.getPageCnt();
 	}
 	
 }

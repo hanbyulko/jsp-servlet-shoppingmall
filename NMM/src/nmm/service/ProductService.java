@@ -43,6 +43,10 @@ public class ProductService {
 	public static List<ProductDTO> searchByKeyword(int pageNo, String keyword) throws Exception {
 		return productDAO.searchByKeyword(pageNo, keyword);
 	}
+
+	public static List<ProductDTO> selectByKeyValue(int pageNo, String keyword, String value) throws Exception{
+		return productDAO.selectByKeyValue(pageNo, keyword, value);
+	}
 	
 	
 }

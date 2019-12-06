@@ -69,4 +69,5 @@ public class ReviewController implements Controller {
 		request.setAttribute("listPopular", list);
 		return new ModelAndView("view/main.jsp", false);
 	}
+	
 }

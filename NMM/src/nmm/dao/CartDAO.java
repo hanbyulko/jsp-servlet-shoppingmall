@@ -6,7 +6,7 @@ import nmm.dto.CartDTO;
 
 public interface CartDAO {
 	
-	List<CartDTO> selectAll(int userCode);
+	List<CartDTO> selectAll(int userCode, int pageNo);
 	
 	int insert(int cartNo, int userNo, int productNo, int cartQty) throws Exception;
 	

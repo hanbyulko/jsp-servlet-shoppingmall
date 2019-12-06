@@ -16,4 +16,6 @@ public interface QnaDAO {
 	List<QnaDTO> selectAll(int pageNo) throws Exception;
 
 	List<QnaDTO> selectByUserId(int pageNo, String userId) throws Exception;
+
+	List<QnaDTO> selectByState(int pageNo, String responseState)  throws Exception;
 }

@@ -42,5 +42,7 @@ public class PurchaseController implements Controller {
         request.setAttribute("list", list);
         return new ModelAndView("product/productPurchase.jsp", false);
     }
+
+   
 }
 

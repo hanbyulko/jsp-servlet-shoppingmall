@@ -10,8 +10,8 @@ public class CartService {
 	private static CartDAO dao = new CartDAOImpl();
 	
 	
-	public static List<CartDTO> selectAll(int userNo) throws Exception{
-		return dao.selectAll(userNo);
+	public static List<CartDTO> selectAll(int userNo, int pageNo) throws Exception{
+		return dao.selectAll(userNo, pageNo);
 	}
 	
 	public static int insert(int cartNo, int userNo, int productNo, int cartQty) throws Exception {
