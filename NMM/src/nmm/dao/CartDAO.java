@@ -8,10 +8,10 @@ public interface CartDAO {
 	
 	List<CartDTO> selectAll(int userCode);
 	
-	int insert(int cartNo, int userNo, int productNo, int cartQty) throws Exception;
+	int insert(int userNo, int productNo, int cartQty) throws Exception;
 	
-	int update(int cartNo, int userNo, int productNo, int cartQty) throws Exception;
+	int update(int cartNo, int cartQty) throws Exception;
 	
-	int delete(int cartNo, int userNo) throws Exception;
+	int delete(int cartNo) throws Exception;
 
 }
