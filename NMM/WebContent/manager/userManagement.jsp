@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 <title>Insert title here</title>
 <!-- <script> 
       setTimeout(function(){
          location.reload();
       }, 10000);
-
 </script> -->
 </head>
 <style>
@@ -34,6 +34,42 @@ th{
     font-size: 50px;
 }
 </style>
+
+<script type="text/javascript">
+	function selectAll(){
+		
+	    $.ajax({
+		  type:"get",	//select는 보통 get를 많이쓴다
+		  url:"../selectServlet",
+	    dataType: "json",//서버에게 받은 응답결과 type(text, xml, html, json)
+	  //   data : $("#inForm").serialize() ,//서버에게 전송할 parameter
+	    success: function(result){//select에서 나온 list를 json으로 받아서 여기서 확인
+			// alert(result);
+			var str="";
+				$.each(result,function(index,item){
+					 alert(index+"/"+item.name);
+					 /*
+					str+="<tr>";
+					str+="<td>"+(index+1)+"</td>";
+					str+="<td><a href='#'>"+item.id+"</a></td>";
+					str+="<td>"+item.name+"</td>";
+					str+="<td>"+item.age+"</td>";
+					str+="<td>"+item.tel+"</td>";
+					str+="<td>"+item.addr+"</td>";
+					str+="<td><input type='button' value='삭제' name='"+item.id+"'delete'></td>";
+					str+="</tr>";
+					*/
+				});
+	    } ,
+	    error : function(err){
+	  	  console.log(err+"=> 오류발생");
+	    }
+		});//ajax끝
+		
+		  selectAll();
+		  setInterval(selectAll, 5000);//5초마다 갱신
+	}
+</script>
 <body>
    
    <div name="userManagement">
@@ -48,19 +84,13 @@ th{
          <th>기능</th>
 
       </tr>
-      <%-- <c:forEach var="list" items="${list}">
-         <tr>
-            <td>${userDB.userNo}</td>
-            <td><a href="#" class=openMask>${userDB.userID}</a></td>
-            <td>${userDB.userName}</td>
-            <td>${userDB.userPassword}</td>
-            <td><input type="button">수정하기<input type="button">삭제하기</td>
-            </tr>
-      </c:forEach> --%>
+      
+      
+      
       <tr>
             <td>userNo</td>
             <td><a href="#" class=openMask>userID</a></td>
-            <td>userName</td>
+            <td>userName </td>
             <td>userPassword</td>
             <td><input type="submit" value="수정하기"><input type="button" value= "삭제하기"></td>
             </tr>

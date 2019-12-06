@@ -22,6 +22,7 @@ public class UserController implements Controller {
 		List<UserDTO> list = UserService.selectAll(pageNo);
 		SendPageInfo.sendInfo(request, response);
 		request.setAttribute("list", list);
+		
 		return new ModelAndView("manager/userSelect", false);
 	}
 	
