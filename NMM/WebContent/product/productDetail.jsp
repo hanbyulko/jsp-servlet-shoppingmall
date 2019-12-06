@@ -20,26 +20,26 @@ $(function(){
 		}else{
 			$("#quantity").val(value);
 		}
-		/* var total = eval(value*$("#price").text());
-		$("#total").text(total+" WON"); */
+		var total = eval(value*$("#price").text());
+		$("#total").text(total+" WON"); 
 	});
 	
 	$("#plus").click(function(){
 		var value = parseInt($("#quantity").val())+1;
 		$("#quantity").val(value);
-		/* var total = eval(value*$("#price").text());
-		$("#total").text(total+" WON"); */
+		var total = eval(value*$("#price").text());
+		$("#total").text(total+" WON"); 
 	});
 	
 	$("#cart").click(function(){
 		
-		location.href="${pageContext.request.contextPath}/servlet?controller=cart&command=insert&productNo="+eval(${product.productNo})+"&productStock="+eval($("#quantity").val());
+		location.href="${pageContext.request.contextPath}/servlet?controller=cart&command=insert&productNo="+eval(${product.productNo})+"&cartQty="+eval($("#quantity").val());
 		
 	});
 	
 	$("#buy").click(function(){
 		
-		location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insert&productNo="+eval(${product.productNo})+"&productStock="+eval($("#quantity").val());
+		location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insert&productNo="+eval(${product.productNo})+"&cartQty="+eval($("#quantity").val());
 	});	
 });
 /* function plus(){
@@ -88,7 +88,7 @@ function minus(){
                 <div class="top-info-title-wrap clearfix">
                     <div class="info__icon__new">NEW</div>
                     <div class="top-info-title">${product.productName}</div>
-                    <div class="top-info-price">${product.productPrice}</div>
+                    <div class="top-info-price" id="price">${product.productPrice}</div>
                 </div>
                 
                 <div class="top-info-select clearfix">
