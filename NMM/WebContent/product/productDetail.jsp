@@ -105,8 +105,9 @@ function minus(){
                         <div class="select-form-container">
                             <select class="select-form">
                                 <option>[필수] 사이즈 선택</option>
-                                <option>${product.productSize}</option>
+                                <option> ${product.productSize}</option>
                             </select>
+                            
                             <span class="select-icon">
                                 <i class="material-icons">expand_more</i>
                             </span>
