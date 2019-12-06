@@ -166,7 +166,7 @@ clear:left;
 				}
 			%>
 			<li><a href="<%=application.getContextPath()%>/user/signUp.jsp"
-				class="header__nav__title">SIGNUP</a></li>
+				class="header__nav__title">SIGNUP</a></li>!
 		</ul>
 		*/ --%>
 		<div class="menubar">
