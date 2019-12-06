@@ -20,7 +20,7 @@ public class QnaController implements Controller {
 			userNo = (int) request.getSession().getAttribute("userNo");
 		}
 		List<QnaDTO> list = QnaService.selectByUserId(Integer.parseInt(request.getParameter("pageNo")), userId);
-		request.setAttribute("pageCnt", list.get(list.size() - 1 > 0 ? list.size() - 1 : list.size()).getPageCnt());
+		request.setAttribute("pageCnt", list.get(list.size() > 0 ? list.size() - 1 : 0).getPageCnt());
 		SendPageInfo.sendInfo(request, response);
 		request.setAttribute("list", list);
 		return new ModelAndView("myPage/myPage.jsp", false);
@@ -44,7 +44,7 @@ public class QnaController implements Controller {
 
 	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<QnaDTO> list = QnaService.selectAll(Integer.parseInt(request.getParameter("pageNo")));
-		request.setAttribute("pageCnt", list.get(list.size() - 1 > 0 ? list.size() - 1 : list.size()).getPageCnt());
+		request.setAttribute("pageCnt", list.get(list.size() > 0 ? list.size() - 1 : 0).getPageCnt());
 		request.setAttribute("list", list);
 		SendPageInfo.sendInfo(request, response);
 		return new ModelAndView("myPage/qna.jsp", false);
