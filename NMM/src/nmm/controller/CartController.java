@@ -32,7 +32,8 @@ public class CartController implements Controller {
 
       int cartQty = Integer.parseInt(request.getParameter("cartQty"));
       int productNo = Integer.parseInt(request.getParameter("productNo"));
-      CartService.insert(userNo, productNo, cartQty);
+      int result = CartService.insert(userNo, productNo, cartQty);
+
       return new ModelAndView("cart/cart.jsp", false);
    }
 
