@@ -285,8 +285,8 @@ public class ProductDAOImpl implements ProductDAO {
 			sql+="PRODUCT_PRODUCT_STOCK";
 		}
 		if (keyword.equals("PRODUCT_NAME")) {
-			cnt+="PRODUCT_PRODUCT_CATEGORY";
-			sql+="PRODUCT_PRODUCT_CATEGORY";
+			cnt+="PRODUCT_PRODUCT_NAME";
+			sql+="PRODUCT_PRODUCT_NAME";
 		}
 		cnt+= "LIKE ?";
 		sql+= "LIKE ?) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";

@@ -20,7 +20,7 @@ public class ReviewController implements Controller {
 		return new ModelAndView("myPage/review.jsp", false);
 	}
 
-	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
 		List<ReviewDTO> list = ReviewService.selectAll(Integer.parseInt(request.getParameter("pageNo")));
 		request.setAttribute("pageCnt", list.get(list.size() - 1 > 0 ? list.size() - 1 : list.size()).getPageCnt());

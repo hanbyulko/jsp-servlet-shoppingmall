@@ -107,7 +107,6 @@ public class PurchasesDAOImpl implements PurchasesDAO {
                 int price = rs.getInt("PRODUCT_PRICE");
                 String productResiDate = rs.getString("PRODUCT_RESI_DATE");
 
-
                 UserDTO userDTO = new UserDTO(userNo, userName, userId, userPwd, userAddr, userPhone, userEmail, userBirth);
                 ProductDTO productDTO = new ProductDTO();
                 productDTO.setProductNo(productNo);
