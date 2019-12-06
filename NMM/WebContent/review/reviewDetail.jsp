@@ -152,14 +152,14 @@ th{
 	<nav class="pagination-container">
 		<div class="pagination">
 			<a class="pagination-newer"
-				href="${servlet}review&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo>1?pageNo-1:1}">PREV</a>
+				href="${servlet}review&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo>1?pageNo-1:1}&productNo=${productNo}">PREV</a>
 			<span class="pagination-inner"> <c:forEach var='i' begin='1'
 					end='${pageCnt}'>
 					<a class="${i==pageNo?'pagination-active':page}"
-						href="${servlet}review&command=${command}&category=${category}&keyword=${keyword}&pageNo=${i}">${i}</a>
+						href="${servlet}review&command=${command}&category=${category}&keyword=${keyword}&pageNo=${i}&productNo=${productNo}">${i}</a>
 				</c:forEach>
 			</span> <a class="pagination-older"
-				href="${servlet}review&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo<pageCnt?pageNo+1:pageCnt}">NEXT</a>
+				href="${servlet}review&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo<pageCnt?pageNo+1:pageCnt}&productNo=${productNo}">NEXT</a>
 		</div>
 	</nav>
    	<jsp:include page="../view/footer.jsp" />

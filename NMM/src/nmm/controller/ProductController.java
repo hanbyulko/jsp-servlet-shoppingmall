@@ -111,7 +111,7 @@ public class ProductController implements Controller {
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("category", category);
 		request.setAttribute("command", request.getParameter("command"));
-		request.setAttribute("pageCnt", list.get(list.size()-1>0?list.size()-1:list.size()).getPageCnt());
+		request.setAttribute("pageCnt", list.get(list.size() > 0 ? list.size() - 1 : 0).getPageCnt());
 		request.setAttribute("list", list);
 		return new ModelAndView("product/productList.jsp", false);
 	}
@@ -120,7 +120,7 @@ public class ProductController implements Controller {
 	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
 		List<ProductDTO> list = ProductService.selectAll(pageNo);
-		request.setAttribute("pageCnt", list.get(list.size()-1>0?list.size()-1:list.size()).getPageCnt());
+		request.setAttribute("pageCnt", list.get(list.size() > 0 ? list.size() - 1 : 0).getPageCnt());
 		request.setAttribute("list", list);
 		return new ModelAndView("manager/productSelect.jsp", false);
 	}

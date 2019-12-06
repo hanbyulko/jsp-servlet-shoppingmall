@@ -35,6 +35,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 			}
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, pageNo * 8 + 1);
+			ps.setInt(2, (pageNo - 1) * 8 + 1);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ReviewDTO reviewDTO = new ReviewDTO();
@@ -64,8 +66,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 		ResultSet rs2 = null;
 		List<ReviewDTO> list = new ArrayList<>();
 
-		String cnt = "SELECT COUNT(*) FROM REVIEW WHERE PRODUCT_NO=?";
-		String sql = "SELECT * FROM (SELECT a.*, ROWNUM rnum FROM (SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_STAR, REVIEW_DATE FROM REVIEW WHERE PRODUCT_NO=?) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";
+		String cnt = "SELECT COUNT(*) FROM VIEW_PRODUCTANDREVIEW WHERE PRODUCT_NO=?";
+		String sql = "SELECT * FROM (SELECT a.*, ROWNUM rnum FROM (SELECT PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_COLOR, PRODUCT_SIZE, REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_STAR, REVIEW_DATE FROM VIEW_PRODUCTANDREVIEW WHERE PRODUCT_NO=?) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";
 		try {
 			con2 = DbUtil.getConnection();
 			ps2 = con2.prepareStatement(cnt);
@@ -77,14 +79,22 @@ public class ReviewDAOImpl implements ReviewDAO {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, productNo);
+			ps.setInt(2, pageNo * 8 + 1);
+			ps.setInt(3, (pageNo - 1) * 8 + 1);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ReviewDTO reviewDTO = new ReviewDTO();
-				reviewDTO.setReviewNo(rs.getInt(1));
-				reviewDTO.setReviewTitle(rs.getString(2));
-				reviewDTO.setReviewContent(rs.getString(3));
-				reviewDTO.setReviewStar(rs.getString(4));
-				reviewDTO.setReviewDate(rs.getString(5));
+				ProductDTO productDTO = new ProductDTO();
+				productDTO.setProductName(rs.getString(1));
+				productDTO.setProductPrice(rs.getInt(2));
+				productDTO.setProductColor(rs.getString(3));
+				productDTO.setProductSize(rs.getString(4));
+				reviewDTO.setReviewNo(rs.getInt(5));
+				reviewDTO.setReviewTitle(rs.getString(6));
+				reviewDTO.setReviewContent(rs.getString(7));
+				reviewDTO.setReviewStar(rs.getString(8));
+				reviewDTO.setReviewDate(rs.getString(9));
+				reviewDTO.setProductDTO(productDTO);
 				reviewDTO.setPageCnt(pageCnt % 8 == 0 ? pageCnt / 8 : pageCnt / 8 + 1);
 				list.add(reviewDTO);
 			}
