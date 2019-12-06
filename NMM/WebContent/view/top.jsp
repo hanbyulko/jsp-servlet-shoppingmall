@@ -21,6 +21,7 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 </head>
 <body>
 <%request.setCharacterEncoding("UTF-8");%>
@@ -47,9 +48,10 @@
 		<ul class="header__nav__right clearfix">
 			<%
 				String userId = (String) session.getAttribute("userId");
-
 				if (userId == null) {
-			%><li><a
+			%>
+			
+			<li><a
 				href="<%=application.getContextPath()%>/user/login.jsp" id="login"
 				class="header__nav__title">LOGIN</a></li>
 			<li><a href="<%=application.getContextPath()%>/user/login.jsp"
@@ -74,8 +76,7 @@
 			<li><a href="<%=application.getContextPath()%>/user/signUp.jsp"
 				class="header__nav__title">SIGNUP</a></li>
 		</ul>
-
-	</header>
+		
 
 	<!-- 검색창 -->
 	<div class="container">

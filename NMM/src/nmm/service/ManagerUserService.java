@@ -10,7 +10,15 @@ public class ManagerUserService {
 private static ManagerUserDAO dao = new ManagerUserDAOImpl();
 	
 	public static boolean login(String mgtUserId, String mgtUserPw) throws Exception{
-		return dao.login(mgtUserId, mgtUserPw);
+		ManagerUserDAOImpl managerUserDAOImpl = new ManagerUserDAOImpl();
+		ManagerUserDTO managerUserDTO = managerUserDAOImpl.login(mgtUserId, mgtUserPw);
+		if (managerUserDTO==null) {
+			return false;
+		}
+		if(mgtUserId.equals(managerUserDTO.getMgtUserId())||mgtUserPw.equals(managerUserDTO.getMgtUserPwd())) {
+			return true;
+		}
+		return false;
 	}
 	
 	public static List<ManagerUserDTO> selectAll() throws Exception {

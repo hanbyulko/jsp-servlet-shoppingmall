@@ -14,18 +14,19 @@ public class CartService {
 		return dao.selectAll(userNo);
 	}
 	
-	public static int insert(int cartNo, int userNo, int productNo, int cartQty) throws Exception {
-		int result = dao.insert(cartNo, userNo, productNo, cartQty);
+	
+	public static int insert(int userNo, int productNo, int cartQty) throws Exception {
+		int result = dao.insert(userNo, productNo, cartQty);
 		return result;
 	}
 	
-	public static int update(int cartNo, int userNo, int productNo, int cartQty) throws Exception {
-		int result = dao.update(cartNo, cartQty, productNo, cartQty);
+	public static int update(int cartNo, int cartQty) throws Exception {
+		int result = dao.update(cartNo, cartQty);
 		return result;
 	}
 	
-	public static int delete(int cartNo, int userNo) throws Exception {
-		int result = dao.delete(cartNo, userNo);
+	public static int delete(int cartNo ) throws Exception {
+		int result = dao.delete(cartNo);
 		return result;
 	}
 }

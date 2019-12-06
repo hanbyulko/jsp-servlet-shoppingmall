@@ -4,7 +4,7 @@ public class ManagerUserDTO {
 	private int mgtUserNo;
 	private String mgtUserId;
 	private String mgtUserPwd;
-	public ManagerUserDTO(int mgtUserNo, String mgtUserId, String mgtUserPwd) {
+	public ManagerUserDTO(int mgtUserNo, String mgtUserPwd, String mgtUserId) {
 		super();
 		this.mgtUserNo = mgtUserNo;
 		this.mgtUserId = mgtUserId;
@@ -13,7 +13,7 @@ public class ManagerUserDTO {
 	public ManagerUserDTO() {
 		super();
 	}
-	public ManagerUserDTO(String mgtUserId, String mgtUserPwd) {
+	public ManagerUserDTO(String mgtUserPwd, String mgtUserId) {
 		this.mgtUserId = mgtUserId;
 		this.mgtUserPwd = mgtUserPwd;
 	}
@@ -34,6 +34,11 @@ public class ManagerUserDTO {
 	}
 	public void setMgtUserPwd(String mgtUserPwd) {
 		this.mgtUserPwd = mgtUserPwd;
+	}
+	@Override
+	public String toString() {
+		return "ManagerUserDTO [mgtUserNo=" + mgtUserNo + ", mgtUserId=" + mgtUserId + ", mgtUserPwd=" + mgtUserPwd
+				+ "]";
 	}
 
 	

@@ -47,10 +47,10 @@
                         	<c:forEach items="${list}" var="list" varStatus="state">
                         	<c:choose>
                         	  <c:when test="${state.count==size}">
-                        	 	 [${list.mgtDate} ,${list.mgtLoginNo} ]
+                        	 	 ['${list.mgtDate}' ,${list.mgtLoginNo} ]
                         	  </c:when>
                         	  <c:otherwise>
-                        	    [${list.mgtDate} ,${list.mgtLoginNo} ],
+                        	    ['${list.mgtDate}' ,${list.mgtLoginNo} ],
                         	  </c:otherwise>
                         	</c:choose>
                           </c:forEach>
@@ -62,30 +62,37 @@
                         type: 'line',
                         axisY: 'y2',
                         data: [
-                        	['2019-12-01', 8000000], ['2019-12-02', 6000000], ['2019-12-03', 10000000],
-                        	['2019-12-04', 7000000], ['2019-12-05', 11000000]
+                        	<c:forEach items="${list}" var="list" varStatus="state">
+                        	<c:choose>
+                        	  <c:when test="${state.count==size}">
+                        	 	 ['${list.mgtDate}' ,${list.mgtProfit} ]
+                        	  </c:when>
+                        	  <c:otherwise>
+                        	    ['${list.mgtDate}' ,${list.mgtProfit} ],
+                        	  </c:otherwise>
+                        	</c:choose>
+                          </c:forEach>
                         	]
                     }
                 ]
             });
         });
         
-        $.ajax({
-        	
-        });
+        
     </script>
 
 </head>
 <body>
 
 
-<c:forEach items="${list}" var="list" varStatus="stae">
+<%-- <c:forEach items="${list}" var="list" varStatus="stae">
 	${list.mgtDate}<br>
 	${list.mgtLoginNo}<br>
 	${list.mgtProfit}<br>
-</c:forEach>
+</c:forEach> --%>
+
     <div>
-        <div id="jqChart" style="width: 1000px; height: 600px;">
+        <div id="jqChart" style="width: 800px; height: 480px;">
         </div>
     </div>
 

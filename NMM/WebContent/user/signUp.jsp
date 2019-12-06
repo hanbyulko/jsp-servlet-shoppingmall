@@ -100,6 +100,12 @@ document.getElementById('userBirth').value = new Date().toISOString().substring(
 </script>
 
 <script type="text/javascript">
+function goPopup(){
+	var pop = window.open("jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+}
+function jusoCallBack(roadFullAddr,addrDetail, jibunAddr){
+		document.form.userAddr.value = roadFullAddr;
+}
 
 function cheakFunction() {
 	if($("#userId").val() == ""){
@@ -160,10 +166,11 @@ function cheakFunction() {
 		  
 </script>
 <body>
+
 <div class="full-bg">
 	<div class="table">
 		<div class="table-cell">
-  				<form method="post" onsubmit="return cheakFunction();" action="../servlet?controller=user&command=signUp">
+  				<form method="post" onsubmit="return cheakFunction();" action="../servlet?controller=user&command=signUp" name="form" id="form">
                     <div class="login-container">
                         <h3 class="login--title">SIGN UP</h3>
                         
@@ -177,7 +184,7 @@ function cheakFunction() {
                         <input type="text" id ="userName" name="userName" class="form-input" value="">
                         
                         <label class=form-input--title>ADDRESS</label>
-                        <input type="text" id ="userAddr" name="userAddr" class="form-input" value="">
+                        <input type="text" id ="userAddr" name="userAddr" class="form-input" value="" onClick="goPopup();">
                         
                         <label class=form-input--title>TEL</label>
                         <input type="text" id ="userPhone" name="userPhone" class="form-input" value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')">

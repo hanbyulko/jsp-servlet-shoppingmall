@@ -23,7 +23,7 @@ public class QnaController implements Controller{
 		request.setAttribute("pageCnt", list.get(list.size()-1>0?list.size()-1:list.size()).getPageCnt());
 		SendPageInfo.sendInfo(request, response);
 		request.setAttribute("list", list);
-		return new ModelAndView("myPage/qna.jsp", false);
+		return new ModelAndView("myPage/myPage.jsp", false);
 	}
 	
 	public ModelAndView selectByQnaNo(HttpServletRequest request, HttpServletResponse response) throws Exception{

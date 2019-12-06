@@ -25,37 +25,39 @@ public class CartController implements Controller {
 		request.setAttribute("list", list);
 		return new ModelAndView("cart/cart.jsp", false);
 	}
+	/*
+	 * public ModelAndView selectPurchase(HttpServletRequest request,
+	 * HttpServletResponse response) throws Exception { HttpSession session =
+	 * request.getSession(); int userNo = (int) session.getAttribute("userNo");
+	 * 
+	 * List<CartDTO> cartNos = CartService.selectPurchase(cartNos); JSONArray list =
+	 * JSONArray.fromObject(list);
+	 * response.setContentType("text/html;charset=UTF-8");
+	 * 
+	 * PrintWriter out = response.getWriter(); out.println(list);
+	 * 
+	 * request.setAttribute("list", cartNos); return new
+	 * ModelAndView("cart/cart.jsp", false);
+	 * 
+	 * 
+	 * //list를 json형태로 변환 -> ~.jar 필요.
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
 
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		int userNo = (int) session.getAttribute("userNo");
 
-		int cartNo = Integer.parseInt(request.getParameter("cartNo"));
 		int cartQty = Integer.parseInt(request.getParameter("cartQty"));
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
-		CartService.insert(cartNo, userNo, productNo, cartQty);
+		CartService.insert(userNo, productNo, cartQty);
 		return new ModelAndView("cart/cart.jsp", false);
 	}
 
-	public ModelAndView update(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		int userNo = (int) session.getAttribute("userNo");
 
-		int cartNo = Integer.parseInt(request.getParameter("cartNo"));
-		int cartQty = Integer.parseInt(request.getParameter("cartQty"));
-		int productNo = Integer.parseInt(request.getParameter("productNo"));
-		CartService.update(cartNo, userNo, productNo, cartQty);
-		return new ModelAndView("cart/cart.jsp", false);
-	}
 
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		int userNo = (int) session.getAttribute("userNo");
-		System.out.println(userNo);
-		int cartNo = Integer.parseInt(request.getParameter("cartNo"));
-		System.out.println(cartNo);
-		CartService.delete(cartNo, userNo);
-		return new ModelAndView("cart/cart.jsp", false);
-	}
 
 }

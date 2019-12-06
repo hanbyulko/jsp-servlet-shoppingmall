@@ -44,11 +44,17 @@ public class ManagerUserController implements Controller{
 
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String mgtUserId = request.getParameter("mgtUserId");
-		String mgtUserPw = request.getParameter("mgtUserPw");
-		
-		if (ManagerUserService.login(mgtUserId, mgtUserPw)) {
+		String mgtUserPw = request.getParameter("mgtUserPwd");
+		boolean check =ManagerUserService.login(mgtUserId, mgtUserPw);
+		if(check==true) {
 			request.getSession().setAttribute("mgtUserId", mgtUserId);
+			return new ModelAndView("servlet?controller=product+review&command=productList", true);
+		}else if(check==false) {
+			System.out.println("false");
+			return new ModelAndView("manager/managerLogin.jsp", true);
+		}else {
+			return new ModelAndView("manager/managerLogin.jsp", true);
 		}
-		return new ModelAndView("/servlet?controller=product&command=product", true);
+		
 	}
 }

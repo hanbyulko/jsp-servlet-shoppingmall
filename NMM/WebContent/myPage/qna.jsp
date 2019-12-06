@@ -55,11 +55,13 @@ h1 {
 
 .pagination a:hover, .pagination a .pagination-active {
 	color: #fff;
+
 }
 
 .pagination a:hover:before, .pagination a .pagination-active:before {
 	-webkit-transform: scale(1);
 	transform: scale(1);
+	
 }
 
 .pagination .pagination-active {
