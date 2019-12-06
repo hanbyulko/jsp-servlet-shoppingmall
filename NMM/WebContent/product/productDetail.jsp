@@ -33,11 +33,35 @@ $(function(){
 	});
 	
 	$("#cart").click(function(){
-		location.href="${pageContext.request.contextPath}/servlet?controller=cart&command=insert&productNo="+eval(str[0])+"&cartQty="+eval($("#quantity").val());
+		
+		<% 
+		if(session.getAttribute("userId")==null){
+			%>
+			location.href="${pageContext.request.contextPath}/user/login.jsp";
+			<%
+		}else{
+			%>
+			location.href="${pageContext.request.contextPath}/servlet?controller=cart&command=insert&productNo="+eval(str[0])+"&cartQty="+eval($("#quantity").val());
+			<%
+		}
+		%>
+				
+				
 	});
 	
 	$("#buy").click(function(){
-		location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insertPurchaseDB&productNo="+eval(str[0])+"&cartQty="+eval($("#quantity").val());
+		<% 
+		if(session.getAttribute("userId")==null){
+			%>
+			location.href="${pageContext.request.contextPath}/user/login.jsp";
+			<%
+		}else{
+			%>
+			location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insertPurchaseDB&productNo="+eval(str[0])+"&cartQty="+eval($("#quantity").val());
+			<%
+		}
+		%>
+		
 	});	
 	
 	$('select').on('change', function (e) {

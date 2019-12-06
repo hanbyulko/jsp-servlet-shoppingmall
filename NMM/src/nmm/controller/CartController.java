@@ -21,6 +21,7 @@ public class CartController implements Controller {
    public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
       HttpSession session = request.getSession();
       int userNo = (int) session.getAttribute("userNo");
+      System.out.println("userNO: "+userNo);
       List<CartDTO> list = CartService.selectAll(userNo);
       request.setAttribute("list", list);
       return new ModelAndView("cart/cart.jsp", false);
