@@ -23,17 +23,19 @@ public class ReviewController implements Controller {
 	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
 		List<ReviewDTO> list = ReviewService.selectAll(Integer.parseInt(request.getParameter("pageNo")));
-		request.setAttribute("pageCnt", list.get(list.size() - 1 > 0 ? list.size() - 1 : list.size()).getPageCnt());
+		request.setAttribute("pageCnt", list.get(list.size() > 0 ? list.size() - 1 : 0).getPageCnt());
 		SendPageInfo.sendInfo(request, response);
 		request.setAttribute("list", list);
-		return new ModelAndView("manager/manager#three.jsp", false);
+		return new ModelAndView("product/productDetail.jsp", false);
 	}
 
 	public ModelAndView selectUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
 		List<ReviewDTO> list = ReviewService.selectUser(Integer.parseInt(request.getParameter("pageNo")), productNo);
-		request.setAttribute("pageCnt", list.get(list.size() - 1 > 0 ? list.size() - 1 : list.size()).getPageCnt());
+		ReviewDTO reviewDTO = list.get(list.size() > 0 ? list.size() - 1 : 0);
+		request.setAttribute("pageCnt", reviewDTO.getPageCnt());
 		SendPageInfo.sendInfo(request, response);
+		request.setAttribute("product", reviewDTO.getProductDTO());
 		request.setAttribute("list", list);
 		return new ModelAndView("product/productDetail.jsp", false);
 	}

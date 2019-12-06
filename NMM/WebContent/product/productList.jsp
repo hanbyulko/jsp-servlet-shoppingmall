@@ -96,7 +96,7 @@ img{width:200px; height:350px}
 $(function(){
 	$("img").click(function(){
 		var no = $(this).parent().prev().text();
-		var addr = "${pageContext.request.contextPath}/servlet?controller=review&command=select&productNo="+eval(no);
+		var addr = "${pageContext.request.contextPath}/servlet?controller=review&command=selectUser&pageNo=1&productNo="+eval(no);
 		
 		location.href = addr;
 		
