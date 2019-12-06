@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="${servlet}purchase&command=selectPurchase" >주문페이지로 이동</a><br>
 
 </body>
 </html>
