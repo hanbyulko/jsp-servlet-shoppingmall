@@ -19,7 +19,7 @@ public class PurchasesDAOImpl implements PurchasesDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String sql = "select * from PURCHASEDB pur inner join USERDB u on pur.USER_NO = u.USER_NO " +
-                "left outer join PRODUCT P on pur.PRODUCT_NO = P.PRODUCT_NO where u.USER_NO=?;";
+                "left outer join PRODUCT P on pur.PRODUCT_NO = P.PRODUCT_NO where u.USER_NO=?";
         List<PurchaseDTO> list = new ArrayList<>();
         try {
             con = DbUtil.getConnection();
@@ -28,6 +28,7 @@ public class PurchasesDAOImpl implements PurchasesDAO {
             rs  = ps.executeQuery();
 
             while(rs.next()){
+            	ProductDTO productDTO = new ProductDTO();
                 int purNo = rs.getInt("PURCHASE_NO");
                 int productNo = rs.getInt("PRODUCT_NO");
                 int purQty = rs.getInt("PURCHASE_QTY");
@@ -40,24 +41,23 @@ public class PurchasesDAOImpl implements PurchasesDAO {
                 String userPhone = Integer.toString(rs.getInt("USER_PHONE"));
                 String userAddr = rs.getString("USER_ADDR");
                 String userEmail = rs.getString("USER_EMAIL");
-                String category = rs.getString("PRODUCT_CATEGORY");
-                int stock = rs.getInt("PRODUCT_STOCK");
+                String productCategory = rs.getString("PRODUCT_CATEGORY");
+                int productStock = rs.getInt("PRODUCT_STOCK");
                 String productName = rs.getString("PRODUCT_NAME");
                 String productColor = rs.getString("PRODUCT_COLOR");
                 String productSize = rs.getString("PRODUCT_SIZE");
-                int price = rs.getInt("PRODUCT_PRICE");
-                String productResiDate = rs.getString("PRODUCT_RESI_DATE");
+                int productPrice = rs.getInt("PRODUCT_PRICE");
+                String productResiDate = rs.getString("PRODUCT_RESIDATE");
 
 
-                UserDTO userDTO = new UserDTO(userNo, userName, userId, userPwd, userAddr, userPhone, userEmail, userBirth);
-                ProductDTO productDTO = new ProductDTO();
+                UserDTO userDTO = new UserDTO(userId, userPwd, userName, userAddr, userPhone, userEmail, userBirth);
                 productDTO.setProductNo(productNo);
-                productDTO.setProductCategory(category);
-                productDTO.setProductStock(stock);
+                productDTO.setProductCategory(productCategory);
+                productDTO.setProductStock(productStock);
                 productDTO.setProductName(productName);
                 productDTO.setProductColor(productColor);
                 productDTO.setProductSize(productSize);
-                productDTO.setProductPrice(price);
+                productDTO.setProductPrice(productPrice);
                 productDTO.setProductResiDate(productResiDate);
                 list.add(new PurchaseDTO(purNo,userDTO,productDTO,purQty,purDate,purStat));
 //
@@ -71,6 +71,28 @@ public class PurchasesDAOImpl implements PurchasesDAO {
 
         return list;
     }
+    //성공하면 1 아니면 0
+    @Override
+    public int insert(int userNo, int productNo, int qty) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+        int result = 0;
+        String sql = "INSERT INTO PURCHASEDB VALUES(PURCHASE_NO_SEQ.NEXTVAL,?, ?, ?,sysdate,'배송준비중')";
+        try {
+            con = DbUtil.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, userNo);
+            ps.setInt(2, productNo);
+            ps.setInt(3, qty);
+
+            result  = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.dbClose(ps, con);
+        }
+        return result;
+    }
 
     @Override
     public List<PurchaseDTO> selectAllHistory(int userNo) throws Exception {
@@ -78,7 +100,7 @@ public class PurchasesDAOImpl implements PurchasesDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String sql = "select * from PURCHASEDB pur inner join USERDB u on pur.USER_NO = u.USER_NO " +
-                "left outer join PRODUCT P on pur.PRODUCT_NO = P.PRODUCT_NO where u.USER_NO=?;";
+                "left outer join PRODUCT P on pur.PRODUCT_NO = P.PRODUCT_NO where u.USER_NO=?";
         List<PurchaseDTO> list = new ArrayList<>();
         try {
             con = DbUtil.getConnection();
@@ -87,6 +109,8 @@ public class PurchasesDAOImpl implements PurchasesDAO {
             rs  = ps.executeQuery();
 
             while(rs.next()){
+            	ProductDTO productDTO = new ProductDTO();
+            	
                 int purNo = rs.getInt("PURCHASE_NO");
                 int productNo = rs.getInt("PRODUCT_NO");
                 int purQty = rs.getInt("PURCHASE_QTY");
@@ -99,26 +123,26 @@ public class PurchasesDAOImpl implements PurchasesDAO {
                 String userPhone = Integer.toString(rs.getInt("USER_PHONE"));
                 String userAddr = rs.getString("USER_ADDR");
                 String userEmail = rs.getString("USER_EMAIL");
-                String category = rs.getString("PRODUCT_CATEGORY");
-                int stock = rs.getInt("PRODUCT_STOCK");
+                String productCategory = rs.getString("PRODUCT_CATEGORY");
+                int productStock = rs.getInt("PRODUCT_STOCK");
                 String productName = rs.getString("PRODUCT_NAME");
                 String productColor = rs.getString("PRODUCT_COLOR");
                 String productSize = rs.getString("PRODUCT_SIZE");
-                int price = rs.getInt("PRODUCT_PRICE");
-                String productResiDate = rs.getString("PRODUCT_RESI_DATE");
+                int productPrice = rs.getInt("PRODUCT_PRICE");
+                String productResiDate = rs.getString("PRODUCT_RESIDATE");
 
-
-                UserDTO userDTO = new UserDTO(userNo, userName, userId, userPwd, userAddr, userPhone, userEmail, userBirth);
-                ProductDTO productDTO = new ProductDTO();
+                UserDTO userDTO = new UserDTO(userId, userPwd, userName, userAddr, userPhone, userEmail, userBirth);
                 productDTO.setProductNo(productNo);
-                productDTO.setProductCategory(category);
-                productDTO.setProductStock(stock);
+                productDTO.setProductCategory(productCategory);
+                productDTO.setProductStock(productStock);
                 productDTO.setProductName(productName);
                 productDTO.setProductColor(productColor);
                 productDTO.setProductSize(productSize);
-                productDTO.setProductPrice(price);
+                productDTO.setProductPrice(productPrice);
                 productDTO.setProductResiDate(productResiDate);
+                
                 list.add(new PurchaseDTO(purNo,userDTO,productDTO,purQty,purDate,purStat));
+//
             }
 
         } catch (SQLException e) {
