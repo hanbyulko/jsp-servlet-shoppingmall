@@ -8,10 +8,29 @@
 <title>Insert title here</title>
 <script src="../js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-
+ 
 </script>
-<style>
-/* CSS RESET */
+<style> 
+#mask {  
+    position:absolute;  
+    z-index:9000;  
+    background-color:#000;  
+    display:none;  
+    left:0;
+    top:0;
+} 
+.window{
+    display: none;
+    position:absolute;  
+    left:50%;
+    top:50px;
+    margin-left: -500px;
+    width:1000px;
+    height:500px;
+    background-color:#FFF;
+    z-index:10000;   
+ }
+ /* CSS RESET */
 * {
     padding: 0;
     border: 0;
@@ -22,7 +41,6 @@ li {list-style: none;}
 
 body,html{
     height: 100%;
-    background-color: #f4f4f4;
     font-family: 'Maven Pro','Noto Sans KR';
 }
 
@@ -41,14 +59,8 @@ body,html{
     vertical-align: middle;
 
 }
-.login-container{
-    width: 500px;
-    background-color: #fff;
-    padding: 70px 20px;
-    box-sizing: border-box;
 
-}
-.review--title{
+.qna--title{
     width: 100%;
     text-align: center;
     font-size: 50px;
@@ -78,7 +90,7 @@ body,html{
 }
 .form-btn{
     display: block;
-    width: 100%;
+    width: 100px;
     font-size: 16px;
     height: 40px;
     background-color: #000;
@@ -123,16 +135,61 @@ label.star:before {
   content: '\2605';
 }
 </style>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript"> 
+//<![CDATA[
+    function wrapWindowByMask(){
+ 
+        var maskHeight = $(document).height();  
+        var maskWidth = $(window).width();  
+ 
+        $("#mask").css({"width":maskWidth,"height":maskHeight});  
+ 
+ 
+        $("#mask").fadeIn(0);      
+        $("#mask").fadeTo("slow",0.6);    
+ 
+        $(".window").show();
+ 
+    }
+ 
+    $(document).ready(function(){
+        $(".openMask").click(function(e){
+            e.preventDefault();
+            wrapWindowByMask();
+        });
+ 
+        $(".window .close").click(function (e) {  
+            e.preventDefault();  
+            $("#mask, .window").hide();  
+        });       
+ 
+        $("#mask").click(function () {  
+            $(this).hide();  
+            $(".window").hide();  
+ 
+        });      
+ 
+    });
+ 
+//]]>
+</script>
 </head>
 <body>
-
-<form method='post' action="${servlet}review&command=update">
-
-   <div class="login-container">
-                        <h3 class="review--title">Survey</h3><br><br>
+    <div class="review">
+ <form method='post' action="${servlet}review&command=update"> 
+    <div id ="wrap"> 
+            <div id="mask"></div>
+            <div class="window">
+                <div class="full-bg">
+   <div class="table">
+      <div class="table-cell">
+         
+                    <div class="login-container">
+                    <h3 class="review--title">REVIEW UPDATE</h3><br>
                         
-                         <label class=form-input--title>상품에 만족하셨나요?</label>
-  <div>
+                         <label class=form-input--title>STARS: </label>
+  <div class="table">
    <c:choose>
    <c:when test="${list.reviewStar}==1}">
    <input class="star star-1" id="star-1" name="reviewStar" value = 1 type="radio" />
@@ -197,21 +254,27 @@ label.star:before {
 </c:choose>
    
 </div>
-<div>
-<h3 class="review--title">Product Review</h3><br><br>
+							</div>
+                        <label class=form-input--title>REVIEW TITLE: </label>
+                         <input type = "text" id="reviewTitle" name='reviewTitle' class="form-input" style="text-align:left; width:200px; height:20px;"></input>
+                        <label class=form-input--title>REVIEW Content : </label><p>
+                        <input type="text" id="reviewContent" name="reviewContent" class="form-input" style="text-align:left; width:400px; height:200px;"></input>
                         
-                        <label class=form-input--title>리뷰제목 : </label><p>
-                         <input type = "text" id="reviewTitle" name='reviewTitle' class="form-input" style="text-align:left; width:200px; height:20px;"><p>
+                        <input type="submit" name = "insert" value="Submit"  class="form-btn" >
 
-                        <label class=form-input--title>리뷰 내용 : </label><p>
-                        <input type="text" id="reviewContent" name="reviewContent" class="form-input" style="text-align:left; width:400px; height:400px;">
-                        
-                        
-                        <input type="submit" name = "update" value="수정"  class="form-btn" >
-
-</form>
-
+                    </div>
+             </form>
+   </div>
 </div>
-
+            </div>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">       
+                <tr>
+                    <td align="left">
+                    <a href="<%=application.getContextPath()%>/review/reviewUpdate.jsp" class="openMask" style="vertical-align: middle">REVIEW UPDATE</a>
+                    </td>
+                </tr>       
+            </table>
+        </div>
+    </div>
 </body>
 </html>
