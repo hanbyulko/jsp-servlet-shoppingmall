@@ -12,6 +12,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
+	var str;
 	$("#minus").click(function(){
 		value = parseInt($("#quantity").val())-1;
 		if(value<=1){
@@ -32,46 +33,24 @@ $(function(){
 	});
 	
 	$("#cart").click(function(){
-		
-		location.href="${pageContext.request.contextPath}/servlet?controller=cart&command=insert&productNo="+eval(${product.productNo})+"&cartQty="+eval($("#quantity").val());
-		
+		location.href="${pageContext.request.contextPath}/servlet?controller=cart&command=insert&productNo="+eval(str[0])+"&cartQty="+eval($("#quantity").val());
 	});
 	
 	$("#buy").click(function(){
-		
-		location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insert&productNo="+eval(${product.productNo})+"&cartQty="+eval($("#quantity").val());
+		location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insertPurchaseDB&productNo="+eval(str[0])+"&cartQty="+eval($("#quantity").val());
 	});	
-});
-/* function plus(){
-	var value = document.getElementById("quantity").value+1;
 	
-	
-}
-function minus(){
-	var value = document.getElementById("quantity").value = eval(document.getElementById("quantity").value-1);
-	if(document.getElementById("quantity").value==0){
-		document.getElementById("quantity").value=0;
-	}
-} */
+	$('select').on('change', function (e) {
+	    var optionSelected = $("option:selected", this);
+	    var valueSelected = this.value;
+	    str = valueSelected.split("/");
+	});
+}); 
+
 </script>
 </head>
 <body>
 <jsp:include page="../view/top.jsp"/>
-
-<%-- <table>
-<tr><td rowspan="50"><img alt="이미지입니다." src="${imgPath}${product.productName}_L_1.jpg"></td><td>상품이름 : </td><td>${product.productName} </td><tr>
-<tr><td>PRICE : </td><td id="price">${product.productPrice}</td><tr>
-<tr><td>COLOR : </td><td>${product.productColor}</td><tr>
-<tr><td>SIZE : </td><td>${product.productSize}</td><tr>
-<tr><td>QUANTITY : </td><td><BUTTON TYPE="BUTTON" id="minus">-</BUTTON><input type="text" value=1 size="2" id="quantity"></input><BUTTON TYPE="BUTTON" id="plus">+</BUTTON></td><tr>
-<tr><td>TOTAL : </td><td id ="total">${product.productPrice} WON</td><tr>
-<tr><td colspan="2"><button type="button" value="">구매하기</button></td><tr>
-<tr><td colspan="2"><button type="button" value="">장바구니</button></td><tr>
-</table>
-<img alt="이미지입니다." src="${imgPath}${product.productName}_D_1.jpg">
-<img alt="이미지입니다." src="${imgPath}${product.productName}_D_2.jpg">
-
- --%>
 
 
 <!--탑 인포메이션-->
@@ -94,18 +73,19 @@ function minus(){
                 <div class="top-info-select clearfix">
                     
                     <div class="top-info-color clearfix">
-                        <p class="top-info-select-title">COLOR</p>
-                        ${product.productColor}
+                        <p class="top-info-select-title"></p>
                     </div>
                     
                 
                 
                     <div class="top-info-size clearfix">
-                        <p class="top-info-select-title">SIZE</p>
+                        <p class="top-info-select-title">SIZE AND COLOL</p>
                         <div class="select-form-container">
-                            <select class="select-form">
-                                <option>[필수] 사이즈 선택</option>
-                                <option> ${product.productSize}</option>
+                            <select class="select-form" id="selectedNo">
+                                <option>사이즈 선택 및 COLOR</option>
+                                <c:forEach items="${listName}" var="listName">
+                                <option > ${listName.productNo}/${listName.productSize}/${listName.productColor}/${listName.productStock}</option>
+                                </c:forEach>
                             </select>
                             
                             <span class="select-icon">
@@ -142,6 +122,6 @@ function minus(){
 }
 %> --%>
 <jsp:include page='../review/reviewDetail.jsp' />
-<jsp:include page="../view/footer.jsp"/>
+<jsp:include page="../view/footer.jsp" />
 </body>
 </html>

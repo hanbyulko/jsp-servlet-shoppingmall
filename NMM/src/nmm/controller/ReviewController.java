@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import nmm.dto.ModelAndView;
 import nmm.dto.ProductDTO;
 import nmm.dto.ReviewDTO;
+import nmm.service.ProductService;
 import nmm.service.ReviewService;
 import nmm.service.UserService;
 
@@ -31,6 +32,11 @@ public class ReviewController implements Controller {
 
 	public ModelAndView selectUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
+		String productName = request.getParameter("productName");
+		
+		List<ProductDTO> listName = ProductService.selectByName(productName);
+		request.setAttribute("listName", listName);
+		
 		List<ReviewDTO> list = ReviewService.selectUser(Integer.parseInt(request.getParameter("pageNo")), productNo);
 		ReviewDTO reviewDTO = list.get(list.size() > 0 ? list.size() - 1 : 0);
 		request.setAttribute("pageCnt", reviewDTO.getPageCnt());
@@ -71,5 +77,4 @@ public class ReviewController implements Controller {
 		request.setAttribute("listPopular", list);
 		return new ModelAndView("view/main.jsp", false);
 	}
-	
 }

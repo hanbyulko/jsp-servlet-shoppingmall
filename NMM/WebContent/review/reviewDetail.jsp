@@ -128,7 +128,6 @@ th{
 }
 </style>
 <body>
-	<jsp:include page="../view/top.jsp" />
 <h1 class="table--title">상품 리뷰 </h1>
 <table class="table">
       <tr>
@@ -162,6 +161,6 @@ th{
 				href="${servlet}review&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo<pageCnt?pageNo+1:pageCnt}&productNo=${productNo}">NEXT</a>
 		</div>
 	</nav>
-   	<jsp:include page="../view/footer.jsp" />
+   	
 </body>
 </html>
