@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	img{width:500px; height:700px;}
+   img{width:500px; height:700px;}
 </style>
 <script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
@@ -137,26 +137,6 @@ function minus(){
                 </div>
             </div>
         </div> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <%-- <% if(request.getAttribute("list")!=null){
 	out.println("<jsp:include page='../review/reviewDetail.jsp' />");
 }

@@ -236,7 +236,6 @@ public class ProductDAOImpl implements ProductDAO {
 			while (rs2.next()) {
 				pageCnt = rs2.getInt(1);
 			}
-
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, "%" + keyword + "%");
@@ -265,4 +264,65 @@ public class ProductDAOImpl implements ProductDAO {
 
 	}
 
+	@Override
+	public List<ProductDTO> selectByKeyValue(int pageNo, String keyword, String value) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		Connection con2 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs2 = null;
+		int pageCnt = 0;
+		String cnt = "SELECT COUNT(*) FROM PRODUCT where ";
+		String sql = "SELECT * FROM (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM product ORDER BY PRODUCT_NO ASC";
+		if (keyword.equals("PRODUCT_CATEGORY")) {
+			cnt+="PRODUCT_PRODUCT_CATEGORY";
+			sql+="PRODUCT_PRODUCT_CATEGORY";
+		}
+		if (keyword.equals("PRODUCT_STOCK")) {
+			cnt+="PRODUCT_PRODUCT_STOCK";
+			sql+="PRODUCT_PRODUCT_STOCK";
+		}
+		if (keyword.equals("PRODUCT_NAME")) {
+			cnt+="PRODUCT_PRODUCT_NAME";
+			sql+="PRODUCT_PRODUCT_NAME";
+		}
+		cnt+= "LIKE ?";
+		sql+= "LIKE ?) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";
+		try {
+			con2 = DbUtil.getConnection();
+			ps2 = con2.prepareStatement(cnt);
+			ps2.setString(1, value);
+			rs2 = ps2.executeQuery();
+			while (rs2.next()) {
+				pageCnt = rs2.getInt(1);
+			}
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, value);
+			ps.setInt(2, pageNo * 8 + 1);
+			ps.setInt(3, (pageNo - 1) * 8 + 1);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ProductDTO product = new ProductDTO();
+				product.setProductNo(rs.getInt(1));
+				product.setProductCategory(rs.getString(2));
+				product.setProductStock(rs.getInt(3));
+				product.setProductName(rs.getString(4));
+				product.setProductColor(rs.getString(5));
+				product.setProductSize(rs.getString(6));
+				product.setProductPrice(rs.getInt(7));
+				product.setProductResiDate(rs.getString(8));
+				product.setPageCnt(pageCnt % 8 == 0 ? pageCnt / 8 : pageCnt / 8 + 1);
+				list.add(product);
+			}
+		} finally {
+			DbUtil.dbClose(rs, ps, con);
+			DbUtil.dbClose(rs2, ps2, con2);
+		}
+		return list;
+	}
+
+	
 }

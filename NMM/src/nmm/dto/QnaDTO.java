@@ -1,18 +1,19 @@
 package nmm.dto;
 
-public class QnaDTO {
+public class QnaDTO extends PageCnt{
 	private int qnaNo; 
 	private UserDTO userDTO;
 	private ProductDTO productDTO; 
 	private String qnaTitle;
 	private String qnaContent; 
 	private String qnaDate;
-	private String qnaResponseState; //¥‰∫ØªÛ≈¬
-	private String qnaResponseContent; //¥‰∫Ø≥ªøÎ
-	private int pageCnt;
-	public QnaDTO(int qnaNo, UserDTO userDTO, ProductDTO productDTO, String qnaTitle, String qnaContent, String qnaDate,
-			String qnaResponseState, String qnaResponseContent, int pageCnt) {
-		super();
+	private String qnaResponseState; //ÎãµÎ≥ÄÏÉÅÌÉú
+	private String qnaResponseContent; //ÎãµÎ≥ÄÎÇ¥Ïö©
+	
+	
+	public QnaDTO(int pageCnt, int qnaNo, UserDTO userDTO, ProductDTO productDTO, String qnaTitle, String qnaContent,
+			String qnaDate, String qnaResponseState, String qnaResponseContent) {
+		super(pageCnt);
 		this.qnaNo = qnaNo;
 		this.userDTO = userDTO;
 		this.productDTO = productDTO;
@@ -21,18 +22,16 @@ public class QnaDTO {
 		this.qnaDate = qnaDate;
 		this.qnaResponseState = qnaResponseState;
 		this.qnaResponseContent = qnaResponseContent;
-		this.pageCnt = pageCnt;
 	}
 	public QnaDTO() {
-		super();
 	}
 	public QnaDTO(String qnaTitle, String qnaContent) {
-		this.qnaTitle = qnaTitle;
+		this.qnaTitle= qnaTitle;
 		this.qnaContent = qnaContent;
 	}
 	public QnaDTO(int qnaNo, String qnaTitle, String qnaContent) {
 		this.qnaNo = qnaNo;
-		this.qnaTitle = qnaTitle;
+		this.qnaTitle =qnaTitle;
 		this.qnaContent = qnaContent;
 	}
 	public int getQnaNo() {
@@ -83,12 +82,13 @@ public class QnaDTO {
 	public void setQnaResponseContent(String qnaResponseContent) {
 		this.qnaResponseContent = qnaResponseContent;
 	}
-	public int getPageCnt() {
-		return pageCnt;
-	}
-	public void setPageCnt(int pageCnt) {
-		this.pageCnt = pageCnt;
+	
+	public void setPageCnt(int pageCnt) { 
+		super.setPageCnt(pageCnt);
 	}
 	
-	
+	public int getPageCnt() { 
+		return super.getPageCnt();
+	}
+
 }

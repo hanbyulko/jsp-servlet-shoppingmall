@@ -41,11 +41,11 @@ public class ProductService {
 	}
 
 	public static List<ProductDTO> searchByKeyword(int pageNo, String keyword) throws Exception {
-		List<ProductDTO> list = productDAO.searchByKeyword(pageNo, keyword);
-		if (list.isEmpty()) {
-			throw new Exception("검색 결과가 없습니다");
-		}
-		return list;
+		return productDAO.searchByKeyword(pageNo, keyword);
+	}
+
+	public static List<ProductDTO> selectByKeyValue(int pageNo, String keyword, String value) throws Exception{
+		return productDAO.selectByKeyValue(pageNo, keyword, value);
 	}
 	
 	

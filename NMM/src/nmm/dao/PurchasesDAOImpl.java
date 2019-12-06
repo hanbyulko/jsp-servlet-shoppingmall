@@ -71,13 +71,13 @@ public class PurchasesDAOImpl implements PurchasesDAO {
 
         return list;
     }
-    //¼º°øÇÏ¸é 1 ¾Æ´Ï¸é 0
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ 1 ï¿½Æ´Ï¸ï¿½ 0
     @Override
     public int insert(int userNo, int productNo, int qty) throws Exception {
         Connection con = null;
         PreparedStatement ps = null;
         int result = 0;
-        String sql = "INSERT INTO PURCHASEDB VALUES(PURCHASE_NO_SEQ.NEXTVAL,?, ?, ?,sysdate,'¹è¼ÛÁØºñÁß')";
+        String sql = "INSERT INTO PURCHASEDB VALUES(PURCHASE_NO_SEQ.NEXTVAL,?, ?, ?,sysdate,'ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½')";
         try {
             con = DbUtil.getConnection();
             ps = con.prepareStatement(sql);

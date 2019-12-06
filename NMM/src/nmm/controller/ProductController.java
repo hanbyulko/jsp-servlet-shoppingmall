@@ -12,7 +12,9 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import nmm.dto.ModelAndView;
 import nmm.dto.ProductDTO;
+import nmm.dto.UserDTO;
 import nmm.service.ProductService;
+import nmm.service.UserService;
 
 public class ProductController implements Controller {
 
@@ -118,7 +120,19 @@ public class ProductController implements Controller {
 	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
 		List<ProductDTO> list = ProductService.selectAll(pageNo);
+		request.setAttribute("pageCnt", list.get(list.size()-1>0?list.size()-1:list.size()).getPageCnt());
 		request.setAttribute("list", list);
 		return new ModelAndView("manager/productSelect.jsp", false);
 	}
+
+	public ModelAndView selectByKeyValue(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		String keyword= request.getParameter("keyword");
+		String value = request.getParameter("value");
+		List<ProductDTO> list = ProductService.selectByKeyValue(pageNo, keyword, value);
+		SendPageInfo.sendInfo(request, response);
+		request.setAttribute("list", list);
+		return new ModelAndView("manager/productSelect.jsp", false);
+	} 
+	
 }

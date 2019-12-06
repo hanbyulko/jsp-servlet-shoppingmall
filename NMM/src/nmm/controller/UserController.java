@@ -1,5 +1,7 @@
 package nmm.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,14 +15,34 @@ public class UserController implements Controller {
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return new ModelAndView("servlet?controller=product+review&command=productList", false);
 	}
+	
+	
+	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		List<UserDTO> list = UserService.selectAll(pageNo);
+		SendPageInfo.sendInfo(request, response);
+		request.setAttribute("list", list);
+		return new ModelAndView("manager/userSelect", false);
+	}
+	
+	public ModelAndView selectByKeyword(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		String keyword= request.getParameter("keyword");
+		String value = request.getParameter("value");
+		List<UserDTO> list = UserService.selectByKeyword(pageNo, keyword, value);
+		SendPageInfo.sendInfo(request, response);
+		request.setAttribute("list", list);
+		return new ModelAndView("manager/userSelect", false);
+	}
+	
+	
+	
 	public ModelAndView logOut(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", null);
 		session.setAttribute("userNo", null);
 		return new ModelAndView("servlet?controller=product+review&command=productList", false);
 	}
-
-
 
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();

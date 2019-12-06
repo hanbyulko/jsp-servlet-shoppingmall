@@ -143,9 +143,6 @@ $(function(){
 			<a class="pagination-older" href="${servlet}product&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo<pageCnt?pageNo+1:pageCnt}">NEXT</a>
 		</div>
 	</nav>
-
-
 	<jsp:include page="../view/footer.jsp" />
-
 </body>
 </html>

@@ -190,6 +190,52 @@ public class QnaDAOImpl implements QnaDAO {
 		}
 		return dto;
 	}
+
+	@Override
+	public List<QnaDTO> selectByState(int pageNo, String responseState) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<QnaDTO> list = new ArrayList<>();
+		
+		Connection con2 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs2 = null;
+		int pageCnt = 0;
+		String cnt = "SELECT COUNT(*) FROM QNA WHERE QNA_RESPONSESTATUS=?";
+		String sql = "SELECT * FROM (SELECT a.*, ROWNUM rnum FROM (select QNA_NO, PRODUCT_NO, QNA_TITLE, QNA_DATE, QNA_RESPONSESTATE from QNA WHERE QNA_RESPONSESTATUS=?) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";
+		try {
+			con2 = DbUtil.getConnection();
+			ps2 = con2.prepareStatement(cnt);
+			ps2.setString(1, responseState);
+			con = DbUtil.getConnection();
+			rs2 = ps2.executeQuery();
+			while (rs2.next()) {
+				pageCnt = rs2.getInt(1);
+			}
+			ps = con.prepareStatement(sql);
+			ps.setString(1, responseState);
+			ps.setInt(2, pageNo * 8);
+			ps.setInt(3, (pageNo - 1) * 8 + 1);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ProductDTO productDTO = new ProductDTO();
+				QnaDTO qnaDTO = new QnaDTO();
+				qnaDTO.setQnaNo(rs.getInt(1));
+				productDTO.setProductNo(rs.getInt(2));
+				qnaDTO.setProductDTO(productDTO);
+				qnaDTO.setQnaTitle(rs.getString(3));
+				qnaDTO.setQnaDate(rs.getString(4));
+				qnaDTO.setQnaResponseState(rs.getString(5));
+				qnaDTO.setPageCnt(pageCnt % 8 == 0 ? pageCnt / 8 : pageCnt / 8 + 1);
+				list.add(qnaDTO);
+			}
+		} finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return list;
+	
+	}
 	
 	
 

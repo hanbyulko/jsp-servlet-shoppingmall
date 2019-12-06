@@ -11,8 +11,12 @@ public class ReviewService {
 
    private static ReviewDAO dao = new ReviewDAOImpl();
 
-   public static List<ReviewDTO> selectAll(int productNo) throws Exception {
-      return dao.selectAll(productNo);
+   public static List<ReviewDTO> selectAll(int pageNo) throws Exception {
+	      return dao.selectAll(pageNo);
+	   }
+   
+   public static List<ReviewDTO> selectUser(int pageNo, int productNo) throws Exception {
+      return dao.selectUser(pageNo, productNo);
    }
 
    public static int insert(int userNo, int productNo, ReviewDTO dto) throws Exception {
