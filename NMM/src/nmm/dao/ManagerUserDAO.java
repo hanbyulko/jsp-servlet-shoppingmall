@@ -5,7 +5,7 @@ import java.util.List;
 import nmm.dto.ManagerUserDTO;
 
 public interface ManagerUserDAO {
-	boolean login(String mgtUserId, String mgtUserPw) throws Exception;
+	ManagerUserDTO login(String mgtUserId, String mgtUserPw) throws Exception;
 	
 	List<ManagerUserDTO> selectAll() throws Exception;
 	

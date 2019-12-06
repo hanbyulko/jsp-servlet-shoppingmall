@@ -22,7 +22,7 @@ select{
 
 
 
-/* 공통요소 */
+/* 怨듯넻�슂�냼 */
 .clearfix::after{
     content: "";
     display: block;
@@ -105,14 +105,14 @@ select{
 }
 
 
-/* 그리드 시스템*/
+/* 洹몃━�뱶 �떆�뒪�뀥*/
 .col-2,col-3,col-4,col-5,col-6{
     float: left;
     box-sizing: border-box;
     padding: 10px;
 }
 
-/* 그리드 시스템 */
+/* 洹몃━�뱶 �떆�뒪�뀥 */
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.666%;}
 .col-3 {width: 25%;}
@@ -126,7 +126,7 @@ select{
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
 
-/* 간격 옵션 */
+/* 媛꾧꺽 �샃�뀡 */
 .gutter--none   {padding:0px;}
 .gutter--xxxs   {padding:1px;}
 .gutter--xxs    {padding:5px;}
@@ -141,7 +141,7 @@ select{
 
 
 
-/* 헤더영역 */
+/* �뿤�뜑�쁺�뿭 */
 
 .header{
     font-size: 16px;
@@ -199,7 +199,7 @@ select{
 
 .header__nav__right li{
     float: left;
-    padding-left: 50px;
+    padding-left: 00px;
 }
 
 .header__nav__right li:first-child{
@@ -208,7 +208,7 @@ select{
 
 
 
-/* 배너영역 */
+/* 諛곕꼫�쁺�뿭 */
 
 .banner{
     padding-left: 40px;
@@ -252,7 +252,7 @@ select{
 }
 
 
-/* 뉴컬렉션 상품 영역 */
+/* �돱而щ젆�뀡 �긽�뭹 �쁺�뿭 */
 
 .new {
     width: 1246px;
@@ -462,7 +462,7 @@ select{
 }
 
 
-/* 풋터 */
+/* �뭼�꽣 */
 
 .footer{
     border-top: 1px solid #000;
@@ -911,6 +911,6 @@ select{
 
 
 
-/*미디어쿼리*/
+/*誘몃뵒�뼱荑쇰━*/
 
 

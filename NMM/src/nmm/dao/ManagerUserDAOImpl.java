@@ -3,36 +3,45 @@ package nmm.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import nmm.dto.ManagerUserDTO;
 import nmm.dto.ProductDTO;
 import nmm.dto.QnaDTO;
+import nmm.dto.UserDTO;
 import nmm.util.DbUtil;
 
 public class ManagerUserDAOImpl implements ManagerUserDAO {
 
 	@Override
-	public boolean login(String mgtUserId, String mgtUserPw) throws Exception{
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = "select * from MGT_USER where MGT_USER_ID=? AND MGT_USER_PWD=?";
-		try {
-			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
-			ps.setString(1, mgtUserId);
-			ps.setString(2, mgtUserPw);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				return true;
-			}
+	public ManagerUserDTO login(String mgtUserId, String mgtUserPw) throws SQLException{
+			System.out.println(mgtUserId+"11");
+			System.out.println(mgtUserPw+"11");
+	      Connection con = null;
+	      PreparedStatement ps = null;
+	      ManagerUserDTO user2 = null;
+	      String sql = "select MGT_USER_PWD, MGT_USER_ID from MGT_USER where upper(MGT_USER_ID) = upper(?)";
+	      ResultSet rs2 =null;
+	      try {
+	         con = DbUtil.getConnection();
+	         ps = con.prepareStatement(sql);
+	         ps.setString(1, mgtUserId);
+	         rs2 = ps.executeQuery();  
+	         System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb5bb");
+	         while(rs2.next()) {
+	        	 System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb5bb");
+	        	 user2 = new ManagerUserDTO(rs2.getString(1),rs2.getString(2));
+	        	 return user2;
+	         }
+	      }catch (Exception e) {
+			e.printStackTrace();// TODO: handle exception
 		} finally {
-			DbUtil.dbClose(rs, ps, con);
-		}
-		return false;
-	}
+	         DbUtil.dbClose(rs2, ps, con);
+	      }
+	      return null;
+	   }
 
 	@Override
 	public List<ManagerUserDTO> selectAll() throws Exception {

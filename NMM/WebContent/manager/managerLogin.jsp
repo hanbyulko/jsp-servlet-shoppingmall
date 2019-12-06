@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>NMM Admin Login</title>
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 <style>
 /* CSS RESET */
 * {
@@ -87,13 +88,28 @@ body,html{
 }
 
 </style>
+<script type="text/javascript">
+function cheakFunction() {
+	
+	if($("#mgtUserId").val()==""){
+	    alert("아이디 입력바람");
+	    $("#mgtUserId").focus();
+	    return false;
+	  }
+	if($("#mgtUserPwd").val()==""){
+	    alert("비밀번호 입력바람");
+	    $("#mgtUserPwd").focus();
+	    return false;
+	  }
+}
+</script>
 </head>
 <body>
 
 <div class="full-bg">
 	<div class="table">
 		<div class="table-cell">
-  				<form method="post" action="<%=application.getContextPath()%>/servlet?controller=siteManage&command=accounting">
+  				<form method="post" onsubmit="return cheakFunction();" action="<%=application.getContextPath()%>/servlet?controller=managerUser&command=login">
                     <div class="login-container">
                         <h3 class="login--title">ADMIN LOGIN</h3>
                         

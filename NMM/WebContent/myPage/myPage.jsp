@@ -18,6 +18,8 @@
 		<style type="text/css">
 		img {width: 200px; height: 150px; margin: 0; padding: 0;}
 		p{color: "#0d001a";}
+		a text{font-size: 2px }
+		
 		</style>
 		<script type="text/javascript">
 		function cheakFunction() {
@@ -82,11 +84,11 @@
 
 		<!-- Wrapper -->
 			<div id="wrapper">
-
+					<jsp:include page="../view/top.jsp"/>
 				<!-- Intro -->
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
-							<h1>마이페이지 환영한다 동무</h1>
+							<h1>마이페이지 환영한다</h1>
 							<p>이 페이지에서 회원정보를 수정하고, 구매내역을 조회할수 있습니다<br />
 							<ul class="actions">
 								<li><a href="#one" class="button scrolly">구매내역</a></li>
@@ -168,9 +170,6 @@
 									</form>
 								</section>
 								<section>
-								<a href="${servlet}qna&command=main&pageNo=1">QNA PAGE MOVE</a>
-								</section>
-								<section>
 									<ul class="contact">
 										<li><img alt="1" src="images/1.jpg"></li>
 										<li><img alt="2" src="images/2.jpg"></li>
@@ -188,9 +187,7 @@
 		<!-- Footer -->
 			<footer id="footer" class="wrapper style1-alt">
 				<div class="inner">
-					<ul class="menu">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
+					<jsp:include page="../view/footer.jsp"/>
 				</div>
 			</footer>
 
