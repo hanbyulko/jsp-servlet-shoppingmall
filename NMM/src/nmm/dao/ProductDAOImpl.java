@@ -323,6 +323,29 @@ public class ProductDAOImpl implements ProductDAO {
 		}
 		return list;
 	}
-
 	
+	public List<ProductDTO> selectByName(String productName) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		String sql = "SELECT PRODUCT_STOCK, PRODUCT_COLOR, PRODUCT_SIZE, PRODUCT_NO FROM PRODUCT WHERE PRODUCT_NAME = ?";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, productName);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ProductDTO productDTO = new ProductDTO();
+				productDTO.setProductStock(rs.getInt(1));
+				productDTO.setProductColor(rs.getString(2));
+				productDTO.setProductSize(rs.getString(3));
+				productDTO.setProductNo(rs.getInt(4));
+				list.add(productDTO);
+			}
+		} finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return list;
+	}
 }

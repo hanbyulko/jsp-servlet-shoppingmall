@@ -141,7 +141,6 @@ public class ReviewDAOImpl implements ReviewDAO {
 			ps.setString(3, dto.getReviewStar());
 			ps.setInt(4, dto.getReviewNo());
 			result = ps.executeUpdate();
-			result = ps.executeUpdate();
 		} finally {
 			DbUtil.dbClose(ps, con);
 		}

@@ -15,6 +15,46 @@
 		frm.submit();
 		return true;
 	}
+	
+</script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript"> 
+//<![CDATA[
+    function wrapWindowByMask(){
+ 
+        var maskHeight = $(document).height();  
+        var maskWidth = $(window).width();  
+ 
+        $("#mask").css({"width":maskWidth,"height":maskHeight});  
+ 
+ 
+        $("#mask").fadeIn(0);      
+        $("#mask").fadeTo("slow",0.6);    
+ 
+        $(".window").show();
+ 
+    }
+ 
+    $(document).ready(function(){
+        $(".openMask").click(function(e){
+            e.preventDefault();
+            wrapWindowByMask();
+        });
+ 
+        $(".window .close").click(function (e) {  
+            e.preventDefault();  
+            $("#mask, .window").hide();  
+        });       
+ 
+        $("#mask").click(function () {  
+            $(this).hide();  
+            $(".window").hide();  
+ 
+        });      
+ 
+    });
+ 
+//]]>
 </script>
 
 <style>

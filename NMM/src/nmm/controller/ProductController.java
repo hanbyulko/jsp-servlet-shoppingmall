@@ -134,5 +134,4 @@ public class ProductController implements Controller {
 		request.setAttribute("list", list);
 		return new ModelAndView("manager/productSelect.jsp", false);
 	} 
-	
 }

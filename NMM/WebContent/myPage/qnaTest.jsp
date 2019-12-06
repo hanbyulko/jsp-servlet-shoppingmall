@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>REVIEW</title>
+<title>상품 문의하기</title>
 <style> 
 #mask {  
     position:absolute;  
@@ -34,6 +34,7 @@ li {list-style: none;}
 
 body,html{
     height: 100%;
+    background-color: #f4f4f4;
     font-family: 'Maven Pro','Noto Sans KR';
 }
 
@@ -98,35 +99,6 @@ body,html{
     box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
     
 }
-div.stars {
-  width: 270px;
-  display: table-row;
-}
-
-input.star { display: none; }
-
-label.star {
-  float: right;
-  padding: 10px;
-  font-size: 36px;
-  color: #444;
-  transition: all .2s;
-}
-
-input.star:checked ~ label.star:before {
-  content: '\2605';
-  color: #FD4;
-  transition: all .25s;
-}
-
-
-
-
-label.star:hover { transform: rotate(-15deg) scale(1.3); }
-
-label.star:before {
-  content: '\2605';
-}
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript"> 
@@ -137,7 +109,6 @@ label.star:before {
         var maskWidth = $(window).width();  
  
         $("#mask").css({"width":maskWidth,"height":maskHeight});  
- 
  
         $("#mask").fadeIn(0);      
         $("#mask").fadeTo("slow",0.6);    
@@ -169,55 +140,40 @@ label.star:before {
 </script>
 </head>
 <body>
-    <div class="review">
- <form method='post' action="${servlet}review&command=insert"> 
+<form>
     <div id ="wrap"> 
             <div id="mask"></div>
             <div class="window">
                 <div class="full-bg">
-   <div class="table">
-      <div class="table-cell">
-         
+   					<div class="table">
+      					<div class="table-cell">
+      <form method='post' action="${servlet}qna&command=insert">     
                     <div class="login-container">
-                    <h3 class="review--title">REVIEW</h3><br/>
-                        
-                         <label class=form-input--title>RATING STARS: </label>
-   <div class="stars">
-   <input class="star star-1" id="star-1" name="reviewStar" value = 5 type="radio"/>
-    <label class="star star-1" for="star-1"></label>
-  <input class="star star-2" id="star-2" name="reviewStar" value = 4 type="radio"/>
-    <label class="star star-2" for="star-2"></label>
-    <input class="star star-3" id="star-3" name="reviewStar" value =3 type="radio"/>
-    <label class="star star-3" for="star-3"></label>
-    <input class="star star-4" id="star-4" name="reviewStar" value = 2 type="radio"/>
-    <label class="star star-4" for="star-4"></label>
-    <input class="star star-5" id="star-5" name="reviewStar" value = 1 type="radio"/>
-    <label class="star star-5" for="star-5"></label>
-
-    <br/><br/><br/>
-
-</div>
-							</div>
-                        <label class=form-input--title>REVIEW TITLE: </label>
+                        <h3 class="review--title">How Can I Help You?</h3><br><br>
+                     </div>
+                        <label class=form-input--title>Product Name : </label></p>
                          <input type = "text" id="reviewTitle" name='reviewTitle' class="form-input" style="text-align:left; width:200px; height:20px;"></input>
-                        <label class=form-input--title>REVIEW Content : </label><p/>
+                  <label class=form-input--title>Title : </label><p>
+                         <input type = "text" id="reviewTitle" name='reviewTitle' class="form-input" style="text-align:left; width:200px; height:20px;"></input>
+                        <label class=form-input--title>Content : </label><p>
                         <input type="text" id="reviewContent" name="reviewContent" class="form-input" style="text-align:left; width:400px; height:200px;"></input>
                         
-                        <input type="submit" name = "insert" value="Submit"  class="form-btn" ></input>
+                        <input type="submit" name = "insert" value="Submit"  class="form-btn">
 
                     </div>
              </form>
-   </div>
-</div>
-            </div>
+   						</div>
+							</div>
+            					</div>
             <table border="0" cellpadding="0" cellspacing="0" width="100%">       
                 <tr>
                     <td align="left">
-                    <a href="<%=application.getContextPath()%>/review/review.jsp" class="openMask" style="vertical-align: middle">REVIEW</a>
+                    <a href="<%=application.getContextPath()%>/myPage/qna.jsp" class="openMask" style="vertical-align: middle">REVIEW</a>
                     </td>
                 </tr>       
             </table>
         </div>
     </div>
+    </form>
 </body>
 </html>
