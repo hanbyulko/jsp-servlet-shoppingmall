@@ -24,17 +24,16 @@ public class QnaDAOImpl implements QnaDAO {
 		PreparedStatement ps2 = null;
 		ResultSet rs2 = null;
 		int pageCnt = 0;
-		String cnt = "SELECT COUNT(*) FROM QNA";
-		
-		String sql = "SELECT * FROM (SELECT a.*, ROWNUM rnum FROM (select QNA_NO, PRODUCT_NO, QNA_TITLE, QNA_DATE, QNA_RESPONSESTATE from QNA) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";
+		String cnt = "SELECT COUNT(*) FROM  QNA JOIN PRODUCT USING(PRODUCT_NO)";
+		String sql = "SELECT * FROM (SELECT a.*, ROWNUM rnum FROM (select QNA_NO, PRODUCT_NO, QNA_TITLE, QNA_DATE, QNA_RESPONSESTATE, PRODUCT_NAME from QNA JOIN PRODUCT USING(PRODUCT_NO)) a WHERE ROWNUM <= ?)  WHERE rnum >= ?";
 		try {
 			con2 = DbUtil.getConnection();
 			ps2 = con2.prepareStatement(cnt);
-			con = DbUtil.getConnection();
 			rs2 = ps2.executeQuery();
 			while (rs2.next()) {
 				pageCnt = rs2.getInt(1);
 			}
+			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, pageNo * 8);
 			ps.setInt(2, (pageNo - 1) * 8 + 1);
@@ -44,10 +43,11 @@ public class QnaDAOImpl implements QnaDAO {
 				QnaDTO qnaDTO = new QnaDTO();
 				qnaDTO.setQnaNo(rs.getInt(1));
 				productDTO.setProductNo(rs.getInt(2));
-				qnaDTO.setProductDTO(productDTO);
 				qnaDTO.setQnaTitle(rs.getString(3));
 				qnaDTO.setQnaDate(rs.getString(4));
 				qnaDTO.setQnaResponseState(rs.getString(5));
+				productDTO.setProductName(rs.getString(6));
+				qnaDTO.setProductDTO(productDTO);
 				qnaDTO.setPageCnt(pageCnt % 8 == 0 ? pageCnt / 8 : pageCnt / 8 + 1);
 				list.add(qnaDTO);
 			}

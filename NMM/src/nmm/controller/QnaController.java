@@ -20,12 +20,13 @@ public class QnaController implements Controller {
 			userNo = (int) request.getSession().getAttribute("userNo");
 		}
 		List<QnaDTO> list = QnaService.selectByUserId(Integer.parseInt(request.getParameter("pageNo")), userId);
+		if (list.size()>0) {
 		request.setAttribute("pageCnt", list.get(list.size() > 0 ? list.size() - 1 : 0).getPageCnt());
+		}
 		SendPageInfo.sendInfo(request, response);
 		request.setAttribute("list", list);
-		return new ModelAndView("myPage/myPage.jsp", false);
+		return new ModelAndView("myPage/qna.jsp", false);
 	}
-	
 	
 	public ModelAndView selectByState(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
@@ -47,22 +48,28 @@ public class QnaController implements Controller {
 		request.setAttribute("pageCnt", list.get(list.size() > 0 ? list.size() - 1 : 0).getPageCnt());
 		request.setAttribute("list", list);
 		SendPageInfo.sendInfo(request, response);
-		return new ModelAndView("myPage/qna.jsp", false);
+		return new ModelAndView("manager/FAQManagement.jsp", false);
 	}
 
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
 		QnaService.delete(qnaNo);
+		if (request.getParameter("manage").equals("1")) {
+			return new ModelAndView("manager/FAQManagement.jsp", false);
+		}
 		return new ModelAndView("myPage/qna.jsp", false);
 	}
 
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("insert ȣ��");
+		if (request.getSession().getAttribute("userNo") != null) {
+			userId = (String) request.getSession().getAttribute("userId");
+			userNo = (int) request.getSession().getAttribute("userNo");
+		}
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
 		String qnaTitle = request.getParameter("qnaTitle");
 		String qnaContent = request.getParameter("qnaContent");
 		QnaService.insert(userNo, productNo, new QnaDTO(qnaTitle, qnaContent));
-		return new ModelAndView("myPage/qna.jsp", false);
+		return new ModelAndView("servlet?controller=qna&command=main&pageNo=1", false);
 	}
 
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response) throws Exception {
