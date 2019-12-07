@@ -16,8 +16,9 @@
 $(function(){
 	$("img").click(function(){
 		var no = $(this).parent().prev().text();
-		var addr = "${pageContext.request.contextPath}/servlet?controller=review&command=selectUser&pageNo=1&productNo="+eval(no);
-		
+		var name = $(this).parent().next().text();
+		var addr = "${pageContext.request.contextPath}/servlet?controller=review&command=selectUser&pageNo=1&productNo="+eval(no)+"&productName="+name;
+
 		location.href = addr;
 		
 	});

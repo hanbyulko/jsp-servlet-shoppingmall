@@ -48,5 +48,7 @@ public class ProductService {
 		return productDAO.selectByKeyValue(pageNo, keyword, value);
 	}
 	
-	
+	public static List<ProductDTO> selectByName(String productName) throws Exception{
+		return productDAO.selectByName(productName);
+	}
 }

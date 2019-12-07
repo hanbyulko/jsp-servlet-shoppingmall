@@ -21,6 +21,7 @@ public class CartController implements Controller {
    public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
       HttpSession session = request.getSession();
       int userNo = (int) session.getAttribute("userNo");
+      System.out.println("userNO: "+userNo);
       List<CartDTO> list = CartService.selectAll(userNo);
       request.setAttribute("list", list);
       return new ModelAndView("cart/cart.jsp", false);
@@ -32,7 +33,8 @@ public class CartController implements Controller {
 
       int cartQty = Integer.parseInt(request.getParameter("cartQty"));
       int productNo = Integer.parseInt(request.getParameter("productNo"));
-      CartService.insert(userNo, productNo, cartQty);
+      int result = CartService.insert(userNo, productNo, cartQty);
+
       return new ModelAndView("cart/cart.jsp", false);
    }
 

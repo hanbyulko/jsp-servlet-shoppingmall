@@ -27,11 +27,8 @@ public class SelectServlet extends HttpServlet {
 		response.setContentType("text/xml; charset=UTF-8");
 		UserDAOImpl user = new UserDAOImpl();
 		PrintWriter out = response.getWriter();
-		
-		String id = request.getParameter("id");
 		try {
 		list = user.selectAll(1);
-		System.out.println(list);
 		JSONArray result = JSONArray.fromObject(list);
 		out.print(result);
 		}catch (Exception e) {

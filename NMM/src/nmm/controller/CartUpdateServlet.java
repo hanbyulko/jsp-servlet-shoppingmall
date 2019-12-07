@@ -23,14 +23,11 @@ public class CartUpdateServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		int cartNo = Integer.parseInt(request.getParameter("cartNo"));
-		System.out.println("나는 업데이트 서블릿 카트넘버:"+cartNo);
 		int cartQty = Integer.parseInt(request.getParameter("cartQty"));
-		System.out.println("나는 업데이트 서블릿 cartQty:"+cartQty);
 		request.getParameter("cartQty");
 		
 		try {
 			int result = CartService.update(cartNo, cartQty);
-			System.out.println("나는 업데이트 서블릿 리져트:"+result);
 			PrintWriter out = response.getWriter();
 			out.println(result);
 		}catch (Exception e){

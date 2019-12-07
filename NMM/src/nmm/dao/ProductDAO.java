@@ -23,4 +23,6 @@ public interface ProductDAO {
 
 	List<ProductDTO> selectByKeyValue(int pageNo, String keyword, String value) throws Exception;
 	
+	List<ProductDTO> selectByName(String productName) throws Exception;
+	
 }

@@ -95,7 +95,6 @@ public class CartDAOImpl implements CartDAO {
 
    @Override
    public int update(int cartNo, int cartQty) throws Exception{
-      System.out.println("업데이트왓다아");
         Connection con = null;
         PreparedStatement ps = null;
         int result = 0;
@@ -117,7 +116,6 @@ public class CartDAOImpl implements CartDAO {
 
    @Override
    public int delete(int cartNo) throws Exception{
-      System.out.println("나는 다오 카트넘버1:"+cartNo);
         Connection con = null;
         PreparedStatement ps = null;
         int result = 0;
@@ -132,8 +130,6 @@ public class CartDAOImpl implements CartDAO {
         } finally {
          DbUtil.dbClose(ps, con);
         }
-        System.out.println("나는 다오 카트넘버2:"+cartNo);
-        System.out.println("나는 다오 리져트:"+result);
         return result;
    }
    
