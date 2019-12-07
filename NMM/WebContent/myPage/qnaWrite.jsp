@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 <h2 class="table--title">문의하기</h2>
@@ -64,7 +67,7 @@
 		</div>
 		<div class="form-group row">
 			<div class="col-sm-10">
-			<button type="submit" style='width:400px' class="form-btn cart" id="cart">제출하기</button>
+			<button type="submit" class="form-btn cart" id="cart">제출하기</button>
 			</div>
 		</div>
 	</form>

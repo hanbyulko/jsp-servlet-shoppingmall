@@ -123,7 +123,7 @@ td {
 			$(".content").hide()
 		})
 		function show() {
-			$(".content").show()
+			$(this).parent().next().children().toggle()
 		}
 		function popUp() {
 		}

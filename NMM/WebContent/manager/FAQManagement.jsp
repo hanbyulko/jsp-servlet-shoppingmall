@@ -15,12 +15,6 @@ body {
 	font-weight: 400;
 }
 
-h1 {
-	text-align: center;
-	font-size: 2.5rem;
-	font-weight: 300;
-}
-
 .pagination-container {
 	margin: 100px auto;
 	text-align: center;
@@ -82,29 +76,6 @@ h1 {
 	margin-left: 50px;
 }
 
-
-body, html {
-	height: 100%;
-	background-color: #f4f4f4;
-	font-family: 'Maven Pro', 'Noto Sans KR';
-}
-
-th {
-	text-align: center;
-}
-
-.table {
-	height: auto;
-	display: table;
-	margin: 0 auto;
-	text-align: center;
-}
-
-.table--title {
-	width: 100%;
-	text-align: center;
-	font-size: 50px;
-}
 </style>
 </head>
 <body>
@@ -117,14 +88,13 @@ th {
 			<th>제목</th>
 			<th>작성날짜</th>
 			<th>답변상태</th>
-			<td>기능<td>
-			<td>삭제하기<td>
+			<th>기능<th>
+			<th>삭제하기<th>
 		</tr>
 		<c:forEach var="qnaDTO" items="${list}" varStatus="i">
 			<tr>
-				<input type="text" class='${i}' hidden='hidden' value='${qnaDTO.qnaResponseContent}'/>
 				<td>${i.count}</td>
-				<td><a href="javacript:void();" id='${i}' onclick="show()">${qnaDTO.productDTO.productName}</a></td>
+				<td><a href="javacript:void();" class='openMask' onclick="show()">${qnaDTO.productDTO.productName}</a></td>
 				<td>${qnaDTO.qnaTitle}</td>
 				<td>${qnaDTO.qnaDate}</td>
 				<td>${qnaDTO.qnaResponseState}</td>
@@ -149,9 +119,39 @@ th {
 	</nav>
 	<jsp:include page="../view/footer.jsp" />
 <script>
-function show() {
-	alert(1)
+function wrapWindowByMask(){
+	 
+    var maskHeight = $(document).height();  
+    var maskWidth = $(window).width();  
+
+    $("#mask").css({"width":maskWidth,"height":maskHeight});  
+
+
+    $("#mask").fadeIn(0);      
+    $("#mask").fadeTo("slow",0.6);    
+
+    $(".window").show();
+
 }
+
+$(document).ready(function(){
+    $(".openMask").click(function(e){
+        e.preventDefault();
+        wrapWindowByMask();
+    });
+
+    $(".window .close").click(function (e) {  
+        e.preventDefault();  
+        $("#mask, .window").hide();  
+    });       
+
+    $("#mask").click(function () {  
+        $(this).hide();  
+        $(".window").hide();  
+
+    });      
+
+});
 </script>
 </body>
 </html>
