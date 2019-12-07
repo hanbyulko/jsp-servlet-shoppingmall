@@ -39,11 +39,12 @@
         </div>
         	<!-- Default dropright button -->
 			<div class="btn-group dropright">
+			<a href="../manager/managerLogin.jsp">관리자 로그인</a>
 			  <button type="button" class="btn btn-secondary dropdown-toggle btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			   관리자 위로는 안돼
+			  관리자 위로는 안돼
 			  </button>
 			  <div class="dropdown-menu">
-			    	<a class="dropdown-item" href="#">페이지 1 </a><br>
+			    	<a class="dropdown-item" href="${pageContext.request.contextPath}/servlet?controller=siteManage&command=selectAll">상품관리</a><br>
 					<a class="dropdown-item" href="#">페이지 2 </a><br>
 					<a class="dropdown-item" href="#">페이지 3 </a><br>
 			  </div>

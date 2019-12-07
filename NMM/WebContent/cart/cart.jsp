@@ -88,6 +88,7 @@
          
          //선택이 있을때 작동
          if(length>0){
+        	 
 	         //체크된 체크박스의 값을 반복해 불러옴
 	         checkBox.each(function (length){
 
@@ -197,7 +198,7 @@
    <h1>구매목록 페이지 </h1>
    <div>
       <form method="post" id="buyList-form">
-      <table>
+            <table>
          <tr id="buyList-form-first-tr">
             <th class="display-none">카트번호</th>
             <th class="display-none">상품번호</th>
@@ -213,7 +214,7 @@
    </div>
    
    <div>
-      <form  method="post" >
+      <form  method="post">
       <input type="submit" id="purchaseBtn"  value="결제하기" style="padding:30px" formaction="${servlet}purchase&command=insertPurchaseDB">
       </form>
    </div>   

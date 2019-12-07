@@ -37,19 +37,19 @@ public class PurchaseController implements Controller {
         return new ModelAndView("user/purchase/purchaseHistory.jsp", false);
     }
 
-//    public ModelAndView selectPurchase(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//        // 구매할 물품 보여주는 결제 전 페이지
-//        //결제 실패하면 다시 이쪽으로 와야할듯
-//        HttpSession session = request.getSession();
-//        int userNo = (int) session.getAttribute("userNo");
-//        List<PurchaseDTO> list = PurchaseService.selectAllPurchase(userNo);
-//        request.setAttribute("list", list);
-//        return new ModelAndView("user/purchase/productPurchase.jsp", false);
-//    }
+    public ModelAndView selectPurchase(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 구매할 물품 보여주는 결제 전 페이지
+        //결제 실패하면 다시 이쪽으로 와야할듯
+        HttpSession session = request.getSession();
+        int userNo = (int) session.getAttribute("userNo");
+        List<PurchaseDTO> list = PurchaseService.selectAllPurchase(userNo);
+        request.setAttribute("list", list);
+        return new ModelAndView("user/purchase/productPurchase.jsp", false);
+    }
     public ModelAndView payment(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String name="";
         String email = "";
-        String phone = "";
+        int phone = 0;
         String addr = "";
         String productName="";
         HttpSession session = request.getSession();
@@ -75,6 +75,8 @@ public class PurchaseController implements Controller {
 
         return new ModelAndView("user/purchase/api.jsp", false);
     }
+    
+    
     public ModelAndView insertPurchaseDB(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         int userNo = (int) session.getAttribute("userNo");
@@ -86,7 +88,7 @@ public class PurchaseController implements Controller {
 
 
 
-        return new ModelAndView("user/purchase/api.jsp", false);
+        return new ModelAndView("user/purchase/productPurchase.jsp", false);
     }
 
    

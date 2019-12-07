@@ -43,7 +43,7 @@ public class CartDAOImpl implements CartDAO {
                String userId = rs.getString("USER_ID");
                String userName = rs.getString("USER_NAME");
                String userBirth = rs.getString("USER_BIRTHDATE");
-               String userPhone = Integer.toString(rs.getInt("USER_PHONE"));
+               int userPhone = rs.getInt("USER_PHONE");
                String userAddr = rs.getString("USER_ADDR");
                String userEmail = rs.getString("USER_EMAIL");
                String productResiDate = rs.getString("PRODUCT_RESIDATE");

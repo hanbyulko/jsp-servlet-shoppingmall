@@ -18,4 +18,5 @@ public interface UserDAO {
 
 	List<UserDTO> selectByKeyword(int pageNo, String keyword, String value) throws Exception;
 
+	UserDTO selectByUserNo(int userNo) throws Exception;
 }
