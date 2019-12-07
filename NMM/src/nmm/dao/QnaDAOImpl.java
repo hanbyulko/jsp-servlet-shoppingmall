@@ -172,8 +172,8 @@ public class QnaDAOImpl implements QnaDAO {
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
 			ps.setInt(1, qnaNo);
+			rs = ps.executeQuery();
 			while (rs.next()) {
 				ProductDTO productDTO = new ProductDTO();
 				dto = new QnaDTO();

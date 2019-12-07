@@ -40,7 +40,7 @@ public class QnaController implements Controller {
 	public ModelAndView selectByQnaNo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		QnaDTO qnaDTO = QnaService.selectByQnaNo(Integer.parseInt(request.getParameter("qnaNo")));
 		request.setAttribute("qnaDTO", qnaDTO);
-		return new ModelAndView("myPage/qna.jsp", false);
+		return new ModelAndView("manager/FAQManagementUpdate.jsp", false);
 	}
 
 	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception {

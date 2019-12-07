@@ -94,11 +94,11 @@ body {
 		<c:forEach var="qnaDTO" items="${list}" varStatus="i">
 			<tr>
 				<td>${i.count}</td>
-				<td><a href="javacript:void();" class='openMask' onclick="show()">${qnaDTO.productDTO.productName}</a></td>
+				<td>${qnaDTO.productDTO.productName}</td>
 				<td>${qnaDTO.qnaTitle}</td>
 				<td>${qnaDTO.qnaDate}</td>
 				<td>${qnaDTO.qnaResponseState}</td>
-				<td><a href="${servlet}qna&command=update&manage=1&qnaNo=${qnaDTO.qnaNo}">답변하기</a></td>
+				<td><a href="${servlet}qna&command=selectByQnaNo&qnaNo=${qnaDTO.qnaNo}">답변하기</a></td>
 				<td><a href="${servlet}qna&command=delete&manage=1&qnaNo=${qnaDTO.qnaNo}">삭제하기</a></td>
 			</tr>
 		</c:forEach>
@@ -117,41 +117,8 @@ body {
 				href="${servlet}qna&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo<pageCnt?pageNo+1:pageCnt}">NEXT</a>
 		</div>
 	</nav>
+	
+	
 	<jsp:include page="../view/footer.jsp" />
-<script>
-function wrapWindowByMask(){
-	 
-    var maskHeight = $(document).height();  
-    var maskWidth = $(window).width();  
-
-    $("#mask").css({"width":maskWidth,"height":maskHeight});  
-
-
-    $("#mask").fadeIn(0);      
-    $("#mask").fadeTo("slow",0.6);    
-
-    $(".window").show();
-
-}
-
-$(document).ready(function(){
-    $(".openMask").click(function(e){
-        e.preventDefault();
-        wrapWindowByMask();
-    });
-
-    $(".window .close").click(function (e) {  
-        e.preventDefault();  
-        $("#mask, .window").hide();  
-    });       
-
-    $("#mask").click(function () {  
-        $(this).hide();  
-        $(".window").hide();  
-
-    });      
-
-});
-</script>
 </body>
 </html>
