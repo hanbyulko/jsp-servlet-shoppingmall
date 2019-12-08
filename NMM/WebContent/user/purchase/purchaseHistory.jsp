@@ -9,7 +9,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>퐈</title>
+    <title>product history</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900|Noto+Sans+KR:100,300,400,500,700,900" rel="stylesheet">
@@ -22,14 +22,13 @@
 </head>
 <body>
 <jsp:include page="../../view/top.jsp"/>
+
 <h1>product history</h1>
-<jsp:include page="<%=application.getContextPath()%>/review/reviewTest.jsp">
 <form name="historyForm" method="post" id="historyForm">
     <table>
         <tr>
             <th>주문번호</th>
             <th>주문일</th>
-
             <th>상품번호</th>
             <th>상품이름</th>
             <th>상품컬러</th>
@@ -55,8 +54,6 @@
                         <td>${his.orderNo}</td>
                         <td>${his.purchaseDate}</td>
 
-
-
                         <td>${his.productDTO.productNo}</td>
                         <td>${his.productDTO.productName}</td>
                         <td>${his.productDTO.productColor}</td>
@@ -64,15 +61,13 @@
                         <td>${his.productDTO.productPrice}</td>
                         <td>${his.purchaseQty}</td>
                         <td>${his.purchaseStatus}</td>
-                        <td>리뷰등록 링크 첨부하기</td>
-
+                        <td><a href="${pageContext.request.contextPath}/review/review.jsp">리뷰등록</a></td>
                     </tr>
                 </c:forEach>
             </c:otherwise>
         </c:choose>
     </table>
 </form>
-
 <jsp:include page="../../view/footer.jsp"/>
 </body>
 </html>

@@ -23,9 +23,12 @@
 
 <%--        name=dto.getUserName();--%>
 <%--    }--%>
-   <%
-    String name = request.getParameter("name");
 
+   <%	
+   
+   	String state = request.getParameter("state");
+	
+    String name = request.getParameter("name");
     String email = request.getParameter("email");
     String phone = request.getParameter("phone");
     String address = request.getParameter("address");
@@ -50,7 +53,7 @@
     <script>
     $(function(){
         var IMP = window.IMP; // 생략가능
-        IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+        IMP.init('imp32416573'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
         var msg;
         
         IMP.request_pay({
@@ -66,7 +69,7 @@
             buyer_postcode : '123-456',
             //m_redirect_url : 'http://www.naver.com'
         }, function(rsp) {
-            if ( rsp.success ) {
+            if ( rsp.success ) { 	
                 //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
                 jQuery.ajax({
                     url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
@@ -83,16 +86,51 @@
                         msg += '\n고유ID : ' + rsp.imp_uid;
                         msg += '\n상점 거래ID : ' + rsp.merchant_uid;
                         msg += '\결제 금액 : ' + rsp.paid_amount;
-                        msg += '카드 승인번호 : ' + rsp.apply_num;
+                        msg += '카 드 승인번호 : ' + rsp.apply_num;
                         
                         alert(msg);
                     } else {
                         //[3] 아직 제대로 결제가 되지 않았습니다.
                         //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                    	msg = '결제에 실패하였습니다. 메인 화면으로 돌아갑니다.';
+                    	alert(msg);
+                    	location.href="${pageContext.request.contextPath}/servlet?controller=product+review&command=productList";
                     }
                 });
+               	alert("결제 성공")
+               	<%
+               		if(state.equals("0")){
+               			int productNo = Integer.parseInt(request.getParameter("productNo"));
+               			int purchaseQty = Integer.parseInt(request.getParameter("purchaseQty"));
+               	%>
+               	
+               			location.href="../../servletForAPI?productNo="+<%=productNo%>+"&purchaseQty="+<%=purchaseQty%>;
+               			location.href="${pageContext.request.contextPath}/user/purchase/purchaseSuccess.jsp";
+               	<%
+               		}else if(state.equals("1")){
+               			int cntNum = Integer.parseInt(request.getParameter("cntNum"));
+               			System.out.println(cntNum);
+               			for(int i = 0 ; i < cntNum; i++){
+               				System.out.println(request.getParameter("productNo["+i+"]"));
+               				System.out.println(request.getParameter("cartQty["+i+"]"));
+               				%>
+               				location.href="../../servletForAPI?productNo="+<%=request.getParameter("productNo["+i+"]")%>+"&purchaseQty="+<%=request.getParameter("cartQty["+i+"]")%>;
+               				<%
+               			}
+               			%>
+               			location.href="${pageContext.request.contextPath}/user/purchase/purchaseSuccess.jsp";
+               			<%
+               		}
+               	
+                %>	
+                
                 //성공시 이동할 페이지
+<<<<<<< HEAD
                 location.href='<%=request.getContextPath()%>user/purchase/purchaseSuccess';
+=======
+                //location.href="${pageContext.request.contextPath}/servlet?controller=product+review&command=productList";
+                
+>>>>>>> 1cb320f5d40eb03a8fec3e1485103c997643314a
             } else {
                 msg = '결제에 실패하였습니다. 메인 화면으로 돌아갑니다.';
                 //실패시 이동할 페이지

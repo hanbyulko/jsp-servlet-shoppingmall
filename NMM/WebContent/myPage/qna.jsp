@@ -4,21 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300");
-body {
-	color: #2c3e50;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
-}
-
-h1 {
-	text-align: center;
-	font-size: 2.5rem;
-	font-weight: 300;
-}
 
 .pagination-container {
 	margin: 100px auto;
@@ -55,13 +45,11 @@ h1 {
 
 .pagination a:hover, .pagination a .pagination-active {
 	color: #fff;
-
 }
 
 .pagination a:hover:before, .pagination a .pagination-active:before {
 	-webkit-transform: scale(1);
 	transform: scale(1);
-	
 }
 
 .pagination .pagination-active {
@@ -81,52 +69,37 @@ h1 {
 	margin-left: 50px;
 }
 
-
-body, html {
-	height: 100%;
-	background-color: #f4f4f4;
-	font-family: 'Maven Pro', 'Noto Sans KR';
-}
-
-th {
+td {
 	text-align: center;
-}
-
-.table {
-	height: auto;
-	display: table;
-	margin: 0 auto;
-	text-align: center;
-}
-
-.table--title {
-	width: 100%;
-	text-align: center;
-	font-size: 50px;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="../view/top.jsp" />
-	<h1 class="table--title">1대1 문의</h1>
+	<h2 class="table--title">1대1 문의</h2>
+	<p>
 	<table class="table">
 		<tr>
-			<th>게시글번호</th>
-			<th>상품이름</th>
-			<th>제목</th>
-			<th>작성날짜</th>
-			<th>답변상태</th>
+			<th style='text-align: center'>게시글번호</th>
+			<th style='text-align: center'>상품이름</th>
+			<th style='text-align: center'>제목</th>
+			<th style='text-align: center'>작성날짜</th>
+			<th style='text-align: center'>답변상태</th>
 		</tr>
-		<c:forEach var="qnaDTO" items="${list}">
+		<c:forEach var="qnaDTO" items="${list}" varStatus="i">
 			<tr>
-				<td>${qnaDTO.qnaNo}</td>
-				<td><a href="${servlet}qna&command=main">${qnaDTO.productDTO.productName}</a></td>
+				<td>${i.count}</td>
+				<td><a href="javacript:void();" onclick="show()">${qnaDTO.productDTO.productName}</a></td>
 				<td>${qnaDTO.qnaTitle}</td>
 				<td>${qnaDTO.qnaDate}</td>
 				<td>${qnaDTO.qnaResponseState}</td>
+			</tr>
+			<tr class='content'>
+				<td>${qnaDTO.qnaResponseContent}'</td>
+			</tr>
 		</c:forEach>
 	</table>
-	
+
 	<!-- 페이징처리 -->
 	<nav class="pagination-container">
 		<div class="pagination">
@@ -141,19 +114,17 @@ th {
 				href="${servlet}qna&command=${command}&keyword=${keyword}&category=${category}&pageNo=${pageNo<pageCnt?pageNo+1:pageCnt}">NEXT</a>
 		</div>
 	</nav>
-	
-	<p>
-		<br> <br>
-	<form method='post' action='${servlet}qna&command=insert'>
-		상품명 <input type="text" name='productNo'></input>
-		<p>
-			제목 <input type="text" name='qnaTitle'></input>
-		<p>
-			내용 <input type="text" name='qnaContent'></input>
-		<p>
-			<input type="submit" />
-	</form>
 
+
+	<jsp:include page="qnaWrite.jsp" />
 	<jsp:include page="../view/footer.jsp" />
+	<script>
+		$(function() {
+			$(".content").hide()
+		})
+		function show() {
+			$(".content").toggle()
+		}
+	</script>
 </body>
 </html>

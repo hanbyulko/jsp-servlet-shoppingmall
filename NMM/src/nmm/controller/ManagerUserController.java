@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import nmm.dto.ManagerUserDTO;
 import nmm.dto.ModelAndView;
 import nmm.service.ManagerUserService;
+import nmm.service.UserService;
 
 public class ManagerUserController implements Controller{
 
@@ -20,8 +21,13 @@ public class ManagerUserController implements Controller{
 	}
 
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ManagerUserService.delete(Integer.parseInt(request.getParameter("mgtUserNo")));
-		return new ModelAndView("/servlet?controller=managerUser&command=select", false);
+		System.out.println("들어오니?");
+		String userId = request.getParameter("name");
+		System.out.println(userId);
+		
+		int result = UserService.delete(userId);
+			
+		return new ModelAndView("/manager/userManagement.jsp", false);
 	}
 
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response) throws Exception{

@@ -22,6 +22,23 @@
         <div class="footer__mid">
             NMM
         </div>
+<<<<<<< HEAD
+        	<!-- Default dropright button -->
+			<div class="btn-group dropright">
+			<a href="../manager/managerLogin.jsp">관리자 로그인</a>
+			  <button type="button" class="btn btn-secondary dropdown-toggle btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  관리자 위로는 안돼
+			  </button>
+			  <div class="dropdown-menu">
+			    	<a class="dropdown-item" href="${pageContext.request.contextPath}/servlet?controller=siteManage&command=selectAll">상품관리</a><br>
+					<a class="dropdown-item" href="#">페이지 2 </a><br>
+					<a class="dropdown-item" href="#">페이지 3 </a><br>
+			  </div>
+			</div>
+
+
+=======
+>>>>>>> 7f5513f44600f82838357b887691d32a5697df31
         <div class="footer__right">
             입점문의 : korea@anderssonbell.com<br>
             문의메일 : cs@anderssonbell.com<br>

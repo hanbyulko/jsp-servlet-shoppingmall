@@ -38,7 +38,7 @@ public class PurchasesDAOImpl implements PurchasesDAO {
                 String userPwd = rs.getString("USER_PWD");
                 String userName = rs.getString("USER_NAME");
                 String userBirth = rs.getString("USER_BIRTHDATE");
-                String userPhone = Integer.toString(rs.getInt("USER_PHONE"));
+                int userPhone = rs.getInt("USER_PHONE");
                 String userAddr = rs.getString("USER_ADDR");
                 String userEmail = rs.getString("USER_EMAIL");
                 String productCategory = rs.getString("PRODUCT_CATEGORY");
@@ -50,7 +50,7 @@ public class PurchasesDAOImpl implements PurchasesDAO {
                 String productResiDate = rs.getString("PRODUCT_RESIDATE");
 
 
-                UserDTO userDTO = new UserDTO(userId, userPwd, userName, userAddr, userPhone, userEmail, userBirth);
+                UserDTO userDTO = new UserDTO(userId, userPwd, userName, userPhone, userAddr, userEmail);
                 productDTO.setProductNo(productNo);
                 productDTO.setProductCategory(productCategory);
                 productDTO.setProductStock(productStock);
@@ -99,50 +99,34 @@ public class PurchasesDAOImpl implements PurchasesDAO {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "select * from PURCHASEDB pur inner join USERDB u on pur.USER_NO = u.USER_NO " +
-                "left outer join PRODUCT P on pur.PRODUCT_NO = P.PRODUCT_NO where u.USER_NO=?";
+        String sql = "SELECT PURCHASE_NO, PURCHASE_DATE, PRODUCT_NO, PRODUCT_NAME, PRODUCT_COLOR, PRODUCT_SIZE, PRODUCT_PRICE, PURCHASE_QTY, PURCHASE_STATUS FROM PURCHASEDB JOIN PRODUCT USING (PRODUCT_NO) WHERE USER_NO=?";
         List<PurchaseDTO> list = new ArrayList<>();
         try {
             con = DbUtil.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, userNo);
             rs  = ps.executeQuery();
-
             while(rs.next()){
             	ProductDTO productDTO = new ProductDTO();
             	
-                int purNo = rs.getInt("PURCHASE_NO");
-                int productNo = rs.getInt("PRODUCT_NO");
-                int purQty = rs.getInt("PURCHASE_QTY");
-                String purDate = rs.getString("PURCHASE_DATE");
-                String purStat = rs.getString("PURCHASE_STATUS");
-                String userId = rs.getString("USER_ID");
-                String userPwd = rs.getString("USER_PWD");
-                String userName = rs.getString("USER_NAME");
-                String userBirth = rs.getString("USER_BIRTHDATE");
-                String userPhone = Integer.toString(rs.getInt("USER_PHONE"));
-                String userAddr = rs.getString("USER_ADDR");
-                String userEmail = rs.getString("USER_EMAIL");
-                String productCategory = rs.getString("PRODUCT_CATEGORY");
-                int productStock = rs.getInt("PRODUCT_STOCK");
-                String productName = rs.getString("PRODUCT_NAME");
-                String productColor = rs.getString("PRODUCT_COLOR");
-                String productSize = rs.getString("PRODUCT_SIZE");
-                int productPrice = rs.getInt("PRODUCT_PRICE");
-                String productResiDate = rs.getString("PRODUCT_RESIDATE");
+            	int orderNo = rs.getInt(1);
+            	String purchaseDate = rs.getString(2);
+            	int productNo = rs.getInt(3);
+            	String productName = rs.getString(4);
+            	String productColor = rs.getString(5);
+            	String productSize = rs.getString(6);
+            	int productPrice = rs.getInt(7);
+            	int purchaseQty = rs.getInt(8);
+            	String purchaseStatus = rs.getString(9);
+            	
+            	productDTO.setProductNo(productNo);
+            	productDTO.setProductName(productName);
+            	productDTO.setProductColor(productColor);
+            	productDTO.setProductSize(productSize);
+            	productDTO.setProductPrice(productPrice);
+            	
+            	list.add(new PurchaseDTO(orderNo, productDTO, purchaseQty, purchaseDate, purchaseStatus));
 
-                UserDTO userDTO = new UserDTO(userId, userPwd, userName, userAddr, userPhone, userEmail, userBirth);
-                productDTO.setProductNo(productNo);
-                productDTO.setProductCategory(productCategory);
-                productDTO.setProductStock(productStock);
-                productDTO.setProductName(productName);
-                productDTO.setProductColor(productColor);
-                productDTO.setProductSize(productSize);
-                productDTO.setProductPrice(productPrice);
-                productDTO.setProductResiDate(productResiDate);
-                
-                list.add(new PurchaseDTO(purNo,userDTO,productDTO,purQty,purDate,purStat));
-//
             }
 
         } catch (SQLException e) {
@@ -150,7 +134,6 @@ public class PurchasesDAOImpl implements PurchasesDAO {
         } finally {
             DbUtil.dbClose(rs, ps, con);
         }
-
         return list;
     }
 }

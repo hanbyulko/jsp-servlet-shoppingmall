@@ -17,8 +17,6 @@ public class ManagerUserDAOImpl implements ManagerUserDAO {
 
 	@Override
 	public ManagerUserDTO login(String mgtUserId, String mgtUserPw) throws SQLException{
-			System.out.println(mgtUserId+"11");
-			System.out.println(mgtUserPw+"11");
 	      Connection con = null;
 	      PreparedStatement ps = null;
 	      ManagerUserDTO user2 = null;
@@ -29,9 +27,7 @@ public class ManagerUserDAOImpl implements ManagerUserDAO {
 	         ps = con.prepareStatement(sql);
 	         ps.setString(1, mgtUserId);
 	         rs2 = ps.executeQuery();  
-	         System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb5bb");
 	         while(rs2.next()) {
-	        	 System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb5bb");
 	        	 user2 = new ManagerUserDTO(rs2.getString(1),rs2.getString(2));
 	        	 return user2;
 	         }

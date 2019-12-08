@@ -12,6 +12,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
+<<<<<<< HEAD
    var str;
    $("#minus").click(function(){
       value = parseInt($("#quantity").val())-1;
@@ -69,6 +70,66 @@ $(function(){
        var valueSelected = this.value;
        str = valueSelected.split("/");
    });
+=======
+	var str;
+	$("#minus").click(function(){
+		value = parseInt($("#quantity").val())-1;
+		if(value<=1){
+			$("#quantity").val(1);
+			value=1;
+		}else{
+			$("#quantity").val(value);
+		}
+		var total = eval(value*$("#price").text());
+		$("#total").text(total+" WON"); 
+	});
+	
+	$("#plus").click(function(){
+		var value = parseInt($("#quantity").val())+1;
+		$("#quantity").val(value);
+		var total = eval(value*$("#price").text());
+		$("#total").text(total+" WON"); 
+	});
+	
+	$("#cart").click(function(){
+		
+		<% 
+		if(session.getAttribute("userId")==null){
+			%>
+			location.href="${pageContext.request.contextPath}/user/login.jsp";
+			<%
+		}else{
+			%>
+			location.href="${pageContext.request.contextPath}/servlet?controller=cart&command=insert&productNo="+eval(str[0])+"&cartQty="+eval($("#quantity").val());
+			<%
+		}
+		%>
+				
+				
+	});
+	
+	$("#buy").click(function(){
+		<% 
+		if(session.getAttribute("userId")==null){
+			%>
+			location.href="${pageContext.request.contextPath}/user/login.jsp";
+			<%
+		}else{
+			%>
+			location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insertPurchaseDBForDetail&productNo="+eval(str[0])+"&cartQty="+eval($("#quantity").val());
+
+			<%
+		}
+		%>
+		
+	});	
+	
+	$('select').on('change', function (e) {
+	    var optionSelected = $("option:selected", this);
+	    var valueSelected = this.value;
+	    str = valueSelected.split("/");
+	});
+>>>>>>> 1cb320f5d40eb03a8fec3e1485103c997643314a
 }); 
 
 </script>

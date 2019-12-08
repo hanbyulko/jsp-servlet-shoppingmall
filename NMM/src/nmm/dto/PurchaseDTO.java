@@ -17,6 +17,18 @@ public class PurchaseDTO extends PageCnt{
 		this.purchaseDate = purchaseDate;
 		this.purchaseStatus = purchaseStatus;
 	}
+	
+	public PurchaseDTO(int orderNo, ProductDTO productDTO, int purchaseQty, String purchaseDate,
+			String purchaseStatus) {
+		super();
+		this.orderNo = orderNo;
+		this.productDTO = productDTO;
+		this.purchaseQty = purchaseQty;
+		this.purchaseDate = purchaseDate;
+		this.purchaseStatus = purchaseStatus;
+	}
+
+
 	public int getOrderNo() {
 		return orderNo;
 	}

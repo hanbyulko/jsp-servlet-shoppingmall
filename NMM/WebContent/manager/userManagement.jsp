@@ -1,3 +1,6 @@
+<%@page import="com.sun.corba.se.spi.orbutil.fsm.Guard.Result"%>
+<%@page import="nmm.dto.UserDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -5,7 +8,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Insert title here</title>
 <!-- <script> 
       setTimeout(function(){
@@ -14,86 +16,102 @@
 </script> -->
 </head>
 <style>
-body,html{
-    height: 100%;
-    background-color: #f4f4f4;
-    font-family: 'Maven Pro','Noto Sans KR';
+ .a{border:solid red 5px}
+ span{width:150px; color:red}
+ input{border:solid gray 1px}
+ table{width:100%}
+ th,td{border:1px gray solid; text-align:center;padding:3px}
+ h2{text-align:center}
+
+
+.container {
+  padding: 2em;
 }
-th{
-    text-align: center;
-}
-.table{
-    height: auto;
-    display:table;
-    margin: 0 auto;
-    text-align: center;
-}
-.table--title{
-    width: 100%;
-    text-align: center;
-    font-size: 50px;
+
+
 }
 </style>
 
+ <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+$(function () {
 	function selectAll(){
 		
 	    $.ajax({
-		  type:"get",	//select는 보통 get를 많이쓴다
-		  url:"../selectServlet",
-	    dataType: "json",//서버에게 받은 응답결과 type(text, xml, html, json)
-	  //   data : $("#inForm").serialize() ,//서버에게 전송할 parameter
-	    success: function(result){//select에서 나온 list를 json으로 받아서 여기서 확인
-			// alert(result);
-			var str="";
-				$.each(result,function(index,item){
-					 alert(index+"/"+item.name);
-					 /*
+		type:"post",	
+		url:"../selectServlet",
+	    dataType: "json",
+	    success: function(result){''
+	    	var str="";
+	    		$.each(result,function(index,item){
 					str+="<tr>";
 					str+="<td>"+(index+1)+"</td>";
-					str+="<td><a href='#'>"+item.id+"</a></td>";
-					str+="<td>"+item.name+"</td>";
-					str+="<td>"+item.age+"</td>";
-					str+="<td>"+item.tel+"</td>";
-					str+="<td>"+item.addr+"</td>";
-					str+="<td><input type='button' value='삭제' name='"+item.id+"'delete'></td>";
+					str+="<td>"+item.userId+"</td>";
+					str+="<td>"+item.userPwd+"</td>";
+					str+="<td>"+item.userEmail+"</td>";
+					str+="<td><input type='submit' value='삭제' id='"+item.userId+"' name='"+item.userId+"'></td>";
 					str+="</tr>";
-					*/
 				});
-	    } ,
+	    		str+="</table>";
+	    		
+				 $("#listTable tr:gt(0)").remove();
+				$("#listTable").append(str);
+				  $("a").css("textDecoration", "none");
+	      } ,
 	    error : function(err){
 	  	  console.log(err+"=> 오류발생");
 	    }
 		});//ajax끝
+		var ajaxing=false;
 		
-		  selectAll();
-		  setInterval(selectAll, 5000);//5초마다 갱신
+		  $(document).on("click","[value='삭제']" , function(){
+			  if(ajaxing){
+				  alert("이미 호출중");
+				  return;
+			  }
+			  ajaxing=false;
+			  
+			  // 현재 버튼의 name의 value를 가져오기
+			  $.ajax({
+			   type: "post",
+			   url : "../servlet?controller=managerUser&command=delete",
+			   dataType : "text",// 0 or 1
+			   data : {"name" : $(this).attr("id")}, //
+			   success : function(result){//text
+				 if(result>0){
+					 ajaxing=false;
+					 selectAll();
+				 }else{
+					 alert("삭제되지 않았습니다.");
+				 }
+			   } ,
+			   error : function(err){
+				   console.log(err+" 오류발생");
+			   } 
+			 })//ajax끝
+		  });
+		
 	}
+	  selectAll();
+	  setInterval(selectAll, 10000);
+})
 </script>
 <body>
-   
-   <div name="userManagement">
+   <div name="userManagement" >
 <h1 class="table--title">회원 관리 </h1>
-<form method='post' action="<%=application.getContextPath()%>/manager/userManagementUpdate.jsp">
-<table class="table">
-      <tr>
-         <th>회원 번호</th>
-         <th>회원 ID</th>
-         <th>회원 이름</th>
-         <th>회원 비밀번호</th>
-         <th>기능</th>
+<form method='post' action="<%=application.getContextPath()%>/servlet?controller=managerUser&command=delete">
+<table class="table" cellspacing="0">
 
-      </tr>
-      
-      
-      
-      <tr>
-            <td>userNo</td>
-            <td><a href="#" class=openMask>userID</a></td>
-            <td>userName </td>
-            <td>userPassword</td>
-            <td><input type="submit" value="수정하기"><input type="button" value= "삭제하기"></td>
-            </tr>
+   		      <h2> 고객 리스트 !  </h2>
+<table  class="table" id="listTable" cellspacing="0"  >
+			<tr bgcolor="pink">
+	   <th>userNo</th>
+	   <th>userID</th>
+		<th>userName</th>
+		<th>userAddr</th>
+		<th>수정하기 삭제하기 기능</th>
+			</tr>
+</table>  
    </table>
     </form>
    </div>
