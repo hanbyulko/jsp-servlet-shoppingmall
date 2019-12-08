@@ -9,17 +9,6 @@
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300");
 
-
-body, html {
-	height: 100%;
-	background-color: #f4f4f4;
-	font-family: 'Maven Pro', 'Noto Sans KR';
-}
-
-th {
-	text-align: center;
-}
-
 .table {
 	height: auto;
 	display: table;
@@ -106,28 +95,7 @@ h1 {
 
 </style>
 </head>
-<style>
-body,html{
-    height: 100%;
-    background-color: #f4f4f4;
-    font-family: 'Maven Pro','Noto Sans KR';
-}
-th{
-    text-align: center;
-}
-.table{
-    height: auto;
-    display:table;
-    margin: 0 auto;
-    text-align: center;
-}
-.table--title{
-    width: 100%;
-    text-align: center;
-    font-size: 50px;
-}
-</style>
-<body>
+<body class="best">
 <h1 class="table--title">상품 리뷰 </h1>
 <table class="table">
       <tr>

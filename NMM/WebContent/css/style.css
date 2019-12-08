@@ -5,6 +5,7 @@
     margin: 0;
 }
 a {text-decoration: none;}
+a:hover{text-decoration:none;}
 li {list-style: none;}
 
 body{
@@ -907,10 +908,15 @@ select{
 }
 
 
-
-
-
+.btn-buy:hover{
+    opacity: 70%;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
 
 /*誘몃뵒�뼱荑쇰━*/
 
-
+/*사이즈 */
+.center-size {
+    width: 1240px;
+    margin: 0 auto;
+}

@@ -28,7 +28,7 @@
         </tr>
 
         <c:choose>
-            <c:when test="${empty list}">
+            <c:when test="${empty userDTO}">
                 <tr>
                     <td colspan="20">
                         <p align="center"><b><span style="font-size: 9pt">배송정보가 없습니다</span></b></p>
@@ -36,14 +36,12 @@
                 </tr>
             </c:when>
             <c:otherwise>
-                <c:forEach var="pur" items="${list}">
                     <tr>
-                        <td>${pur.userDTO.userName}</td>
-                        <td>${pur.userDTO.userPhone}</td>
-                        <td>${pur.userDTO.userEmail}</td>
-                        <td>${pur.userDTO.userAddr}</td>
+                        <td>${userDTO.userName}</td>
+                        <td>${userDTO.userPhone}</td>
+                        <td>${userDTO.userEmail}</td>
+                        <td>${userDTO.userAddr}</td>
                     </tr>
-                </c:forEach>
             </c:otherwise>
         </c:choose>
     </table>
@@ -59,7 +57,7 @@
         </tr>
 
         <c:choose>
-            <c:when test="${empty list}">
+            <c:when test="${empty productDTO}">
                 <tr>
                     <td colspan="20">
                         <p align="center"><b><span style="font-size: 9pt">주문상품 정보가 없습니다</span></b></p>
@@ -67,21 +65,18 @@
                 </tr>
             </c:when>
             <c:otherwise>
-                <c:forEach var="pur" items="${list}">
                     <tr>
-                        <td>${pur.productDTO.productName}</td>
-                        <td>${pur.productDTO.productStock}</td>
-                        <td>${pur.productDTO.productColor}</td>
-                        <td>${pur.productDTO.productSize}</td>
-                        <td>${pur.productDTO.productPrice}</td>
+                        <td>${productDTO.productName}</td>
+                        <td>${cartQty}</td>
+                        <td>${productDTO.productColor}</td>
+                        <td>${productDTO.productSize}</td>
+                        <td>${productDTO.productPrice*cartQty}</td>
 
                     </tr>
-                </c:forEach>
             </c:otherwise>
         </c:choose>
     </table>
-    <a href="${servlet}purchase&command=payment" >결제하기</a><br>
-
+    <a href="${pageContext.request.contextPath}/user/purchase/api.jsp?name=${userDTO.userName}&email=${userDTO.userEmail}&phone=${userDTO.userPhone}&address=${userDTO.userAddr}&productName=${productDTO.productName}" >결제하기</a><br>
 </form>
 
 <jsp:include page="../../view/footer.jsp"/>

@@ -24,12 +24,12 @@
 <%--        name=dto.getUserName();--%>
 <%--    }--%>
    <%
-    String name = (String)request.getAttribute("name");
+    String name = request.getParameter("name");
 
-    String email = (String)request.getAttribute("email");
-    String phone = (String)request.getAttribute("phone");
-    String address = (String)request.getAttribute("address");
-    String productName=(String)request.getAttribute("productName");
+    String email = request.getParameter("email");
+    String phone = request.getParameter("phone");
+    String address = request.getParameter("address");
+    String productName=request.getParameter("productName");
 //    int totalPrice = (int)request.getAttribute("totalPrice");
     
 //    String name = "고한별";
@@ -92,12 +92,11 @@
                     }
                 });
                 //성공시 이동할 페이지
-                location.href='<%=request.getContextPath()%>user/purchase/purchaseSuccess?msg='+msg;
+                location.href='<%=request.getContextPath()%>user/purchase/purchaseSuccess';
             } else {
-                msg = '결제에 실패하였습니다.';
-                msg += '에러내용 : ' + rsp.error_msg;
+                msg = '결제에 실패하였습니다. 메인 화면으로 돌아갑니다.';
                 //실패시 이동할 페이지
-                location.href="<%=request.getContextPath()%>user/purchase/purchaseFail.jsp";
+                location.href="${pageContext.request.contextPath}/servlet?controller=product+review&command=productList";
                 alert(msg);
             }
         });

@@ -35,7 +35,7 @@ public class UserService {
 		UserDAOImpl userdaoimpa = new UserDAOImpl();
 		UserDTO user = userdaoimpa.loginCheck(userId, userPwd);
 		if (user == null) {
-			System.out.println("���̵� ��� ����!!!!!!!");
+			System.out.println("占쏙옙占싱듸옙 占쏙옙占� 占쏙옙占쏙옙!!!!!!!");
 			return null;
 		} else if (userId.equals(user.getUserId()) & userPwd.equals(user.getUserPwd())) {
 			return user;
@@ -56,5 +56,9 @@ public class UserService {
 
 	public static List<UserDTO> selectByKeyword(int pageNo, String keyword, String value) throws Exception{
 		return dao.selectByKeyword(pageNo, keyword, value);
+	}
+	
+	public static UserDTO selectByUserNo(int userNo) throws Exception{
+		return dao.selectByUserNo(userNo);
 	}
 }
