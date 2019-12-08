@@ -102,6 +102,7 @@
                			int productNo = Integer.parseInt(request.getParameter("productNo"));
                			int purchaseQty = Integer.parseInt(request.getParameter("purchaseQty"));
                	%>
+               	
                			location.href="../../servletForAPI?productNo="+<%=productNo%>+"&purchaseQty="+<%=purchaseQty%>;
                			location.href="${pageContext.request.contextPath}/user/purchase/purchaseSuccess.jsp";
                	<%
