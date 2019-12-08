@@ -56,6 +56,7 @@ public class UserDAOImpl implements UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			DbUtil.dbClose(ps, con);
 		}
 		return ps.executeUpdate();
 	}
@@ -231,6 +232,26 @@ public class UserDAOImpl implements UserDAO {
 		return list;
 	}
 
-	
-	
+	public UserDTO selectByUserNo(int userNo) throws Exception{
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "SELECT USER_NAME, USER_PHONE, USER_EMAIL, USER_ADDR FROM USERDB WHERE USER_NO=?";
+		ResultSet rs = null;
+		UserDTO user1 = new UserDTO();
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, userNo);
+			rs = ps.executeQuery(); 
+			if (rs.next()) {
+				user1.setUserName(rs.getString(1));
+				user1.setUserPhone(rs.getString(2));
+				user1.setUserEmail(rs.getString(3));
+				user1.setUserAddr(rs.getString(4));
+			}
+			return user1;
+		} finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+	}
 }

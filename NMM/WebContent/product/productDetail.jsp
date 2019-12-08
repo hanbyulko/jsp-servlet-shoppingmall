@@ -57,7 +57,7 @@ $(function(){
 			<%
 		}else{
 			%>
-			location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insertPurchaseDB&productNo="+eval(str[0])+"&cartQty="+eval($("#quantity").val());
+			location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insertPurchaseDBForDetail&productNo="+eval(str[0])+"&cartQty="+eval($("#quantity").val());
 			<%
 		}
 		%>
@@ -141,10 +141,6 @@ $(function(){
                 </div>
             </div>
         </div> 
-<%-- <% if(request.getAttribute("list")!=null){
-	out.println("<jsp:include page='../review/reviewDetail.jsp' />");
-}
-%> --%>
 <jsp:include page='../review/reviewDetail.jsp' />
 <jsp:include page="../view/footer.jsp" />
 </body>

@@ -28,28 +28,7 @@
   padding: 2em;
 }
 
-/* GENERAL BUTTON STYLING */
-[type = button],
-[type = button]::after {
-  -webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-  -o-transition: all 0.3s;
-	transition: all 0.3s;
-}
 
-[type = button] {
-  background: none;
-  border: 3px solid #2ecc71;
-  border-radius: 5px;
-  color:#2ecc71;
-  display: block;
-  font-size: 1em;
-  font-weight: bold;
-  margin: 1em auto;
-  padding: 1em 3em;
-  position: relative;
-  text-transform: uppercase;
-}
 }
 </style>
 
@@ -59,7 +38,7 @@ $(function () {
 	function selectAll(){
 		
 	    $.ajax({
-		type:"get",	
+		type:"post",	
 		url:"../selectServlet",
 	    dataType: "json",
 	    success: function(result){''
@@ -67,71 +46,73 @@ $(function () {
 	    		$.each(result,function(index,item){
 					str+="<tr>";
 					str+="<td>"+(index+1)+"</td>";
-					str+="<td><a href='#'>"+item.userId+"</a></td>";
+					str+="<td>"+item.userId+"</td>";
 					str+="<td>"+item.userPwd+"</td>";
-					str+="<td>"+item.userPhone+"</td>";
-					str+="<td><input type='button' value='삭제' name='"+item.userId+"'delete'><input type='button' value='수정하기'></td>";
+					str+="<td>"+item.userEmail+"</td>";
+					str+="<td><input type='submit' value='삭제' id='"+item.userId+"' name='"+item.userId+"'></td>";
 					str+="</tr>";
 				});
 	    		str+="</table>";
-				// before after는 형제
-				// append 는 하위
-				// html은 덮어쓰기
+	    		
 				 $("#listTable tr:gt(0)").remove();
 				$("#listTable").append(str);
 				  $("a").css("textDecoration", "none");
-					this.userNo = userNo;
-					this.userId = userId;
-					this.userPwd = userPwd;
-					this.userName = userName;
-					this.userBirth = userBirth;
-					this.userPhone = userPhone;
-					this.userAddr = userAddr;
-					this.userEmail = userEmail;
 	      } ,
 	    error : function(err){
 	  	  console.log(err+"=> 오류발생");
 	    }
 		});//ajax끝
+		var ajaxing=false;
+		
+		  $(document).on("click","[value='삭제']" , function(){
+			  if(ajaxing){
+				  alert("이미 호출중");
+				  return;
+			  }
+			  ajaxing=false;
+			  
+			  // 현재 버튼의 name의 value를 가져오기
+			  $.ajax({
+			   type: "post",
+			   url : "../servlet?controller=managerUser&command=delete",
+			   dataType : "text",// 0 or 1
+			   data : {"name" : $(this).attr("id")}, //
+			   success : function(result){//text
+				 if(result>0){
+					 ajaxing=false;
+					 selectAll();
+				 }else{
+					 alert("삭제되지 않았습니다.");
+				 }
+			   } ,
+			   error : function(err){
+				   console.log(err+" 오류발생");
+			   } 
+			 })//ajax끝
+		  });
+		
 	}
 	  selectAll();
+	  setInterval(selectAll, 10000);
 })
 </script>
 <body>
-   
    <div name="userManagement" >
 <h1 class="table--title">회원 관리 </h1>
-<form method='post' action="<%=application.getContextPath()%>/manager/userManagementUpdate.jsp">
+<form method='post' action="<%=application.getContextPath()%>/servlet?controller=managerUser&command=delete">
 <table class="table" cellspacing="0">
-      <tr>
-         <th>회원 번호</th>
-         <th>회원 ID</th>
-         <th>회원 이름</th>
-         <th>회원 비밀번호</th>
-         <th>기능</th>
 
-      </tr>
    		      <h2> 고객 리스트 !  </h2>
-<table  class="table" id="listTable" cellspacing="0" >
+<table  class="table" id="listTable" cellspacing="0"  >
 			<tr bgcolor="pink">
-			   <th>번호</th>
-			   <th>아이디</th>
-				<th>이름</th>
-				<th>이메일</th>	
-				<th>주소</th>
+	   <th>userNo</th>
+	   <th>userID</th>
+		<th>userName</th>
+		<th>userAddr</th>
+		<th>수정하기 삭제하기 기능</th>
 			</tr>
-</table>    
-      
-      
-      <tr>
-            <td>userNo</td>
-            <td><a href="#" class=openMask>userID</a></td>
-            <td>userName </td>
-            <td>userPassword</td>
-            <td><input type="submit" value="수정하기"><input type="button" value= "삭제하기"></td>
-            </tr>
+</table>  
    </table>
-
     </form>
    </div>
    
