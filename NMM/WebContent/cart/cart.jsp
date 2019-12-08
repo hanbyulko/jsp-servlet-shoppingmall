@@ -101,14 +101,14 @@
                totalPrice = ($(this).parent().next().next().next().next().next().next().next().text());
                if(!productName==""){
                   str+="<tr>";
-                  str+="<td class='hide'>"+cartNo+"/></td>";
-                  str+="<td class='hide'><input type='text' name='productNo["+i+"]' readonly value='"+productNo+"'/></td>";
-                  str+="<td>"+productName+"</td>";
-                  str+="<td>"+productColor+"</td>";
-                  str+="<td>"+productSize+"</td>";
-                  str+="<td>"+productPrice+"</td>";
-                  str+="<td><input type='text' name='cartQty["+i+"]' readonly value='"+cartQty+"'/></td>";
-                  str+="<td>"+totalPrice+"</td>";
+                  str+="<td class='hide table-data bg-gray'>"+cartNo+"/></td>";
+                  str+="<td class='hide table-data bg-gray'><input type='text' name='productNo["+i+"]' disabled value='"+productNo+"'/></td>";
+                  str+="<td class='table-data bg-gray'>"+productName+"</td>";
+                  str+="<td class='table-data bg-gray'>"+productColor+"</td>";
+                  str+="<td class='table-data bg-gray'>"+productSize+"</td>";
+                  str+="<td class='table-data bg-gray'>"+productPrice+"</td>";
+                  str+="<td class='table-data bg-gray'><input type='text' name='cartQty["+i+"]' disabled class='input-number bg-gray' value='"+cartQty+"'/></td>";
+                  str+="<td class='table-data bg-gray'>"+totalPrice+"</td>";
                   str+="</tr>";
 
                   i++;
@@ -199,28 +199,28 @@
       <span class="gutter--xxl">
          <input type="checkbox" id="allCheck" value="전체선택" class="gutter--xxl">전체선택
       </span>
-         <input type="button" name="buyBtn" value="구매하기" class="form-btn btn-buy">
+         <input type="button" name="buyBtn" value="구매하기" class="cart--btn col-12">
       </form>
    </div>
 </div>
 
 <!-- 배송지정보 -->
-<div class="userList hide">
+<div class="userList hide table-container">
       <h3>배송정보</h3>
              <table>
-                 <tr>
-                     <th>주문자</th>
-                     <th>번호</th>
-                     <th>이메일</th>
-                     <th>배송지</th>
+                 <tr class="table-header">
+                     <th class="header__item">주문자</th>
+                     <th class="header__item">번호</th>
+                     <th class="header__item">이메일</th>
+                     <th class="header__item">배송지</th>
                  </tr>
                  
                      <c:forEach var="cart" items="${list}" end="0">
                              <tr>
-                                 <td>${cart.userDTO.userName}</td>
-                                 <td>${cart.userDTO.userPhone}</td>
-                                 <td>${cart.userDTO.userEmail}</td>
-                                 <td>${cart.userDTO.userAddr}</td>
+                                 <td class="table-data">${cart.userDTO.userName}</td>
+                                 <td class="table-data">${cart.userDTO.userPhone}</td>
+                                 <td class="table-data">${cart.userDTO.userEmail}</td>
+                                 <td class="table-data">${cart.userDTO.userAddr}</td>
                              </tr>
                      </c:forEach>
              </table>
@@ -228,23 +228,23 @@
 
 
 <!-- 결제전 구매목록 확정 페이지 -->
-<div class="buyList hide">
+<div class="buyList hide table-container">
    <h1>구매목록 페이지 </h1>
-   <div>
+   <div class="col-12">
       <form method="post" id="buyList-form">
          <table>
-            <tr id="buyList-form-first-tr">
-               <th class="hide">카트번호</th>
-               <th class="hide">상품번호</th>
-               <th id="buyList--productName">상품이름</th>
-               <th>상품컬러</th>
-               <th>상품사이즈</th>
-               <th>상품금액</th>
-               <th>상품수량</th>
-               <th>총액</th>
+            <tr id="buyList-form-first-tr" class="table-header">
+               <th class="hide header__item">카트번호</th>
+               <th class="hide header__item">상품번호</th>
+               <th id="buyList--productName" class="header__item">상품이름</th>
+               <th class="header__item">상품컬러</th>
+               <th class="header__item">상품사이즈</th>
+               <th class="header__item">상품금액</th>
+               <th class="header__item">상품수량</th>
+               <th class="header__item">총액</th>
             </tr>
          </table>
-         <input type="submit" id="purchaseBtn"  value="결제하기" style="padding:30px" formaction="${pageContext.request.contextPath}/user/purchase/api.jsp" >
+         <input type="submit" id="purchaseBtn" class="cart--btn" value="결제하기" formaction="${pageContext.request.contextPath}/user/purchase/api.jsp" >
      
       </form>
    </div>

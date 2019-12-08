@@ -58,6 +58,7 @@ $(function(){
 		}else{
 			%>
 			location.href="${pageContext.request.contextPath}/servlet?controller=purchase&command=insertPurchaseDBForDetail&productNo="+eval(str[0])+"&cartQty="+eval($("#quantity").val());
+
 			<%
 		}
 		%>

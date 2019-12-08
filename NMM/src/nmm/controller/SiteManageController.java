@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 import nmm.dto.ModelAndView;
+import nmm.dto.ProductDTO;
 import nmm.dto.SiteManageDTO;
 import nmm.service.SiteManageService;
 
@@ -23,6 +24,12 @@ public class SiteManageController implements Controller {
 		List<SiteManageDTO> list = SiteManageService.selectSiteManage();
 		request.setAttribute("list", list);
 		return new ModelAndView("manager/accounting.jsp", false);
+	}
+	
+	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) {
+		List<ProductDTO> list = SiteManageService.selectAll();
+		request.setAttribute("list", list);
+		return new ModelAndView("manager/productManagement.jsp", false);
 	}
 
 }

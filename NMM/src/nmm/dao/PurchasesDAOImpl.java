@@ -38,7 +38,7 @@ public class PurchasesDAOImpl implements PurchasesDAO {
                 String userPwd = rs.getString("USER_PWD");
                 String userName = rs.getString("USER_NAME");
                 String userBirth = rs.getString("USER_BIRTHDATE");
-                String userPhone = Integer.toString(rs.getInt("USER_PHONE"));
+                int userPhone = rs.getInt("USER_PHONE");
                 String userAddr = rs.getString("USER_ADDR");
                 String userEmail = rs.getString("USER_EMAIL");
                 String productCategory = rs.getString("PRODUCT_CATEGORY");
@@ -50,7 +50,7 @@ public class PurchasesDAOImpl implements PurchasesDAO {
                 String productResiDate = rs.getString("PRODUCT_RESIDATE");
 
 
-                UserDTO userDTO = new UserDTO(userId, userPwd, userName, userAddr, userPhone, userEmail, userBirth);
+                UserDTO userDTO = new UserDTO(userId, userPwd, userName, userPhone, userAddr, userEmail);
                 productDTO.setProductNo(productNo);
                 productDTO.setProductCategory(productCategory);
                 productDTO.setProductStock(productStock);
@@ -77,7 +77,7 @@ public class PurchasesDAOImpl implements PurchasesDAO {
         Connection con = null;
         PreparedStatement ps = null;
         int result = 0;
-        String sql = "INSERT INTO PURCHASEDB VALUES(PURCHASE_NO_SEQ.NEXTVAL,?, ?, ?,sysdate,'¹è¼ÛÁØºñÁß')";
+        String sql = "INSERT INTO PURCHASEDB VALUES(PURCHASE_NO_SEQ.NEXTVAL,?, ?, ?,sysdate,'ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½')";
         try {
             con = DbUtil.getConnection();
             ps = con.prepareStatement(sql);
@@ -126,6 +126,7 @@ public class PurchasesDAOImpl implements PurchasesDAO {
             	productDTO.setProductPrice(productPrice);
             	
             	list.add(new PurchaseDTO(orderNo, productDTO, purchaseQty, purchaseDate, purchaseStatus));
+
             }
 
         } catch (SQLException e) {

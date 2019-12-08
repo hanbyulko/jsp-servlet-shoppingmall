@@ -6,12 +6,12 @@ public class UserDTO extends PageCnt {
 	private String userPwd;
 	private String userName;
 	private String userBirth;
-	private String userPhone;
+	private int userPhone;
 	private String userAddr;
 	private String userEmail;
 
 	public UserDTO(int pageCnt, int userNo, String userId, String userPwd, String userName, String userBirth,
-			String userPhone, String userAddr, String userEmail) {
+			int userPhone, String userAddr, String userEmail) {
 		super(pageCnt);
 		this.userNo = userNo;
 		this.userId = userId;
@@ -23,7 +23,7 @@ public class UserDTO extends PageCnt {
 		this.userEmail = userEmail;
 	}
 
-	public UserDTO(int userNo, String userName, String userId, String userPwd, String userAddr, String userPhone,
+	public UserDTO(int userNo, String userName, String userId, String userPwd, String userAddr, int userPhone,
 			String userEmail, String userBirth) {
 		this.userNo = userNo;
 		this.userName = userName;
@@ -40,7 +40,7 @@ public class UserDTO extends PageCnt {
 		this.userPwd = userPwd;
 	}
 
-	public UserDTO(String userId, String userPwd, String userName, String userPhone, String userAddr,
+	public UserDTO(String userId, String userPwd, String userName, int userPhone, String userAddr,
 			String userEmail) {
 		this.userName = userName;
 		this.userId = userId;
@@ -52,7 +52,7 @@ public class UserDTO extends PageCnt {
 
 
 	public UserDTO(String userId, String userPwd, String userName, String userBirth, String userAddr,
-			String userPhone, String userEmail) {
+			int userPhone, String userEmail) {
 
 		this.userId= userId;
 		this.userPwd = userPwd;
@@ -107,11 +107,11 @@ public class UserDTO extends PageCnt {
 		this.userBirth = userBirth;
 	}
 
-	public String getUserPhone() {
+	public int getUserPhone() {
 		return userPhone;
 	}
 
-	public void setUserPhone(String userPhone) {
+	public void setUserPhone(int userPhone) {
 		this.userPhone = userPhone;
 	}
 

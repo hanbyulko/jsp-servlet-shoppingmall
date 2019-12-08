@@ -25,7 +25,7 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(2, dto.getUserId());
 			ps.setString(3, dto.getUserName());
 			ps.setString(4, dto.getUserBirth());
-			ps.setString(5, dto.getUserPhone());
+			ps.setInt(5, dto.getUserPhone());
 			ps.setString(6, dto.getUserAddr());
 			ps.setString(7, dto.getUserEmail());
 			result = ps.executeUpdate();
@@ -50,7 +50,7 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(1, dto.getUserPwd());
 			ps.setString(2, dto.getUserName());
 			ps.setString(3, dto.getUserAddr());
-			ps.setString(4, dto.getUserPhone());
+			ps.setInt(4, dto.getUserPhone());
 			ps.setString(5, dto.getUserEmail());
 			ps.setString(6, dto.getUserId());
 		} catch (SQLException e) {
@@ -150,7 +150,7 @@ public class UserDAOImpl implements UserDAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				UserDTO dto = new UserDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+						rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8));
 				dto.setPageCnt(pageCnt % 8 == 0 ? pageCnt / 8 : pageCnt / 8 + 1);
 				list.add(dto);
 			}
@@ -221,7 +221,7 @@ public class UserDAOImpl implements UserDAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				UserDTO dto = new UserDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+						rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8));
 				dto.setPageCnt(pageCnt % 8 == 0 ? pageCnt / 8 : pageCnt / 8 + 1);
 				list.add(dto);
 			}
@@ -232,12 +232,14 @@ public class UserDAOImpl implements UserDAO {
 		return list;
 	}
 
+
 	public UserDTO selectByUserNo(int userNo) throws Exception{
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = "SELECT USER_NAME, USER_PHONE, USER_EMAIL, USER_ADDR FROM USERDB WHERE USER_NO=?";
 		ResultSet rs = null;
 		UserDTO user1 = new UserDTO();
+
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -254,4 +256,5 @@ public class UserDAOImpl implements UserDAO {
 			DbUtil.dbClose(rs, ps, con);
 		}
 	}
+
 }

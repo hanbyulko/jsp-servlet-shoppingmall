@@ -137,6 +137,19 @@ h1 {
 </head>
 <body>
 <jsp:include page="../../view/top.jsp"/>
+
+
+<h1> 배송정보 </h1>
+<table>
+<tr><td>주문자</td><td>${userDTO.userName} | ${userDTO. } | 주문자 이메일</td></tr>
+<tr><td>이름</td><td><input type="text">주문자 이름</td></tr>
+<tr><td>연락처</td><td>주문자 번호</td></tr>
+<tr><td>주소</td><td><input type="text">주문자 주소</td></tr>
+</table>
+
+
+
+
 <h1>product history</h1>
 <form name="purchaseForm" method="post" id="purchaseForm">
 <h2 class="table--title">배송정보</h2>
