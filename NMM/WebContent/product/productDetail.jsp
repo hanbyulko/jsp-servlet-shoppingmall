@@ -12,7 +12,6 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-<<<<<<< HEAD
    var str;
    $("#minus").click(function(){
       value = parseInt($("#quantity").val())-1;
@@ -70,7 +69,6 @@ $(function(){
        var valueSelected = this.value;
        str = valueSelected.split("/");
    });
-=======
 	var str;
 	$("#minus").click(function(){
 		value = parseInt($("#quantity").val())-1;
@@ -129,7 +127,6 @@ $(function(){
 	    var valueSelected = this.value;
 	    str = valueSelected.split("/");
 	});
->>>>>>> 1cb320f5d40eb03a8fec3e1485103c997643314a
 }); 
 
 </script>

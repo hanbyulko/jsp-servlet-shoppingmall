@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
 <title>Insert title here</title>
 <link rel="stylesheet"
    href="${pageContext.request.contextPath}/css/style.css">

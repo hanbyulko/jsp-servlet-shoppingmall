@@ -22,7 +22,6 @@
         <div class="footer__mid">
             NMM
         </div>
-<<<<<<< HEAD
         	<!-- Default dropright button -->
 			<div class="btn-group dropright">
 			<a href="../manager/managerLogin.jsp">관리자 로그인</a>
@@ -37,8 +36,6 @@
 			</div>
 
 
-=======
->>>>>>> 7f5513f44600f82838357b887691d32a5697df31
         <div class="footer__right">
             입점문의 : korea@anderssonbell.com<br>
             문의메일 : cs@anderssonbell.com<br>

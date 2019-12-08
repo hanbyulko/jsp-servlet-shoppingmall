@@ -8,11 +8,8 @@
    <meta charset="UTF-8">
    <title>Insert title here</title>
    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<<<<<<< HEAD
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/tableStyle/tableMain.css">
-=======
    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/tableStyle/tableMain.css">
->>>>>>> 1cb320f5d40eb03a8fec3e1485103c997643314a
    <meta name="viewport" content="width=device-width,initial-scale=1">
    <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900|Noto+Sans+KR:100,300,400,500,700,900" rel="stylesheet">
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -201,11 +198,7 @@
    <div>
       <form  method="post" id="buyForm">
       <span class="gutter--xxl">
-<<<<<<< HEAD
-         <input type="checkbox" id="allCheck" value="전체선택" class="margin--m">전체선택
-=======
          <input type="checkbox" id="allCheck" value="전체선택" class="gutter--xxl">전체선택
->>>>>>> 1cb320f5d40eb03a8fec3e1485103c997643314a
       </span>
          <input type="button" name="buyBtn" value="구매하기" class="cart--btn col-12">
       </form>
