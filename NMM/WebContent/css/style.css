@@ -5,7 +5,10 @@
     margin: 0;
 }
 a {text-decoration: none;}
-a:hover{text-decoration:none;}
+a:hover{
+    text-decoration:none;
+    color:#575757;
+}
 li {list-style: none;}
 
 body{
@@ -139,7 +142,9 @@ select{
 .gutter--xxl    {padding:40px;}
 .gutter--xxxl   {padding:45px;}
 
-
+.margin--m{
+    margin:5px;
+}
 
 
 /* �뿤�뜑�쁺�뿭 */
