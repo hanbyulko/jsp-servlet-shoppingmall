@@ -1,4 +1,4 @@
-# JSP&Servlet MVC(model2)기반 쇼핑몰 구현
+# JSP&Servlet MVC(model2) 쇼핑몰 구현
 
   <br/>
 
