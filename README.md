@@ -3,7 +3,7 @@
   <br/>
 
 ## Introduction
-19F/W 아우터 제품들을  구매할 수 있는 20~30대 여성을 대상으로 하는 의류 쇼핑몰을 제작
+19F/W 아우터 제품들을  구매할 수 있는 20~30대 여성을 대상으로 하는 의류 쇼핑몰 제작
 
   <br/>
 
@@ -12,7 +12,14 @@
 
 
   <br/>
+  
+## Required Library 
+- cos.jar
+- json-simple-1.1.1.jar
+- javax-mail.jar
 
+
+  <br/>
 
 ## Requirements Specification
 
