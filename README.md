@@ -15,8 +15,10 @@
   
 ## Required Library 
 - cos.jar
-- json-simple-1.1.1.jar
-- javax-mail.jar
+- ojdbc6.jar
+- standard.jar
+- jstl.jar
+- json-lib-2.4-jdk15.jar
 
 
   <br/>
@@ -36,3 +38,12 @@
 
 ## Database Modeling
 ![image](https://user-images.githubusercontent.com/49690751/73123189-adcf1a80-3fd0-11ea-8645-a810bd68e4c1.png)
+
+
+  <br/>
+
+
+
+## 주요 기능 설명
+
+
