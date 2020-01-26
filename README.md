@@ -57,7 +57,15 @@
 
   <br/>
     <br/>
+    
+***회원가입***
+![image](https://user-images.githubusercontent.com/49690751/73131552-66886e80-4050-11ea-9f81-a66d2293fa91.png)
+![image](https://user-images.githubusercontent.com/49690751/73131551-65574180-4050-11ea-9367-4013c34088a5.png)
+> 회원가입은 ajax 비동기 통신으로 아이디 중복체크 기능을 구현하였으며, 우편번호 api를 사용해 주소를 입력받을 수 있게 하였습니다.
 
+  <br/>
+    <br/>
+    
 ***제품 리스트 조회***
 ![image](https://user-images.githubusercontent.com/49690751/73129477-9ff8b400-4027-11ea-8790-7bac764000d5.gif)
 > 자켓, 코트, 패딩 3가지의 상품 카테고리가 존재하며 각각의 상품에 대해 페이징 처리를 하였습니다.
