@@ -54,7 +54,7 @@
 ***로그인***
 ![image](https://user-images.githubusercontent.com/49690751/73129473-8e171100-4027-11ea-97cd-7d36a81b26e0.gif)
 ![image](https://user-images.githubusercontent.com/49690751/73131551-65574180-4050-11ea-9367-4013c34088a5.png)
-> kakao javascript sdk를 사용해 카카오 소셜 회원 가입 기능을 구현하였습니다. 로그인에 성공시 user테이블에 아이디와 비밀번호 값이 저장됩니다.
+> **kakao javascript sdk**를 사용해 카카오 소셜 회원 가입 기능을 구현하였습니다. 로그인에 성공시 user테이블에 아이디와 비밀번호 값이 저장됩니다.
 
   <br/>
     <br/>
@@ -62,7 +62,7 @@
 ***회원가입***
 ![image](https://user-images.githubusercontent.com/49690751/73131552-66886e80-4050-11ea-9f81-a66d2293fa91.png)
 
-> 회원가입은 ajax 비동기 통신으로 아이디 중복체크 기능을 구현하였으며, 우편번호 api를 사용해 주소를 입력받을 수 있게 하였습니다.
+> 회원가입은 **ajax 비동기 통신**으로 아이디 중복체크 기능을 구현하였으며, **우편번호 api**를 사용해 주소를 입력받을 수 있게 하였습니다.
 
   <br/>
     <br/>
@@ -109,7 +109,7 @@
 
 ***상품 등록 및 이미지 업로드***
 ![image](https://user-images.githubusercontent.com/49690751/73124226-37381a00-3fdc-11ea-804b-faed8e5a5721.png)
-> 상품 등록시 cos library를 활용해 multipart/form-data형식으로 이미지를 전송하여 이미지 업로드 기능을 구현했습니다.
+> 상품 등록시 **cos library**를 활용해 **multipart/form-data**형식으로 이미지를 전송하여 이미지 업로드 기능을 구현했습니다.
 
   <br/>
   <br/>
