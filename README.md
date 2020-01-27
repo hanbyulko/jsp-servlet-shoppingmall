@@ -45,7 +45,7 @@
 
 ## 주요 기능 설명
 ### ***사이트 메인화면***
-![image](https://drive.google.com/uc?id=1rn9KxT0SMaeqD-AhfsU0qyuEL1cNDeJR)
+![image](https://user-images.githubusercontent.com/49690751/73165359-ff91b500-4136-11ea-9661-0369b1d83479.gif)
 > 메인화면에서는 가장 최근에 등록된 상품과 가장 판매량이 높은 상품을 확인할 수 있습니다.
 
   <br/>
